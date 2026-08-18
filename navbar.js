@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 </svg>
             </a>
 
-            <h1 class="logo-title">
+            <a href="index.html" class="logo-title">
                 <span>Z</span><span>E</span><span>L</span><span>T</span>
                 <span>A</span><span>I</span><span>N</span><span>S</span>
-            </h1>
+            </a>
 
         </nav>
     `);

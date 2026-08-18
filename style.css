@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-/* Virsraksta pamata stils */
+/* ZELTAINS logo */
 .logo-title {
     margin: 0;
     font-size: 80px;
@@ -22,17 +22,18 @@ body {
     font-family: "Times New Roman", Times, serif;
     font-weight: normal;
     display: flex;
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-/* Katra burta neatkarīgais stils (tikai krāsas pāreja bez palielināšanas) */
+/* Katrs ZELTAINS burts */
 .logo-title span {
     display: inline-block;
     color: black;
     transition: color 0.25s ease;
 }
 
-/* Zelta krāsas efekts uzvirzot peli atsevišķam burtam */
+/* Burts kļūst zelta krāsā */
 .logo-title span:hover {
     color: gold;
 }
@@ -45,7 +46,7 @@ body {
     gap: 25px;
 }
 
-/* Izvēlnes pogu stils */
+/* Izvēlnes pogas */
 .menu a {
     color: black;
     text-decoration: none;
@@ -70,7 +71,7 @@ body {
     text-decoration: none;
 }
 
-/* SVG Aploksnes ikona */
+/* Aploksnes ikona */
 .svg-envelope {
     width: 30px;
     height: 30px;
@@ -83,7 +84,7 @@ body {
     transform: scale(1.15);
 }
 
-/* Apakšējā zelta teksta fonts */
+/* Lapu teksts */
 p {
     font-size: 24px;
     color: gold;
