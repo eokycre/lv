@@ -33,7 +33,7 @@ body {
     color: black;
 }
 
-/* Zelta slānis virs burta */
+/* Zelta slānis, ko parāda kursora aplis */
 .logo-title span::after {
     content: attr(data-letter);
 
@@ -44,14 +44,9 @@ body {
     color: gold;
     pointer-events: none;
 
-    /* Sākumā zelta slānis nav redzams */
-    clip-path: circle(0px at 50% 50%);
-}
-
-/* Kad pele atrodas virs logo, parādās mazais zelta aplis */
-.logo-title:hover span::after {
     clip-path: circle(
-        60px at var(--mouse-x) var(--mouse-y)
+        var(--glow-size, 0px)
+        at var(--mouse-x, 50%) var(--mouse-y, 50%)
     );
 }
 

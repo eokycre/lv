@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     document.body.insertAdjacentHTML("afterbegin", `
         <nav class="navbar">
 
@@ -27,25 +28,42 @@ document.addEventListener("DOMContentLoaded", function () {
         </nav>
     `);
 
-    const logo = document.querySelector(".logo-title");
+    const navbar = document.querySelector(".navbar");
     const letters = document.querySelectorAll(".logo-title span");
 
-    logo.addEventListener("mousemove", function(event) {
+    document.addEventListener("mousemove", function (event) {
+
+        const navRect = navbar.getBoundingClientRect();
+
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        // Pārbaudām, vai kursors atrodas baltajā navbar zonā
+        const insideNavbar =
+            mouseX >= navRect.left &&
+            mouseX <= navRect.right &&
+            mouseY >= navRect.top &&
+            mouseY <= navRect.bottom;
+
         letters.forEach(letter => {
+
             const rect = letter.getBoundingClientRect();
 
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            // Kursora koordinātas attiecībā pret konkrēto burtu
+            const x = mouseX - rect.left;
+            const y = mouseY - rect.top;
 
             letter.style.setProperty("--mouse-x", `${x}px`);
             letter.style.setProperty("--mouse-y", `${y}px`);
+
+            if (insideNavbar) {
+                // Rādiuss = 60px
+                letter.style.setProperty("--glow-size", "60px");
+            } else {
+                // Kad kursors iziet no navbar, zelta efekts pazūd
+                letter.style.setProperty("--glow-size", "0px");
+            }
         });
     });
 
-    logo.addEventListener("mouseleave", function() {
-        letters.forEach(letter => {
-            letter.style.removeProperty("--mouse-x");
-            letter.style.removeProperty("--mouse-y");
-        });
-    });
 });
