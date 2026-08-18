@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Kontakti — ZELTAINS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="navbar.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <h2>Kontakti</h2>
+        <!-- Tavs saturs -->
+    </main>
+
+</body>
+</html>
