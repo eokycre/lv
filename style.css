@@ -33,7 +33,7 @@ body {
     color: black;
 }
 
-/* Zelta aplis, kas iekrāso tikai burtu daļas */
+/* Zelta slānis virs burta */
 .logo-title span::after {
     content: attr(data-letter);
 
@@ -44,8 +44,14 @@ body {
     color: gold;
     pointer-events: none;
 
+    /* Sākumā zelta slānis nav redzams */
+    clip-path: circle(0px at 50% 50%);
+}
+
+/* Kad pele atrodas virs logo, parādās mazais zelta aplis */
+.logo-title:hover span::after {
     clip-path: circle(
-        120px at var(--mouse-x) var(--mouse-y)
+        60px at var(--mouse-x) var(--mouse-y)
     );
 }
 
