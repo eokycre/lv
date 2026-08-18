@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    background-color: midnightblue;
+    text-align: center;
+}
+
+.navbar {
+    position: relative;
+    height: 110px;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Virsraksta pamata stils */
+.logo-title {
+    margin: 0;
+    font-size: 80px;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: normal;
+    display: flex;
+    cursor: default;
+}
+
+/* Katra burta neatkarīgais stils (tikai krāsas pāreja bez palielināšanas) */
+.logo-title span {
+    display: inline-block;
+    color: black;
+    transition: color 0.25s ease;
+}
+
+/* Zelta krāsas efekts uzvirzot peli atsevišķam burtam */
+.logo-title span:hover {
+    color: gold;
+}
+
+.menu {
+    position: absolute;
+    left: 30px;
+
+    display: flex;
+    gap: 25px;
+}
+
+/* Izvēlnes pogu stils */
+.menu a {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: "Times New Roman", Times, serif;
+    display: inline-block;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.menu a:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+.contacts {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* SVG Aploksnes ikona */
+.svg-envelope {
+    width: 30px;
+    height: 30px;
+    fill: black;
+    transition: fill 0.25s ease, transform 0.25s ease;
+}
+
+.contacts:hover .svg-envelope {
+    fill: gold;
+    transform: scale(1.15);
+}
+
+/* Apakšējā zelta teksta fonts */
+p {
+    font-size: 24px;
+    color: gold;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
