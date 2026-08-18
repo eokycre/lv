@@ -28,14 +28,25 @@ body {
 
 /* Katrs ZELTAINS burts */
 .logo-title span {
+    position: relative;
     display: inline-block;
     color: black;
-    transition: color 0.25s ease;
 }
 
-/* Burts kļūst zelta krāsā */
-.logo-title span:hover {
+/* Zelta aplis, kas iekrāso tikai burtu daļas */
+.logo-title span::after {
+    content: attr(data-letter);
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
     color: gold;
+    pointer-events: none;
+
+    clip-path: circle(
+        120px at var(--mouse-x) var(--mouse-y)
+    );
 }
 
 .menu {
@@ -46,7 +57,7 @@ body {
     gap: 25px;
 }
 
-/* Izvēlnes pogas */
+/* Izvēlnes pogu stils */
 .menu a {
     color: black;
     text-decoration: none;
@@ -71,7 +82,7 @@ body {
     text-decoration: none;
 }
 
-/* Aploksnes ikona */
+/* SVG aploksnes ikona */
 .svg-envelope {
     width: 30px;
     height: 30px;

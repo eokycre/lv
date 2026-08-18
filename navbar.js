@@ -14,10 +14,38 @@ document.addEventListener("DOMContentLoaded", function () {
             </a>
 
             <a href="index.html" class="logo-title">
-                <span>Z</span><span>E</span><span>L</span><span>T</span>
-                <span>A</span><span>I</span><span>N</span><span>S</span>
+                <span data-letter="Z">Z</span>
+                <span data-letter="E">E</span>
+                <span data-letter="L">L</span>
+                <span data-letter="T">T</span>
+                <span data-letter="A">A</span>
+                <span data-letter="I">I</span>
+                <span data-letter="N">N</span>
+                <span data-letter="S">S</span>
             </a>
 
         </nav>
     `);
+
+    const logo = document.querySelector(".logo-title");
+    const letters = document.querySelectorAll(".logo-title span");
+
+    logo.addEventListener("mousemove", function(event) {
+        letters.forEach(letter => {
+            const rect = letter.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            letter.style.setProperty("--mouse-x", `${x}px`);
+            letter.style.setProperty("--mouse-y", `${y}px`);
+        });
+    });
+
+    logo.addEventListener("mouseleave", function() {
+        letters.forEach(letter => {
+            letter.style.removeProperty("--mouse-x");
+            letter.style.removeProperty("--mouse-y");
+        });
+    });
 });
