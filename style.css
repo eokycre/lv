@@ -33,7 +33,7 @@ body {
     color: black;
 }
 
-/* Zelta slānis, ko parāda kursora aplis */
+/* Zelta slānis kursora apļa iekšpusē */
 .logo-title span::after {
     content: attr(data-letter);
 
@@ -45,9 +45,12 @@ body {
     pointer-events: none;
 
     clip-path: circle(
-        var(--glow-size, 0px)
-        at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        60px at var(--mouse-x, 50%) var(--mouse-y, 50%)
     );
+
+    opacity: var(--glow-opacity, 0);
+
+    transition: opacity 0.18s ease;
 }
 
 .menu {

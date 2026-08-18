@@ -31,39 +31,67 @@ document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.querySelector(".navbar");
     const letters = document.querySelectorAll(".logo-title span");
 
-    document.addEventListener("mousemove", function (event) {
+    let targetX = 0;
+    let targetY = 0;
 
-        const navRect = navbar.getBoundingClientRect();
+    let currentX = 0;
+    let currentY = 0;
 
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
+    let active = false;
 
-        // Pārbaudām, vai kursors atrodas baltajā navbar zonā
-        const insideNavbar =
-            mouseX >= navRect.left &&
-            mouseX <= navRect.right &&
-            mouseY >= navRect.top &&
-            mouseY <= navRect.bottom;
+    navbar.addEventListener("mouseenter", function (event) {
+        active = true;
+
+        targetX = event.clientX;
+        targetY = event.clientY;
+
+        currentX = targetX;
+        currentY = targetY;
 
         letters.forEach(letter => {
-
-            const rect = letter.getBoundingClientRect();
-
-            // Kursora koordinātas attiecībā pret konkrēto burtu
-            const x = mouseX - rect.left;
-            const y = mouseY - rect.top;
-
-            letter.style.setProperty("--mouse-x", `${x}px`);
-            letter.style.setProperty("--mouse-y", `${y}px`);
-
-            if (insideNavbar) {
-                // Rādiuss = 60px
-                letter.style.setProperty("--glow-size", "60px");
-            } else {
-                // Kad kursors iziet no navbar, zelta efekts pazūd
-                letter.style.setProperty("--glow-size", "0px");
-            }
+            letter.style.setProperty("--glow-opacity", "1");
         });
     });
+
+    navbar.addEventListener("mousemove", function (event) {
+        targetX = event.clientX;
+        targetY = event.clientY;
+    });
+
+    navbar.addEventListener("mouseleave", function () {
+        active = false;
+
+        letters.forEach(letter => {
+            letter.style.setProperty("--glow-opacity", "0");
+        });
+    });
+
+    function animate() {
+
+        /*
+         * Jo lielāks skaitlis, jo ātrāk aplis seko pelei.
+         * 0.12 = maiga, redzama inerce.
+         */
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+
+        if (active) {
+
+            letters.forEach(letter => {
+
+                const rect = letter.getBoundingClientRect();
+
+                const x = currentX - rect.left;
+                const y = currentY - rect.top;
+
+                letter.style.setProperty("--mouse-x", `${x}px`);
+                letter.style.setProperty("--mouse-y", `${y}px`);
+            });
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 
 });
