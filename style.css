@@ -106,3 +106,44 @@ p {
     text-transform: uppercase;
     font-family: Arial, sans-serif;
 }
+/* =========================
+   MOBILĀ VERSIJA
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        height: auto;
+        min-height: 90px;
+        padding: 15px 20px;
+        box-sizing: border-box;
+    }
+
+    .logo-title {
+        font-size: 48px;
+        line-height: 1;
+    }
+
+    .menu {
+        left: 15px;
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 14px;
+    }
+
+    .contacts {
+        right: 15px;
+    }
+
+    .svg-envelope {
+        width: 24px;
+        height: 24px;
+    }
+
+    p {
+        font-size: 20px;
+        margin: 16px 10px;
+    }
+}
