@@ -39,7 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let active = false;
 
+
+    /* =========================
+       PELE
+       ========================= */
+
     navbar.addEventListener("mouseenter", function (event) {
+
         active = true;
 
         targetX = event.clientX;
@@ -53,12 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+
     navbar.addEventListener("mousemove", function (event) {
+
         targetX = event.clientX;
         targetY = event.clientY;
     });
 
+
     navbar.addEventListener("mouseleave", function () {
+
         active = false;
 
         letters.forEach(letter => {
@@ -66,11 +76,79 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+
+    /* =========================
+       PIESKĀRIENS / PĀRVIETOŠANA
+       ========================= */
+
+    navbar.addEventListener("pointerdown", function (event) {
+
+        if (event.pointerType !== "touch") {
+            return;
+        }
+
+        active = true;
+
+        targetX = event.clientX;
+        targetY = event.clientY;
+
+        currentX = targetX;
+        currentY = targetY;
+
+        letters.forEach(letter => {
+            letter.style.setProperty("--glow-opacity", "1");
+        });
+    });
+
+
+    navbar.addEventListener("pointermove", function (event) {
+
+        if (event.pointerType !== "touch") {
+            return;
+        }
+
+        targetX = event.clientX;
+        targetY = event.clientY;
+    });
+
+
+    navbar.addEventListener("pointerup", function (event) {
+
+        if (event.pointerType !== "touch") {
+            return;
+        }
+
+        active = false;
+
+        letters.forEach(letter => {
+            letter.style.setProperty("--glow-opacity", "0");
+        });
+    });
+
+
+    navbar.addEventListener("pointercancel", function (event) {
+
+        if (event.pointerType !== "touch") {
+            return;
+        }
+
+        active = false;
+
+        letters.forEach(letter => {
+            letter.style.setProperty("--glow-opacity", "0");
+        });
+    });
+
+
+    /* =========================
+       ZELTA APĻA ANIMĀCIJA
+       ========================= */
+
     function animate() {
 
         /*
-         * Jo lielāks skaitlis, jo ātrāk aplis seko pelei.
-         * 0.12 = maiga, redzama inerce.
+         * Jo lielāks skaitlis,
+         * jo ātrāk aplis seko pelei/pirkstam.
          */
         currentX += (targetX - currentX) * 0.12;
         currentY += (targetY - currentY) * 0.12;
@@ -84,8 +162,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const x = currentX - rect.left;
                 const y = currentY - rect.top;
 
-                letter.style.setProperty("--mouse-x", `${x}px`);
-                letter.style.setProperty("--mouse-y", `${y}px`);
+                letter.style.setProperty(
+                    "--mouse-x",
+                    `${x}px`
+                );
+
+                letter.style.setProperty(
+                    "--mouse-y",
+                    `${y}px`
+                );
             });
         }
 
