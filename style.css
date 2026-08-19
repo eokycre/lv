@@ -33,7 +33,7 @@ body {
     color: black;
 }
 
-/* Zelta slānis kursora apļa iekšpusē */
+/* Zelta slānis kursora / pirksta apļa iekšpusē */
 .logo-title span::after {
     content: attr(data-letter);
 
@@ -80,9 +80,11 @@ body {
 .contacts {
     position: absolute;
     right: 30px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-decoration: none;
 }
 
@@ -91,6 +93,7 @@ body {
     width: 30px;
     height: 30px;
     fill: black;
+
     transition: fill 0.25s ease, transform 0.25s ease;
 }
 
@@ -106,6 +109,8 @@ p {
     text-transform: uppercase;
     font-family: Arial, sans-serif;
 }
+
+
 /* =========================
    MOBILĀ VERSIJA
    ========================= */
@@ -113,28 +118,48 @@ p {
 @media (max-width: 600px) {
 
     .navbar {
+        min-height: 0;
         height: auto;
-        min-height: 90px;
-        padding: 15px 20px;
-        box-sizing: border-box;
+
+        padding: 18px 15px 22px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 14px;
+
+        /* Ļauj pirksta kustībai normāli tikt JS */
+        touch-action: none;
     }
 
     .logo-title {
+        order: 1;
+
         font-size: 48px;
         line-height: 1;
     }
 
     .menu {
-        left: 15px;
-        gap: 12px;
+        order: 2;
+
+        position: static;
+
+        display: flex;
+        justify-content: center;
+
+        gap: 18px;
+        width: 100%;
     }
 
     .menu a {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .contacts {
-        right: 15px;
+        order: 3;
+
+        position: static;
     }
 
     .svg-envelope {
@@ -145,5 +170,12 @@ p {
     p {
         font-size: 20px;
         margin: 16px 10px;
+    }
+
+    /* Mazāks zelta aplis telefonā */
+    .logo-title span::after {
+        clip-path: circle(
+            30px at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        );
     }
 }
