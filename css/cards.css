@@ -1,89 +1,25 @@
 /* =========================================================
-   LANGUAGE SELECTOR
-   ========================================================= */
-
-.valodu-izvele {
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 15px 10px 5px;
-
-    background: midnightblue;
-}
-
-
-.valodu-izvele button {
-
-    border: 0;
-
-    background: transparent;
-
-    color: white;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    padding: 5px 7px;
-
-    opacity: 0.55;
-
-    transition:
-        color 0.2s ease,
-        opacity 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.valodu-izvele button:hover {
-
-    color: gold;
-
-    opacity: 1;
-
-    transform: scale(1.05);
-}
-
-
-.valodu-izvele button.active {
-
-    color: gold;
-
-    opacity: 1;
-}
-
-
-/* =========================================================
-   ARTICLES GRID
+   ARTICLES GRID — MOBILE FIRST
    ========================================================= */
 
 .raksti-container {
 
     width: 100%;
 
-    max-width: 1600px;
+    max-width: 1800px;
 
     margin: 0 auto;
 
-    padding: 25px 15px 50px;
+    padding: 20px 12px 50px;
 
     display: grid;
 
-    grid-template-columns:
-        repeat(auto-fit, minmax(210px, 1fr));
+    /* Mobile first — 1 card */
+    grid-template-columns: 1fr;
 
     gap: 18px;
+
+    box-sizing: border-box;
 }
 
 
@@ -95,9 +31,11 @@
 
     position: relative;
 
-    min-width: 0;
+    width: 100%;
 
-    min-height: 300px;
+    aspect-ratio: 4 / 5;
+
+    min-height: 0;
 
     overflow: hidden;
 
@@ -108,8 +46,23 @@
     text-align: left;
 
     isolation: isolate;
+
+    border-radius: 0;
+
+    transition:
+        transform 0.3s ease;
 }
 
+
+.raksts-card:hover {
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
 
 .raksts-card-image {
 
@@ -125,9 +78,20 @@
     z-index: -2;
 
     transition:
-        transform 0.4s ease;
+        transform 0.45s ease;
 }
 
+
+.raksts-card:hover
+.raksts-card-image {
+
+    transform: scale(1.06);
+}
+
+
+/* =========================================================
+   CARD OVERLAY
+   ========================================================= */
 
 .raksts-card::after {
 
@@ -140,14 +104,18 @@
     background:
         linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.9),
-            rgba(0, 0, 0, 0.2) 65%,
-            rgba(0, 0, 0, 0)
+            rgba(0, 0, 0, 0.92),
+            rgba(0, 0, 0, 0.35) 55%,
+            rgba(0, 0, 0, 0) 100%
         );
 
     z-index: -1;
 }
 
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
 
 .raksts-card-content {
 
@@ -157,9 +125,15 @@
     right: 0;
     bottom: 0;
 
-    padding: 18px;
+    padding: 16px;
+
+    color: white;
 }
 
+
+/* =========================================================
+   CARD CATEGORY
+   ========================================================= */
 
 .raksts-card-category {
 
@@ -167,21 +141,27 @@
 
     color: gold;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: bold;
 
-    text-transform: uppercase;
-
     letter-spacing: 0.08em;
+
+    text-transform: uppercase;
 }
 
 
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
 .raksts-card-title {
 
-    margin: 0 0 8px;
+    margin: 0 0 7px;
 
     color: white;
 
@@ -190,11 +170,19 @@
         Times,
         serif;
 
-    font-size: 25px;
+    font-size: 22px;
+
+    font-weight: normal;
 
     line-height: 1.05;
+
+    text-transform: none;
 }
 
+
+/* =========================================================
+   CARD EXCERPT
+   ========================================================= */
 
 .raksts-card-excerpt {
 
@@ -202,22 +190,17 @@
 
     color: white;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
-    font-size: 13px;
+    font-size: 12px;
+
+    font-weight: normal;
 
     line-height: 1.4;
 
     text-transform: none;
-
-    opacity: 0.9;
-}
-
-
-.raksts-card:hover
-.raksts-card-image {
-
-    transform: scale(1.06);
 }
 
 
@@ -241,7 +224,7 @@
     padding: 20px;
 
     background:
-        rgba(0, 0, 0, 0.8);
+        rgba(0, 0, 0, 0.82);
 }
 
 
@@ -255,7 +238,8 @@
 
     position: relative;
 
-    width: min(900px, 100%);
+    width:
+        min(900px, 100%);
 
     max-height: 90vh;
 
@@ -266,8 +250,14 @@
     padding: 35px;
 
     text-align: left;
+
+    box-sizing: border-box;
 }
 
+
+/* =========================================================
+   MODAL IMAGE
+   ========================================================= */
 
 .raksts-modal-image {
 
@@ -283,11 +273,17 @@
 }
 
 
+/* =========================================================
+   MODAL CATEGORY
+   ========================================================= */
+
 .raksts-modal-category {
 
-    color: gold;
+    color: #b8860b;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
     font-size: 12px;
 
@@ -296,6 +292,10 @@
     text-transform: uppercase;
 }
 
+
+/* =========================================================
+   MODAL TITLE
+   ========================================================= */
 
 .raksts-modal-title {
 
@@ -311,15 +311,25 @@
     font-size:
         clamp(32px, 5vw, 56px);
 
+    font-weight: normal;
+
     line-height: 1;
+
+    text-transform: none;
 }
 
+
+/* =========================================================
+   MODAL TEXT
+   ========================================================= */
 
 .raksts-modal-text {
 
     color: #111;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
     font-size: 18px;
 
@@ -331,9 +341,17 @@
 
 .raksts-modal-text p {
 
+    margin: 0 0 20px;
+
     color: #111;
 
-    margin: 0 0 20px;
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 18px;
+
+    line-height: 1.6;
 
     text-transform: none;
 }
@@ -353,7 +371,9 @@
 
     color: #555;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
     font-size: 13px;
 
@@ -364,7 +384,7 @@
 
 
 /* =========================================================
-   CLOSE
+   MODAL CLOSE
    ========================================================= */
 
 .raksts-modal-close {
@@ -373,8 +393,6 @@
 
     top: 10px;
     right: 15px;
-
-    z-index: 2;
 
     border: 0;
 
@@ -391,14 +409,44 @@
 
 
 /* =========================================================
-   MOBILE
+   DESKTOP — AUTOMATIC NUMBER OF CARDS
    ========================================================= */
 
-@media (max-width: 600px) {
+@media (min-width: 601px) {
 
     .raksti-container {
 
-        grid-template-columns: 1fr;
+        /*
+         * CSS pats aprēķina,
+         * cik cards ietilpst.
+         *
+         * 220px = minimālais card platums.
+         */
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+
+        gap: 18px;
+
+        padding:
+            30px 20px 60px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE LANDSCAPE — 2 CARDS
+   ========================================================= */
+
+@media (max-width: 900px)
+and (orientation: landscape) {
+
+    .raksti-container {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
         gap: 14px;
 
@@ -409,13 +457,50 @@
 
     .raksts-card {
 
-        min-height: 280px;
+        aspect-ratio: 16 / 10;
+    }
+}
+
+
+/* =========================================================
+   MOBILE — PORTRAIT
+   ========================================================= */
+
+@media (max-width: 600px)
+and (orientation: portrait) {
+
+    .raksti-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        padding:
+            20px 12px 40px;
+    }
+
+
+    .raksts-card {
+
+        aspect-ratio: 16 / 10;
+    }
+
+
+    .raksts-card-content {
+
+        padding: 15px;
     }
 
 
     .raksts-card-title {
 
-        font-size: 26px;
+        font-size: 24px;
+    }
+
+
+    .raksts-card-excerpt {
+
+        font-size: 13px;
     }
 
 
@@ -430,28 +515,5 @@
         max-height: 94vh;
 
         padding: 22px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE LANDSCAPE
-   ========================================================= */
-
-@media (max-width: 900px)
-and (orientation: landscape) {
-
-    .raksti-container {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 14px;
-    }
-
-
-    .raksts-card {
-
-        min-height: 260px;
     }
 }

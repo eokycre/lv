@@ -1,8 +1,9 @@
 /* =========================================================
-   HEADER
+   HEADER — MOBILE FIRST
    ========================================================= */
 
 .navbar {
+
     position: relative;
 
     width: 100%;
@@ -10,13 +11,76 @@
 
     background-color: white;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     padding: 14px 10px;
 
-    min-height: 90px;
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu {
+
+    grid-column: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.menu a {
+
+    color: black;
+
+    text-decoration: none;
+
+    font-size:
+        clamp(11px, 2.7vw, 15px);
+
+    text-transform: uppercase;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    white-space: nowrap;
+
+    display: inline-block;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.menu a:hover {
+
+    color: gold;
+
+    transform: scale(1.05);
 }
 
 
@@ -25,30 +89,43 @@
    ========================================================= */
 
 .logo-title {
-    margin: 0;
+
+    grid-column: 2;
+
+    min-width: 0;
 
     display: flex;
+
     justify-content: center;
-    align-items: center;
 
     color: black;
 
-    font-family: "Times New Roman", Times, serif;
-    font-size: clamp(40px, 9vw, 80px);
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size:
+        clamp(34px, 8vw, 52px);
+
     font-weight: normal;
 
     line-height: 1;
 
     text-decoration: none;
-    white-space: nowrap;
 
     cursor: pointer;
 
+    white-space: nowrap;
+
     position: relative;
+
     z-index: 2;
 }
 
+
 .logo-title span {
+
     position: relative;
 
     display: inline-block;
@@ -58,10 +135,11 @@
 
 
 /* =========================================================
-   GOLD EFFECT
+   GOLD LOGO EFFECT
    ========================================================= */
 
 .logo-title span::after {
+
     content: attr(data-letter);
 
     position: absolute;
@@ -73,81 +151,136 @@
 
     pointer-events: none;
 
-    clip-path: circle(
-        clamp(28px, 5vw, 60px)
-        at
-        var(--mouse-x, 50%)
-        var(--mouse-y, 50%)
-    );
+    clip-path:
+        circle(
+            clamp(24px, 5vw, 30px)
+            at
+            var(--mouse-x, 50%)
+            var(--mouse-y, 50%)
+        );
 
-    opacity: var(--glow-opacity, 0);
-
-    transition: opacity 0.18s ease;
-}
-
-
-/* =========================================================
-   MENU
-   ========================================================= */
-
-.menu {
-    position: absolute;
-
-    left: 30px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 25px;
-
-    min-width: 0;
-}
-
-.menu a {
-    color: black;
-
-    text-decoration: none;
-
-    font-size: clamp(14px, 2vw, 20px);
-
-    text-transform: uppercase;
-
-    font-family: "Times New Roman", Times, serif;
-
-    white-space: nowrap;
+    opacity:
+        var(--glow-opacity, 0);
 
     transition:
-        color 0.25s ease,
-        transform 0.25s ease;
-}
-
-.menu a:hover {
-    color: gold;
-
-    transform: scale(1.05);
+        opacity 0.18s ease;
 }
 
 
 /* =========================================================
-   CONTACTS / ENVELOPE
+   HEADER RIGHT SIDE
+   LANGUAGE + CONTACT
+   ========================================================= */
+
+.header-right {
+
+    grid-column: 3;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   LANGUAGE SELECTOR
+   ========================================================= */
+
+.language-selector {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 2px;
+}
+
+
+.language-selector button {
+
+    margin: 0;
+
+    padding: 4px 3px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: black;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size: 10px;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: 0.45;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.language-selector button:hover {
+
+    color: gold;
+
+    opacity: 1;
+
+    transform: scale(1.08);
+}
+
+
+.language-selector button.active {
+
+    color: gold;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   CONTACTS
    ========================================================= */
 
 .contacts {
-    position: absolute;
-
-    right: 30px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     text-decoration: none;
+
+    flex-shrink: 0;
 }
 
+
 .svg-envelope {
-    width: 30px;
-    height: 30px;
+
+    width:
+        clamp(22px, 5vw, 26px);
+
+    height:
+        clamp(22px, 5vw, 26px);
 
     fill: black;
 
@@ -156,103 +289,12 @@
         transform 0.25s ease;
 }
 
+
 .contacts:hover .svg-envelope {
+
     fill: gold;
 
     transform: scale(1.15);
-}
-
-
-/* =========================================================
-   MOBILE HEADER
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .navbar {
-        min-height: 0;
-
-        padding: 14px 10px;
-
-        /*
-         * Grid neļauj menu, logo un kontaktam
-         * nejauši uzkrist vienam otram.
-         */
-        display: grid;
-
-        grid-template-columns:
-            minmax(0, 1fr)
-            auto
-            minmax(0, 1fr);
-
-        align-items: center;
-
-        gap: 8px;
-    }
-
-
-    /* Logo */
-
-    .logo-title {
-        grid-column: 2;
-
-        font-size: clamp(36px, 9vw, 52px);
-
-        min-width: 0;
-    }
-
-
-    /* Menu */
-
-    .menu {
-        position: static;
-
-        grid-column: 1;
-
-        min-width: 0;
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        justify-content: flex-start;
-        align-items: center;
-
-        gap: 8px;
-    }
-
-
-    .menu a {
-        font-size: clamp(11px, 2.8vw, 15px);
-    }
-
-
-    /* Contacts */
-
-    .contacts {
-        position: static;
-
-        grid-column: 3;
-
-        justify-self: end;
-    }
-
-
-    .svg-envelope {
-        width: 24px;
-        height: 24px;
-    }
-
-
-    /* Mobile gold circle */
-
-    .logo-title span::after {
-        clip-path: circle(
-            28px at
-            var(--mouse-x, 50%)
-            var(--mouse-y, 50%)
-        );
-    }
 }
 
 
@@ -263,51 +305,80 @@
 @media (max-width: 420px) {
 
     .navbar {
-        /*
-         * Uz ļoti šaura ekrāna headeris
-         * pārslēdzas uz drošu 3-rindu izkārtojumu.
-         */
-        grid-template-columns: 1fr;
 
-        grid-template-rows:
-            auto
-            auto
-            auto;
+        padding:
+            12px 7px;
 
-        gap: 10px;
-
-        padding: 12px 8px;
-    }
-
-
-    .logo-title {
-        grid-column: 1;
-        grid-row: 1;
-
-        font-size: 42px;
+        gap: 5px;
     }
 
 
     .menu {
-        grid-column: 1;
-        grid-row: 2;
 
-        justify-content: center;
-
-        gap: 12px;
+        gap: 6px;
     }
 
 
     .menu a {
-        font-size: 13px;
+
+        font-size: 11px;
     }
 
 
-    .contacts {
-        grid-column: 1;
-        grid-row: 3;
+    .logo-title {
 
-        justify-self: center;
+        font-size: 38px;
+    }
+
+
+    .header-right {
+
+        gap: 4px;
+    }
+
+
+    .language-selector {
+
+        gap: 0;
+    }
+
+
+    .language-selector button {
+
+        font-size: 9px;
+
+        padding:
+            3px 2px;
+    }
+
+
+    .svg-envelope {
+
+        width: 22px;
+
+        height: 22px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 900px)
+and (orientation: landscape) {
+
+    .navbar {
+
+        padding:
+            10px 12px;
+    }
+
+
+    .logo-title {
+
+        font-size:
+            clamp(38px, 8vw, 52px);
     }
 }
 
@@ -319,7 +390,9 @@
 @media (min-width: 601px) {
 
     .navbar {
+
         height: 110px;
+
         min-height: 110px;
 
         padding: 0;
@@ -327,20 +400,85 @@
         display: flex;
 
         align-items: center;
+
         justify-content: center;
+
+        gap: 0;
     }
 
 
+    /* =====================================================
+       DESKTOP LOGO
+       ===================================================== */
+
     .logo-title {
+
+        width: auto;
+
         font-size: 80px;
+
+        line-height: normal;
     }
 
 
     .logo-title span::after {
-        clip-path: circle(
-            60px at
-            var(--mouse-x, 50%)
-            var(--mouse-y, 50%)
-        );
+
+        clip-path:
+            circle(
+                60px at
+                var(--mouse-x, 50%)
+                var(--mouse-y, 50%)
+            );
     }
-}
+
+
+    /* =====================================================
+       DESKTOP MENU
+       ===================================================== */
+
+    .menu {
+
+        position: absolute;
+
+        left: 30px;
+
+        width: auto;
+
+        display: flex;
+
+        flex-wrap: nowrap;
+
+        align-items: center;
+
+        gap: 25px;
+    }
+
+
+    .menu a {
+
+        font-size: 20px;
+    }
+
+
+    /* =====================================================
+       DESKTOP RIGHT SIDE
+       ===================================================== */
+
+    .header-right {
+
+        position: absolute;
+
+        right: 30px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: 18px;
+    }
+
+
+    /* =====================================================
+       DES

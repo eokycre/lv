@@ -3,12 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const container =
         document.querySelector(".raksti-container");
 
+
     if (!container) {
         return;
     }
 
+
     if (typeof raksti === "undefined") {
-        console.error("raksti.js nav ielādēts.");
+
+        console.error(
+            "raksti.js nav ielādēts."
+        );
+
         return;
     }
 
@@ -26,7 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let currentLanguage =
-        localStorage.getItem("zeltainsLanguage") || "lv";
+        localStorage.getItem(
+            "zeltainsLanguage"
+        ) || "lv";
 
 
     if (
@@ -34,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             currentLanguage
         )
     ) {
+
         currentLanguage = "lv";
     }
 
@@ -54,13 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         limitValue
             ? Number(limitValue)
             : null;
-
-
-    /* =====================================================
-       VALODU IZVĒLNE
-       ===================================================== */
-
-    createLanguageSelector();
 
 
     /* =====================================================
@@ -125,6 +127,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
+       VALODAS MAIŅA NO HEADERA
+       ===================================================== */
+
+    document.addEventListener(
+        "zeltainsLanguageChange",
+        function (event) {
+
+            const language =
+                event.detail &&
+                event.detail.language;
+
+
+            if (
+                !supportedLanguages.includes(
+                    language
+                )
+            ) {
+
+                return;
+            }
+
+
+            currentLanguage =
+                language;
+
+
+            renderCards();
+
+        }
+    );
+
+
+    /* =====================================================
        CARDS
        ===================================================== */
 
@@ -146,6 +181,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     raksts[valoda];
 
 
+                if (!saturs) {
+                    return;
+                }
+
+
                 const card =
                     document.createElement(
                         "article"
@@ -161,23 +201,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img
                         class="raksts-card-image"
                         src="${raksts.image}"
-                        alt="${saturs.title}"
+                        alt="${escapeHtml(
+                            saturs.title
+                        )}"
+                        loading="lazy"
                     >
 
                     <div class="raksts-card-content">
 
-                        <div class="raksts-card-category">
-                            ${getCategoryName(
-                                raksts.category
+                        <div
+                            class="raksts-card-category"
+                        >
+                            ${escapeHtml(
+                                getCategoryName(
+                                    raksts.category
+                                )
                             )}
                         </div>
 
-                        <h2 class="raksts-card-title">
-                            ${saturs.title}
+                        <h2
+                            class="raksts-card-title"
+                        >
+                            ${escapeHtml(
+                                saturs.title
+                            )}
                         </h2>
 
-                        <p class="raksts-card-excerpt">
-                            ${saturs.excerpt}
+                        <p
+                            class="raksts-card-excerpt"
+                        >
+                            ${escapeHtml(
+                                saturs.excerpt
+                            )}
                         </p>
 
                     </div>
@@ -189,13 +244,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     "click",
                     function () {
 
-                        openArticle(raksts);
+                        openArticle(
+                            raksts
+                        );
 
                     }
                 );
 
 
-                container.appendChild(card);
+                container.appendChild(
+                    card
+                );
 
             }
         );
@@ -210,6 +269,10 @@ document.addEventListener("DOMContentLoaded", function () {
         raksts
     ) {
 
+        /*
+         * Vispirms mēģinām izvēlēto valodu.
+         */
+
         if (
             raksts[currentLanguage]
         ) {
@@ -218,11 +281,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /*
+         * Ja tās nav, izmantojam LV.
+         */
+
         if (raksts.lv) {
 
             return "lv";
         }
 
+
+        /*
+         * Drošības variants:
+         * atrodam jebkuru pieejamu valodu.
+         */
 
         for (
             const language
@@ -236,130 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        return "lv";
-    }
-
-
-    /* =====================================================
-       VALODAS IZVĒLNE
-       ===================================================== */
-
-    function createLanguageSelector() {
-
-        let selector =
-            document.querySelector(
-                ".valodu-izvele"
-            );
-
-
-        if (!selector) {
-
-            selector =
-                document.createElement(
-                    "nav"
-                );
-
-
-            selector.className =
-                "valodu-izvele";
-
-
-            document.body.insertBefore(
-                selector,
-                document.body.firstChild
-            );
-        }
-
-
-        selector.innerHTML = "";
-
-
-        supportedLanguages.forEach(
-            function (language) {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                button.type = "button";
-
-
-                button.dataset.language =
-                    language;
-
-
-                button.textContent =
-                    language.toUpperCase();
-
-
-                if (
-                    language ===
-                    currentLanguage
-                ) {
-
-                    button.classList.add(
-                        "active"
-                    );
-                }
-
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        currentLanguage =
-                            language;
-
-
-                        localStorage.setItem(
-                            "zeltainsLanguage",
-                            language
-                        );
-
-
-                        updateLanguageButtons();
-
-                        renderCards();
-
-                    }
-                );
-
-
-                selector.appendChild(
-                    button
-                );
-
-            }
-        );
-    }
-
-
-    /* =====================================================
-       VALODU POGU AKTĪVAIS STĀVOKLIS
-       ===================================================== */
-
-    function updateLanguageButtons() {
-
-        const buttons =
-            document.querySelectorAll(
-                ".valodu-izvele button"
-            );
-
-
-        buttons.forEach(
-            function (button) {
-
-                button.classList.toggle(
-                    "active",
-
-                    button.dataset.language ===
-                    currentLanguage
-                );
-
-            }
-        );
+        return null;
     }
 
 
@@ -391,7 +340,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             modal.innerHTML = `
 
-                <div class="raksts-modal-content">
+                <div
+                    class="raksts-modal-content"
+                >
 
                     <button
                         class="raksts-modal-close"
@@ -448,6 +399,11 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
+        if (!valoda) {
+            return;
+        }
+
+
         const saturs =
             raksts[valoda];
 
@@ -468,19 +424,29 @@ document.addEventListener("DOMContentLoaded", function () {
             <img
                 class="raksts-modal-image"
                 src="${raksts.image}"
-                alt="${saturs.title}"
+                alt="${escapeHtml(
+                    saturs.title
+                )}"
             >
 
-            <div class="raksts-modal-category">
-                ${getCategoryName(
-                    raksts.category
+            <div
+                class="raksts-modal-category"
+            >
+                ${escapeHtml(
+                    getCategoryName(
+                        raksts.category
+                    )
                 )}
             </div>
 
             ${
                 translationMissing
                     ? `
-                        <div class="raksts-translation-notice">
+                        <div
+                            class="
+                                raksts-translation-notice
+                            "
+                        >
 
                             Šis raksts pašlaik nav
                             pieejams
@@ -500,11 +466,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     : ""
             }
 
-            <h1 class="raksts-modal-title">
-                ${saturs.title}
+            <h1
+                class="raksts-modal-title"
+            >
+                ${escapeHtml(
+                    saturs.title
+                )}
             </h1>
 
-            <div class="raksts-modal-text">
+            <div
+                class="raksts-modal-text"
+            >
                 ${saturs.content}
             </div>
 
@@ -603,7 +575,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ESC
+       HTML DROŠĪBA
+       ===================================================== */
+
+    function escapeHtml(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+        }
+
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+    }
+
+
+    /* =====================================================
+       ESC — AIZVĒRT RAKSTU
        ===================================================== */
 
     document.addEventListener(
