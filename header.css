@@ -1,0 +1,302 @@
+/* =========================================================
+   HEADER — MOBILE FIRST
+   ========================================================= */
+
+.navbar {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    background-color: white;
+
+    padding: 14px 10px;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.menu {
+    grid-column: 1;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.menu a {
+    color: black;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    font-family: "Times New Roman", Times, serif;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.menu a:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo-title {
+    grid-column: 2;
+
+    min-width: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    color: black;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: clamp(38px, 9vw, 52px);
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* Individual letters */
+
+.logo-title span {
+    position: relative;
+
+    display: inline-block;
+
+    color: black;
+}
+
+
+/* Golden layer */
+
+.logo-title span::after {
+    content: attr(data-letter);
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    color: gold;
+
+    pointer-events: none;
+
+    clip-path: circle(
+        30px at
+        var(--mouse-x, 50%)
+        var(--mouse-y, 50%)
+    );
+
+    opacity: var(--glow-opacity, 0);
+
+    transition: opacity 0.18s ease;
+}
+
+
+/* =========================================================
+   CONTACTS
+   ========================================================= */
+
+.contacts {
+    grid-column: 3;
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+.svg-envelope {
+    width: 24px;
+    height: 24px;
+
+    fill: black;
+
+    transition:
+        fill 0.25s ease,
+        transform 0.25s ease;
+}
+
+.contacts:hover .svg-envelope {
+    fill: gold;
+    transform: scale(1.15);
+}
+
+
+/* =========================================================
+   VERY NARROW MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .navbar {
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            auto
+            auto
+            auto;
+
+        gap: 10px;
+
+        padding: 14px 8px;
+    }
+
+
+    .logo-title {
+        grid-column: 1;
+        grid-row: 1;
+
+        font-size: 42px;
+    }
+
+
+    .menu {
+        grid-column: 1;
+        grid-row: 2;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+
+    .menu a {
+        font-size: 13px;
+    }
+
+
+    .contacts {
+        grid-column: 1;
+        grid-row: 3;
+
+        justify-self: center;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 601px) {
+
+    .navbar {
+        height: 110px;
+
+        padding: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* -----------------------------------------
+       MENU
+       ----------------------------------------- */
+
+    .menu {
+        position: absolute;
+
+        left: 30px;
+
+        width: auto;
+
+        display: flex;
+
+        flex-wrap: nowrap;
+
+        gap: 25px;
+    }
+
+
+    .menu a {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------
+       LOGO
+       ----------------------------------------- */
+
+    .logo-title {
+        width: auto;
+
+        font-size: 80px;
+    }
+
+
+    /* Desktop golden circle */
+
+    .logo-title span::after {
+        clip-path: circle(
+            60px at
+            var(--mouse-x, 50%)
+            var(--mouse-y, 50%)
+        );
+    }
+
+
+    /* -----------------------------------------
+       CONTACTS
+       ----------------------------------------- */
+
+    .contacts {
+        position: absolute;
+
+        right: 30px;
+
+        justify-self: initial;
+    }
+
+
+    .svg-envelope {
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -1,0 +1,33 @@
+/* =========================================================
+   PAGE CONTENT
+   ========================================================= */
+
+.page-text {
+    margin: 16px 10px;
+
+    color: gold;
+
+    font-family: Arial, sans-serif;
+
+    font-size: clamp(18px, 4vw, 24px);
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   GENERAL CONTENT SAFETY
+   ========================================================= */
+
+main {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 auto;
+
+    padding: 0 10px;
+
+    overflow-wrap: break-word;
+}
