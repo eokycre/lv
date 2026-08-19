@@ -1,65 +1,144 @@
 /* =========================================================
-   PAMATA — MOBILE FIRST
+   BASE — MOBILE FIRST
    ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-width: 0;
+}
 
 body {
     margin: 0;
+    width: 100%;
+    min-width: 0;
+
     background-color: midnightblue;
     text-align: center;
+
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
 /* =========================================================
-   HEADER
+   HEADER — MOBILE FIRST
    ========================================================= */
 
 .navbar {
     position: relative;
 
     width: 100%;
-    min-height: 0;
+    min-width: 0;
 
     background-color: white;
 
-    box-sizing: border-box;
+    padding: 14px 10px;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+
+    /*
+     * Kreisā zona — izvēlne
+     * Vidus — logo
+     * Labā zona — kontakti
+     */
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
     align-items: center;
-    justify-content: center;
 
-    padding: 18px 10px 22px;
-
-    gap: 14px;
+    gap: 10px;
 }
 
 
 /* =========================================================
-   ZELTAINS LOGO
+   MENU
+   ========================================================= */
+
+.menu {
+    grid-column: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.menu a {
+    color: black;
+
+    text-decoration: none;
+
+    font-size: clamp(12px, 2.8vw, 15px);
+
+    text-transform: uppercase;
+
+    font-family: "Times New Roman", Times, serif;
+
+    white-space: nowrap;
+
+    display: inline-block;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.menu a:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   LOGO
    ========================================================= */
 
 .logo-title {
-    order: 1;
+    grid-column: 2;
 
-    margin: 0;
-
-    width: 100%;
+    min-width: 0;
 
     display: flex;
-    justify-content: center;
 
-    font-size: 48px;
-    line-height: 1;
+    justify-content: center;
 
     color: black;
 
     font-family: "Times New Roman", Times, serif;
+
+    /*
+     * Automātiski pielāgojas ekrānam.
+     */
+    font-size: clamp(36px, 9vw, 52px);
+
     font-weight: normal;
 
-    cursor: pointer;
+    line-height: 1;
+
     text-decoration: none;
 
+    cursor: pointer;
+
+    white-space: nowrap;
+
     position: relative;
+
     z-index: 2;
 }
 
@@ -68,6 +147,7 @@ body {
 
 .logo-title span {
     position: relative;
+
     display: inline-block;
 
     color: black;
@@ -89,7 +169,10 @@ body {
     pointer-events: none;
 
     clip-path: circle(
-        30px at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        clamp(24px, 5vw, 30px)
+        at
+        var(--mouse-x, 50%)
+        var(--mouse-y, 50%)
     );
 
     opacity: var(--glow-opacity, 0);
@@ -99,62 +182,13 @@ body {
 
 
 /* =========================================================
-   MENU
-   ========================================================= */
-
-.menu {
-    order: 2;
-
-    position: static;
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 18px;
-}
-
-
-.menu a {
-    color: black;
-
-    text-decoration: none;
-
-    font-size: 15px;
-
-    text-transform: uppercase;
-
-    font-family: "Times New Roman", Times, serif;
-
-    display: inline-block;
-
-    white-space: nowrap;
-
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-/* Hover galvenokārt desktopam */
-
-.menu a:hover {
-    color: gold;
-    transform: scale(1.05);
-}
-
-
-/* =========================================================
-   KONTAKTI
+   CONTACTS
    ========================================================= */
 
 .contacts {
-    order: 3;
+    grid-column: 3;
 
-    position: static;
+    justify-self: end;
 
     display: flex;
 
@@ -163,15 +197,12 @@ body {
 
     text-decoration: none;
 
-    margin-top: 2px;
+    min-width: 0;
 }
 
-
-/* SVG aploksnes ikona */
-
 .svg-envelope {
-    width: 24px;
-    height: 24px;
+    width: clamp(22px, 5vw, 26px);
+    height: clamp(22px, 5vw, 26px);
 
     fill: black;
 
@@ -180,7 +211,6 @@ body {
         transform 0.25s ease;
 }
 
-
 .contacts:hover .svg-envelope {
     fill: gold;
     transform: scale(1.15);
@@ -188,47 +218,82 @@ body {
 
 
 /* =========================================================
-   LAPAS TEKSTS
+   PAGE TEXT
    ========================================================= */
 
 p {
-    font-size: 20px;
-
-    line-height: 1.4;
+    margin: 16px 10px;
 
     color: gold;
 
-    text-transform: uppercase;
-
     font-family: Arial, sans-serif;
 
-    margin: 16px 10px;
+    font-size: clamp(18px, 4vw, 24px);
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
 }
 
 
 /* =========================================================
-   ĻOTI MAZS TELEFONS
+   VERY NARROW PHONES
    ========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 420px) {
 
     .navbar {
-        padding-left: 8px;
-        padding-right: 8px;
+        /*
+         * Ja ekrāns kļūst ļoti šaurs,
+         * headeris pārslēdzas uz trīs rindām.
+         */
+        grid-template-columns: 1fr;
 
-        gap: 12px;
+        grid-template-rows:
+            auto
+            auto
+            auto;
+
+        gap: 10px;
+
+        padding: 14px 8px;
     }
+
 
     .logo-title {
-        font-size: 40px;
+        grid-column: 1;
+        grid-row: 1;
+
+        font-size: 42px;
     }
 
+
     .menu {
+        grid-column: 1;
+        grid-row: 2;
+
+        justify-content: center;
+
         gap: 12px;
     }
+
 
     .menu a {
         font-size: 13px;
+    }
+
+
+    .contacts {
+        grid-column: 1;
+        grid-row: 3;
+
+        justify-self: center;
+    }
+
+
+    .svg-envelope {
+        width: 24px;
+        height: 24px;
     }
 }
 
@@ -245,25 +310,23 @@ p {
 
         padding: 0;
 
-        flex-direction: row;
+        /*
+         * Desktopā atgriežam tavu sākotnējo
+         * vizuālo izkārtojumu.
+         */
+        display: flex;
 
         align-items: center;
         justify-content: center;
-
-        gap: 0;
     }
 
 
-    /* -----------------------------------------
-       LOGO
-       ----------------------------------------- */
+    /* =====================================================
+       DESKTOP LOGO
+       ===================================================== */
 
     .logo-title {
-        order: initial;
-
         width: auto;
-
-        justify-content: initial;
 
         font-size: 80px;
 
@@ -271,22 +334,20 @@ p {
     }
 
 
-    /* Desktopa zelta aplis */
-
     .logo-title span::after {
         clip-path: circle(
-            60px at var(--mouse-x, 50%) var(--mouse-y, 50%)
+            60px at
+            var(--mouse-x, 50%)
+            var(--mouse-y, 50%)
         );
     }
 
 
-    /* -----------------------------------------
-       MENU
-       ----------------------------------------- */
+    /* =====================================================
+       DESKTOP MENU
+       ===================================================== */
 
     .menu {
-        order: initial;
-
         position: absolute;
 
         left: 30px;
@@ -295,8 +356,9 @@ p {
 
         display: flex;
 
-        justify-content: initial;
-        align-items: initial;
+        flex-wrap: nowrap;
+
+        align-items: center;
 
         gap: 25px;
     }
@@ -307,18 +369,16 @@ p {
     }
 
 
-    /* -----------------------------------------
-       KONTAKTI
-       ----------------------------------------- */
+    /* =====================================================
+       DESKTOP CONTACTS
+       ===================================================== */
 
     .contacts {
-        order: initial;
-
         position: absolute;
 
         right: 30px;
 
-        margin-top: 0;
+        justify-self: initial;
     }
 
 
@@ -328,9 +388,9 @@ p {
     }
 
 
-    /* -----------------------------------------
-       LAPAS TEKSTS
-       ----------------------------------------- */
+    /* =====================================================
+       DESKTOP PAGE TEXT
+       ===================================================== */
 
     p {
         font-size: 24px;
@@ -338,5 +398,18 @@ p {
         line-height: normal;
 
         margin: 16px 0;
+    }
+}
+
+
+/* =========================================================
+   LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .navbar {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }

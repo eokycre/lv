@@ -18,14 +18,11 @@ body {
 
     background-color: midnightblue;
     text-align: center;
+
+    overflow-x: hidden;
 }
 
 img {
-    display: block;
     max-width: 100%;
     height: auto;
-}
-
-a {
-    -webkit-tap-highlight-color: transparent;
 }

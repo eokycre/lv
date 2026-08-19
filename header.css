@@ -1,5 +1,5 @@
 /* =========================================================
-   HEADER — MOBILE FIRST
+   HEADER
    ========================================================= */
 
 .navbar {
@@ -10,57 +10,13 @@
 
     background-color: white;
 
-    padding: 14px 10px;
-
-    display: grid;
-
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-
-/* =========================================================
-   MENU
-   ========================================================= */
-
-.menu {
-    grid-column: 1;
-
-    min-width: 0;
-
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 
-    flex-wrap: wrap;
+    padding: 14px 10px;
 
-    gap: 10px;
-}
-
-.menu a {
-    color: black;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    text-transform: uppercase;
-
-    font-family: "Times New Roman", Times, serif;
-
-    white-space: nowrap;
-
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease;
-}
-
-.menu a:hover {
-    color: gold;
-    transform: scale(1.05);
+    min-height: 90px;
 }
 
 
@@ -69,33 +25,28 @@
    ========================================================= */
 
 .logo-title {
-    grid-column: 2;
-
-    min-width: 0;
+    margin: 0;
 
     display: flex;
-
     justify-content: center;
+    align-items: center;
 
     color: black;
 
     font-family: "Times New Roman", Times, serif;
-
-    font-size: clamp(38px, 9vw, 52px);
-
+    font-size: clamp(40px, 9vw, 80px);
     font-weight: normal;
 
     line-height: 1;
 
     text-decoration: none;
+    white-space: nowrap;
 
     cursor: pointer;
 
-    white-space: nowrap;
+    position: relative;
+    z-index: 2;
 }
-
-
-/* Individual letters */
 
 .logo-title span {
     position: relative;
@@ -106,7 +57,9 @@
 }
 
 
-/* Golden layer */
+/* =========================================================
+   GOLD EFFECT
+   ========================================================= */
 
 .logo-title span::after {
     content: attr(data-letter);
@@ -121,7 +74,8 @@
     pointer-events: none;
 
     clip-path: circle(
-        30px at
+        clamp(28px, 5vw, 60px)
+        at
         var(--mouse-x, 50%)
         var(--mouse-y, 50%)
     );
@@ -133,13 +87,55 @@
 
 
 /* =========================================================
-   CONTACTS
+   MENU
+   ========================================================= */
+
+.menu {
+    position: absolute;
+
+    left: 30px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+
+    min-width: 0;
+}
+
+.menu a {
+    color: black;
+
+    text-decoration: none;
+
+    font-size: clamp(14px, 2vw, 20px);
+
+    text-transform: uppercase;
+
+    font-family: "Times New Roman", Times, serif;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.menu a:hover {
+    color: gold;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   CONTACTS / ENVELOPE
    ========================================================= */
 
 .contacts {
-    grid-column: 3;
+    position: absolute;
 
-    justify-self: end;
+    right: 30px;
 
     display: flex;
 
@@ -150,8 +146,8 @@
 }
 
 .svg-envelope {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
 
     fill: black;
 
@@ -162,17 +158,115 @@
 
 .contacts:hover .svg-envelope {
     fill: gold;
+
     transform: scale(1.15);
 }
 
 
 /* =========================================================
-   VERY NARROW MOBILE
+   MOBILE HEADER
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        min-height: 0;
+
+        padding: 14px 10px;
+
+        /*
+         * Grid neļauj menu, logo un kontaktam
+         * nejauši uzkrist vienam otram.
+         */
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+
+    /* Logo */
+
+    .logo-title {
+        grid-column: 2;
+
+        font-size: clamp(36px, 9vw, 52px);
+
+        min-width: 0;
+    }
+
+
+    /* Menu */
+
+    .menu {
+        position: static;
+
+        grid-column: 1;
+
+        min-width: 0;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 8px;
+    }
+
+
+    .menu a {
+        font-size: clamp(11px, 2.8vw, 15px);
+    }
+
+
+    /* Contacts */
+
+    .contacts {
+        position: static;
+
+        grid-column: 3;
+
+        justify-self: end;
+    }
+
+
+    .svg-envelope {
+        width: 24px;
+        height: 24px;
+    }
+
+
+    /* Mobile gold circle */
+
+    .logo-title span::after {
+        clip-path: circle(
+            28px at
+            var(--mouse-x, 50%)
+            var(--mouse-y, 50%)
+        );
+    }
+}
+
+
+/* =========================================================
+   VERY NARROW PHONES
    ========================================================= */
 
 @media (max-width: 420px) {
 
     .navbar {
+        /*
+         * Uz ļoti šaura ekrāna headeris
+         * pārslēdzas uz drošu 3-rindu izkārtojumu.
+         */
         grid-template-columns: 1fr;
 
         grid-template-rows:
@@ -182,7 +276,7 @@
 
         gap: 10px;
 
-        padding: 14px 8px;
+        padding: 12px 8px;
     }
 
 
@@ -226,6 +320,7 @@
 
     .navbar {
         height: 110px;
+        min-height: 110px;
 
         padding: 0;
 
@@ -236,42 +331,10 @@
     }
 
 
-    /* -----------------------------------------
-       MENU
-       ----------------------------------------- */
-
-    .menu {
-        position: absolute;
-
-        left: 30px;
-
-        width: auto;
-
-        display: flex;
-
-        flex-wrap: nowrap;
-
-        gap: 25px;
-    }
-
-
-    .menu a {
-        font-size: 20px;
-    }
-
-
-    /* -----------------------------------------
-       LOGO
-       ----------------------------------------- */
-
     .logo-title {
-        width: auto;
-
         font-size: 80px;
     }
 
-
-    /* Desktop golden circle */
 
     .logo-title span::after {
         clip-path: circle(
@@ -279,24 +342,5 @@
             var(--mouse-x, 50%)
             var(--mouse-y, 50%)
         );
-    }
-
-
-    /* -----------------------------------------
-       CONTACTS
-       ----------------------------------------- */
-
-    .contacts {
-        position: absolute;
-
-        right: 30px;
-
-        justify-self: initial;
-    }
-
-
-    .svg-envelope {
-        width: 30px;
-        height: 30px;
     }
 }

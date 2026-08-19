@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    /* =========================================================
+       NEĢENERĒT HEADERI OTRREIZ
+       ========================================================= */
+
+    if (document.querySelector(".navbar")) {
+        return;
+    }
+
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
     document.body.insertAdjacentHTML("afterbegin", `
         <nav class="navbar">
 
@@ -16,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <svg
                     class="svg-envelope"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
                     <path d="M22,4H2C0.9,4,0,4.9,0,6v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V6C24,4.9,23.1,4,22,4z M22,6l-10,7L2,6H22z M2,18V8l10,7l10-7v10H2z"/>
                 </svg>
@@ -24,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a
                 href="index.html"
                 class="logo-title"
+                aria-label="ZELTAINS sākumlapa"
             >
                 <span data-letter="Z">Z</span>
                 <span data-letter="E">E</span>
@@ -54,24 +69,29 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentY = 0;
 
     let active = false;
-
     let touchActive = false;
 
 
     /* =========================================================
-       PALĪGFUNKCIJA
+       ZELTA SPĪDUMS
        ========================================================= */
 
     function setGlow(value) {
 
-        letters.forEach(letter => {
+        letters.forEach(function (letter) {
+
             letter.style.setProperty(
                 "--glow-opacity",
                 value
             );
+
         });
     }
 
+
+    /* =========================================================
+       POZĪCIJA
+       ========================================================= */
 
     function updatePosition(x, y) {
 
@@ -88,14 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       DESKTOP — PELE
+       PELE
        ========================================================= */
 
-    navbar.addEventListener("mouseenter", function (event) {
+    navbar.addEventListener("pointerenter", function (event) {
 
-        /*
-         * Touch ierīcēs šo ignorējam.
-         */
         if (event.pointerType === "touch") {
             return;
         }
@@ -111,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    navbar.addEventListener("mousemove", function (event) {
+    navbar.addEventListener("pointermove", function (event) {
 
         if (event.pointerType === "touch") {
             return;
@@ -124,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    navbar.addEventListener("mouseleave", function (event) {
+    navbar.addEventListener("pointerleave", function (event) {
 
         if (event.pointerType === "touch") {
             return;
@@ -137,10 +154,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       MOBILAIS — PIESKĀRIENS
+       TOUCH / PIESKĀRIENS
        ========================================================= */
 
-    document.addEventListener(
+    navbar.addEventListener(
         "touchstart",
         function (event) {
 
@@ -150,27 +167,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const touch = event.touches[0];
 
-            const rect = navbar.getBoundingClientRect();
+            touchActive = true;
+            active = true;
 
-            /*
-             * Aktivizējam tikai tad,
-             * ja pirksts sākas headerī.
-             */
-            if (
-                touch.clientY >= rect.top &&
-                touch.clientY <= rect.bottom
-            ) {
+            updatePosition(
+                touch.clientX,
+                touch.clientY
+            );
 
-                touchActive = true;
-                active = true;
-
-                updatePosition(
-                    touch.clientX,
-                    touch.clientY
-                );
-
-                setGlow("1");
-            }
+            setGlow("1");
         },
         {
             passive: true
@@ -178,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    document.addEventListener(
+    navbar.addEventListener(
         "touchmove",
         function (event) {
 
@@ -192,33 +197,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const touch = event.touches[0];
 
-            /*
-             * Pirksts var pārvietoties pa visu headeri.
-             */
-            const rect = navbar.getBoundingClientRect();
+            updatePosition(
+                touch.clientX,
+                touch.clientY
+            );
 
-            if (
-                touch.clientY >= rect.top &&
-                touch.clientY <= rect.bottom
-            ) {
+            active = true;
 
-                updatePosition(
-                    touch.clientX,
-                    touch.clientY
-                );
-
-                active = true;
-                setGlow("1");
-
-            } else {
-
-                /*
-                 * Ja pirksts iziet no headera,
-                 * aplis lēnām pazūd.
-                 */
-                active = false;
-                setGlow("0");
-            }
+            setGlow("1");
         },
         {
             passive: true
@@ -226,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    document.addEventListener(
+    navbar.addEventListener(
         "touchend",
         function () {
 
@@ -241,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    document.addEventListener(
+    navbar.addEventListener(
         "touchcancel",
         function () {
 
@@ -262,10 +248,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function animate() {
 
-        /*
-         * Inerce.
-         * 0.12 = maiga kustība.
-         */
         currentX +=
             (targetX - currentX) * 0.12;
 
@@ -275,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (active) {
 
-            letters.forEach(letter => {
+            letters.forEach(function (letter) {
 
                 const rect =
                     letter.getBoundingClientRect();
@@ -296,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "--mouse-y",
                     `${y}px`
                 );
+
             });
         }
 

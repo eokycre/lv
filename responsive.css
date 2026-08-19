@@ -1,31 +1,26 @@
 /* =========================================================
-   RESPONSIVE SAFETY
+   RESPONSIVE
    ========================================================= */
 
 /*
- * Prevent long text, URLs and other content
- * from creating horizontal overflow.
+ * Prevent content from creating horizontal scrolling.
  */
 
-body {
-    overflow-x: hidden;
-}
-
-
-/*
- * Make common content elements responsive.
- */
-
-video,
-iframe,
-table {
+main {
     max-width: 100%;
 }
 
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
 
-/*
- * Tablet / medium screens
- */
+
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (min-width: 601px) {
 
@@ -34,17 +29,21 @@ table {
         padding-right: 20px;
     }
 
+    .page-text {
+        font-size: 24px;
+        line-height: normal;
+        margin: 16px 0;
+    }
 }
 
 
-/*
- * Large desktop screens
- */
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
 
 @media (min-width: 1200px) {
 
     main {
         max-width: 1200px;
     }
-
 }
