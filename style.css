@@ -1,31 +1,61 @@
+/* =========================================================
+   PAMATA — MOBILE FIRST
+   ========================================================= */
+
 body {
     margin: 0;
     background-color: midnightblue;
     text-align: center;
 }
 
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .navbar {
     position: relative;
-    height: 110px;
+
+    width: 100%;
+    min-height: 0;
+
     background-color: white;
 
+    box-sizing: border-box;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    padding: 18px 10px 22px;
+
+    gap: 14px;
 }
 
-/* =========================
+
+/* =========================================================
    ZELTAINS LOGO
-   ========================= */
+   ========================================================= */
 
 .logo-title {
+    order: 1;
+
     margin: 0;
-    font-size: 80px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 48px;
+    line-height: 1;
+
     color: black;
+
     font-family: "Times New Roman", Times, serif;
     font-weight: normal;
 
-    display: flex;
     cursor: pointer;
     text-decoration: none;
 
@@ -33,25 +63,33 @@ body {
     z-index: 2;
 }
 
+
+/* Katrs ZELTAINS burts */
+
 .logo-title span {
     position: relative;
     display: inline-block;
+
     color: black;
 }
 
+
 /* Zelta slānis */
+
 .logo-title span::after {
     content: attr(data-letter);
 
     position: absolute;
+
     left: 0;
     top: 0;
 
     color: gold;
+
     pointer-events: none;
 
     clip-path: circle(
-        60px at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        30px at var(--mouse-x, 50%) var(--mouse-y, 50%)
     );
 
     opacity: var(--glow-opacity, 0);
@@ -59,55 +97,81 @@ body {
     transition: opacity 0.18s ease;
 }
 
-/* =========================
+
+/* =========================================================
    MENU
-   ========================= */
+   ========================================================= */
 
 .menu {
-    position: absolute;
-    left: 30px;
+    order: 2;
+
+    position: static;
+
+    width: 100%;
 
     display: flex;
-    gap: 25px;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 18px;
 }
+
 
 .menu a {
     color: black;
+
     text-decoration: none;
-    font-size: 20px;
+
+    font-size: 15px;
+
     text-transform: uppercase;
+
     font-family: "Times New Roman", Times, serif;
 
     display: inline-block;
+
+    white-space: nowrap;
 
     transition:
         color 0.25s ease,
         transform 0.25s ease;
 }
 
+
+/* Hover galvenokārt desktopam */
+
 .menu a:hover {
     color: gold;
     transform: scale(1.05);
 }
 
-/* =========================
+
+/* =========================================================
    KONTAKTI
-   ========================= */
+   ========================================================= */
 
 .contacts {
-    position: absolute;
-    right: 30px;
+    order: 3;
+
+    position: static;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     text-decoration: none;
+
+    margin-top: 2px;
 }
 
+
+/* SVG aploksnes ikona */
+
 .svg-envelope {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 
     fill: black;
 
@@ -116,128 +180,43 @@ body {
         transform 0.25s ease;
 }
 
+
 .contacts:hover .svg-envelope {
     fill: gold;
     transform: scale(1.15);
 }
 
-/* =========================
-   LAPU TEKSTS
-   ========================= */
+
+/* =========================================================
+   LAPAS TEKSTS
+   ========================================================= */
 
 p {
-    font-size: 24px;
+    font-size: 20px;
+
+    line-height: 1.4;
+
     color: gold;
+
     text-transform: uppercase;
+
     font-family: Arial, sans-serif;
+
+    margin: 16px 10px;
 }
 
 
 /* =========================================================
-   MOBILĀ VERSIJA
+   ĻOTI MAZS TELEFONS
    ========================================================= */
 
-@media (max-width: 600px) {
-
-    .navbar {
-        height: auto;
-        min-height: 0;
-
-        padding: 18px 15px 22px;
-
-        display: flex;
-        flex-direction: column;
-
-        justify-content: center;
-        align-items: center;
-
-        gap: 14px;
-
-        box-sizing: border-box;
-    }
-
-    /* -------------------------
-       LOGO
-       ------------------------- */
-
-    .logo-title {
-        order: 1;
-
-        font-size: 48px;
-        line-height: 1;
-
-        width: 100%;
-
-        justify-content: center;
-    }
-
-    /* Mobilais zelta aplis:
-       30px rādiuss = 60px diametrs */
-    .logo-title span::after {
-        clip-path: circle(
-            30px at var(--mouse-x, 50%) var(--mouse-y, 50%)
-        );
-    }
-
-    /* -------------------------
-       MENU
-       ------------------------- */
-
-    .menu {
-        order: 2;
-
-        position: static;
-
-        width: 100%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        gap: 18px;
-    }
-
-    .menu a {
-        font-size: 15px;
-        white-space: nowrap;
-    }
-
-    /* -------------------------
-       KONTAKTI
-       ------------------------- */
-
-    .contacts {
-        order: 3;
-
-        position: static;
-
-        margin-top: 2px;
-    }
-
-    .svg-envelope {
-        width: 24px;
-        height: 24px;
-    }
-
-    /* -------------------------
-       LAPAS TEKSTS
-       ------------------------- */
-
-    p {
-        font-size: 20px;
-        line-height: 1.4;
-
-        margin: 16px 10px;
-    }
-}
-
-
-/* Ļoti mazi telefoni */
 @media (max-width: 380px) {
 
     .navbar {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 8px;
+        padding-right: 8px;
+
+        gap: 12px;
     }
 
     .logo-title {
@@ -250,5 +229,114 @@ p {
 
     .menu a {
         font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 601px) {
+
+    .navbar {
+        height: 110px;
+        min-height: 110px;
+
+        padding: 0;
+
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 0;
+    }
+
+
+    /* -----------------------------------------
+       LOGO
+       ----------------------------------------- */
+
+    .logo-title {
+        order: initial;
+
+        width: auto;
+
+        justify-content: initial;
+
+        font-size: 80px;
+
+        line-height: normal;
+    }
+
+
+    /* Desktopa zelta aplis */
+
+    .logo-title span::after {
+        clip-path: circle(
+            60px at var(--mouse-x, 50%) var(--mouse-y, 50%)
+        );
+    }
+
+
+    /* -----------------------------------------
+       MENU
+       ----------------------------------------- */
+
+    .menu {
+        order: initial;
+
+        position: absolute;
+
+        left: 30px;
+
+        width: auto;
+
+        display: flex;
+
+        justify-content: initial;
+        align-items: initial;
+
+        gap: 25px;
+    }
+
+
+    .menu a {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------
+       KONTAKTI
+       ----------------------------------------- */
+
+    .contacts {
+        order: initial;
+
+        position: absolute;
+
+        right: 30px;
+
+        margin-top: 0;
+    }
+
+
+    .svg-envelope {
+        width: 30px;
+        height: 30px;
+    }
+
+
+    /* -----------------------------------------
+       LAPAS TEKSTS
+       ----------------------------------------- */
+
+    p {
+        font-size: 24px;
+
+        line-height: normal;
+
+        margin: 16px 0;
     }
 }
