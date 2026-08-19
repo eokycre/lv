@@ -1,0 +1,230 @@
+const raksti = [
+
+    {
+        id: 1,
+
+        category: "piedzivojumi",
+
+        date: "2026-08-19",
+
+        image: "images/piedzivojumi-1.jpg",
+
+        lv: {
+            title: "Pirmais piedzīvojums",
+
+            excerpt:
+                "Pirmais ZELTAINS piedzīvojumu stāsts.",
+
+            content: `
+                <p>
+                    Šis ir pirmais ZELTAINS piedzīvojumu stāsts.
+                </p>
+
+                <p>
+                    Piedzīvojumi sākas tajā brīdī, kad ikdienas
+                    maršruts vairs nav pietiekams un rodas vēlme
+                    ieraudzīt kaut ko jaunu.
+                </p>
+
+                <p>
+                    Šeit vēlāk būs pilns raksta teksts,
+                    fotogrāfijas un cita informācija.
+                </p>
+            `
+        },
+
+        en: {
+            title: "The First Adventure",
+
+            excerpt:
+                "The first ZELTAINS adventure story.",
+
+            content: `
+                <p>
+                    This is the first ZELTAINS adventure story.
+                </p>
+
+                <p>
+                    Adventures begin when the familiar route
+                    is no longer enough and there is a desire
+                    to discover something new.
+                </p>
+
+                <p>
+                    The full article, photographs and additional
+                    information will be added here later.
+                </p>
+            `
+        },
+
+        fr: {
+            title: "La première aventure",
+
+            excerpt:
+                "La première histoire d'aventure de ZELTAINS.",
+
+            content: `
+                <p>
+                    Voici la première histoire d'aventure
+                    de ZELTAINS.
+                </p>
+
+                <p>
+                    Les aventures commencent lorsque le chemin
+                    habituel ne suffit plus et que l'envie de
+                    découvrir quelque chose de nouveau apparaît.
+                </p>
+
+                <p>
+                    L'article complet, les photographies et
+                    les informations supplémentaires seront
+                    ajoutés ici plus tard.
+                </p>
+            `
+        },
+
+        it: {
+            title: "La prima avventura",
+
+            excerpt:
+                "La prima storia di avventura di ZELTAINS.",
+
+            content: `
+                <p>
+                    Questa è la prima storia di avventura
+                    di ZELTAINS.
+                </p>
+
+                <p>
+                    Le avventure iniziano quando il percorso
+                    abituale non è più sufficiente e nasce
+                    il desiderio di scoprire qualcosa di nuovo.
+                </p>
+
+                <p>
+                    L'articolo completo, le fotografie e
+                    ulteriori informazioni saranno aggiunti
+                    qui in seguito.
+                </p>
+            `
+        }
+    },
+
+
+    {
+        id: 2,
+
+        category: "dzivesstils",
+
+        date: "2026-08-18",
+
+        image: "images/dzivesstils-1.jpg",
+
+        lv: {
+            title: "Dzīvesstils bez steigas",
+
+            excerpt:
+                "Par dzīvi, kurā nav nepieciešams visu paspēt.",
+
+            content: `
+                <p>
+                    Dzīvesstils bez steigas nozīmē nevis darīt
+                    mazāk, bet izvēlēties to, kam patiešām
+                    ir nozīme.
+                </p>
+
+                <p>
+                    Ikdienā mēs bieži cenšamies paspēt visu,
+                    taču dažreiz vērtīgākais ir vienkārši
+                    apstāties un paskatīties apkārt.
+                </p>
+
+                <p>
+                    Šeit vēlāk būs pilns raksta teksts,
+                    fotogrāfijas un cita informācija.
+                </p>
+            `
+        },
+
+        en: {
+            title: "A Life Without Hurry",
+
+            excerpt:
+                "A life where there is no need to rush everything.",
+
+            content: `
+                <p>
+                    A life without hurry does not mean doing
+                    less. It means choosing what truly matters.
+                </p>
+
+                <p>
+                    In everyday life, we often try to accomplish
+                    everything at once. Sometimes the most valuable
+                    thing is simply to stop and look around.
+                </p>
+
+                <p>
+                    The full article, photographs and additional
+                    information will be added here later.
+                </p>
+            `
+        },
+
+        fr: {
+            title: "Un style de vie sans précipitation",
+
+            excerpt:
+                "Une vie où il n'est pas nécessaire de tout faire dans l'urgence.",
+
+            content: `
+                <p>
+                    Vivre sans précipitation ne signifie pas
+                    faire moins. Cela signifie choisir ce qui
+                    compte vraiment.
+                </p>
+
+                <p>
+                    Dans la vie quotidienne, nous essayons
+                    souvent de tout accomplir en même temps.
+                    Parfois, le plus précieux est simplement
+                    de s'arrêter et de regarder autour de soi.
+                </p>
+
+                <p>
+                    L'article complet, les photographies et
+                    les informations supplémentaires seront
+                    ajoutés ici plus tard.
+                </p>
+            `
+        },
+
+        it: {
+            title: "Uno stile di vita senza fretta",
+
+            excerpt:
+                "Una vita in cui non è necessario fare tutto di corsa.",
+
+            content: `
+                <p>
+                    Vivere senza fretta non significa fare meno.
+                    Significa scegliere ciò che conta davvero.
+                </p>
+
+                <p>
+                    Nella vita quotidiana cerchiamo spesso
+                    di fare tutto contemporaneamente. A volte
+                    la cosa più preziosa è semplicemente fermarsi
+                    e guardarsi intorno.
+                </p>
+
+                <p>
+                    L'articolo completo, le fotografie e
+                    ulteriori informazioni saranno aggiunti
+                    qui in seguito.
+                </p>
+            `
+        }
+    }
+
+];

@@ -2,6 +2,7 @@
 <html lang="lv">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,18 +12,39 @@
 
     <title>ZELTAINS</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-    <script src="navbar.js"></script>
+    <script
+        src="navbar.js"
+        defer
+    ></script>
+
+    <script
+        src="data/raksti.js"
+        defer
+    ></script>
+
+    <script
+        src="js/cards.js"
+        defer
+    ></script>
+
 </head>
+
 
 <body>
 
     <main>
-        <p class="page-text">Tu esi</p>
-        <p class="page-text">You are golden</p>
-        <p class="page-text">Tu es en or</p>
-        <p class="page-text">Sei d'oro</p>
+
+        <section
+            class="raksti-container"
+            data-category="all"
+            data-limit="2"
+        ></section>
+
     </main>
 
 </body>
