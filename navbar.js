@@ -10,6 +10,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
+       VALODAS
+       ========================================================= */
+
+    const supportedLanguages = [
+        "lv",
+        "en",
+        "fr",
+        "it"
+    ];
+
+    let currentLanguage =
+        localStorage.getItem("zeltainsLanguage") || "lv";
+
+    if (!supportedLanguages.includes(currentLanguage)) {
+        currentLanguage = "lv";
+    }
+
+
+    /* =========================================================
        HEADER
        ========================================================= */
 
@@ -21,19 +40,58 @@ document.addEventListener("DOMContentLoaded", function () {
                 <a href="dzivesstils.html">Dzīvesstils</a>
             </div>
 
-            <a
-                class="contacts"
-                href="kontakti.html"
-                aria-label="Kontakti"
-            >
-                <svg
-                    class="svg-envelope"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+
+            <div class="header-right">
+
+                <div class="valodu-izvele" aria-label="Valoda">
+
+                    <button
+                        type="button"
+                        data-language="lv"
+                    >
+                        LV
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="en"
+                    >
+                        EN
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="fr"
+                    >
+                        FR
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="it"
+                    >
+                        IT
+                    </button>
+
+                </div>
+
+
+                <a
+                    class="contacts"
+                    href="kontakti.html"
+                    aria-label="Kontakti"
                 >
-                    <path d="M22,4H2C0.9,4,0,4.9,0,6v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V6C24,4.9,23.1,4,22,4z M22,6l-10,7L2,6H22z M2,18V8l10,7l10-7v10H2z"/>
-                </svg>
-            </a>
+                    <svg
+                        class="svg-envelope"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M22,4H2C0.9,4,0,4.9,0,6v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V6C24,4.9,23.1,4,22,4z M22,6l-10,7L2,6H22z M2,18V8l10,7l10-7v10H2z"/>
+                    </svg>
+                </a>
+
+            </div>
+
 
             <a
                 href="index.html"
@@ -54,8 +112,75 @@ document.addEventListener("DOMContentLoaded", function () {
     `);
 
 
-    const navbar = document.querySelector(".navbar");
-    const letters = document.querySelectorAll(".logo-title span");
+    const navbar =
+        document.querySelector(".navbar");
+
+    const letters =
+        document.querySelectorAll(".logo-title span");
+
+    const languageButtons =
+        document.querySelectorAll(
+            ".valodu-izvele button"
+        );
+
+
+    /* =========================================================
+       VALODU POGAS
+       ========================================================= */
+
+    function updateLanguageButtons() {
+
+        languageButtons.forEach(function (button) {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.language === currentLanguage
+            );
+
+        });
+    }
+
+
+    languageButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                currentLanguage =
+                    button.dataset.language;
+
+                localStorage.setItem(
+                    "zeltainsLanguage",
+                    currentLanguage
+                );
+
+                updateLanguageButtons();
+
+
+                /*
+                 * Ja cards.js ir ielādēts,
+                 * paziņojam tam, ka valoda mainījusies.
+                 */
+
+                document.dispatchEvent(
+                    new CustomEvent(
+                        "zeltainsLanguageChanged",
+                        {
+                            detail: {
+                                language: currentLanguage
+                            }
+                        }
+                    )
+                );
+
+            }
+        );
+
+    });
+
+
+    updateLanguageButtons();
 
 
     /* =========================================================
@@ -111,46 +236,55 @@ document.addEventListener("DOMContentLoaded", function () {
        PELE
        ========================================================= */
 
-    navbar.addEventListener("pointerenter", function (event) {
+    navbar.addEventListener(
+        "pointerenter",
+        function (event) {
 
-        if (event.pointerType === "touch") {
-            return;
+            if (event.pointerType === "touch") {
+                return;
+            }
+
+            active = true;
+
+            updatePosition(
+                event.clientX,
+                event.clientY
+            );
+
+            setGlow("1");
         }
-
-        active = true;
-
-        updatePosition(
-            event.clientX,
-            event.clientY
-        );
-
-        setGlow("1");
-    });
+    );
 
 
-    navbar.addEventListener("pointermove", function (event) {
+    navbar.addEventListener(
+        "pointermove",
+        function (event) {
 
-        if (event.pointerType === "touch") {
-            return;
+            if (event.pointerType === "touch") {
+                return;
+            }
+
+            updatePosition(
+                event.clientX,
+                event.clientY
+            );
         }
-
-        updatePosition(
-            event.clientX,
-            event.clientY
-        );
-    });
+    );
 
 
-    navbar.addEventListener("pointerleave", function (event) {
+    navbar.addEventListener(
+        "pointerleave",
+        function (event) {
 
-        if (event.pointerType === "touch") {
-            return;
+            if (event.pointerType === "touch") {
+                return;
+            }
+
+            active = false;
+
+            setGlow("0");
         }
-
-        active = false;
-
-        setGlow("0");
-    });
+    );
 
 
     /* =========================================================
@@ -165,7 +299,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const touch = event.touches[0];
+            const touch =
+                event.touches[0];
 
             touchActive = true;
             active = true;
@@ -195,7 +330,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const touch = event.touches[0];
+            const touch =
+                event.touches[0];
 
             updatePosition(
                 touch.clientX,
