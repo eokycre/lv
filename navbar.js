@@ -343,6 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let active = false;
     let touchActive = false;
+    let animationRunning = false;
 
 
     function setGlow(value) {
@@ -375,6 +376,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    function startAnimation() {
+
+        if (animationRunning) {
+            return;
+        }
+
+
+        animationRunning = true;
+
+        requestAnimationFrame(
+            animate
+        );
+    }
+
+
     /* =========================================================
        POINTER
        ========================================================= */
@@ -398,6 +414,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             setGlow("1");
+
+            startAnimation();
 
         }
     );
@@ -466,6 +484,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             setGlow("1");
+
+            startAnimation();
 
         },
         {
@@ -545,6 +565,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function animate() {
 
+        if (!active) {
+            animationRunning = false;
+            return;
+        }
+
         currentX +=
             (targetX - currentX) * 0.12;
 
@@ -591,8 +616,5 @@ document.addEventListener("DOMContentLoaded", function () {
             animate
         );
     }
-
-
-    animate();
 
 });

@@ -26,7 +26,7 @@ document.addEventListener(
                 await fetch(
                     "data/raksti.json",
                     {
-                        cache: "no-store"
+                        cache: "default"
                     }
                 );
 
@@ -813,6 +813,8 @@ document.addEventListener(
                                     class="raksts-card-image"
                                     src="${safeImage(article.image)}"
                                     alt="${safeText(content.title)}"
+                                    loading="lazy"
+                                    decoding="async"
                                 >
 
                                 <div
