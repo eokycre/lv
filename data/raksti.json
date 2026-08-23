@@ -3,7 +3,7 @@
     {
       "id": 1,
       "category": "piedzivojumi",
-      "date": "2026-08-19",
+      "date": "2026-08-18",
       "image": "images/piedzivojumi-1.jpg",
       "lv": {
         "title": "Pirmais piedzīvojums",
@@ -29,7 +29,7 @@
     {
       "id": 2,
       "category": "dzivesstils",
-      "date": "2026-08-18",
+      "date": "2026-08-19",
       "image": "images/dzivesstils-1.jpg",
       "lv": {
         "title": "Dzīvesstils bez steigas",
