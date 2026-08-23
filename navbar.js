@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =========================================================
+       VALODAS
+       ========================================================= */
+
     const supportedLanguages = [
         "lv",
         "en",
@@ -22,19 +26,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    document.body.insertAdjacentHTML(
-        "afterbegin",
-        `
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    document.body.insertAdjacentHTML("afterbegin", `
+
         <nav class="navbar">
 
             <div class="menu">
 
-                <a href="piedzivojumi.html">
-                    Piedzīvojumi
+                <a
+                    href="piedzivojumi.html"
+                    data-nav="adventure"
+                >
+                    PIEDZĪVOJUMI
                 </a>
 
-                <a href="dzivesstils.html">
-                    Dzīvesstils
+                <a
+                    href="dzivesstils.html"
+                    data-nav="lifestyle"
+                >
+                    DZĪVESSTILS
                 </a>
 
             </div>
@@ -65,20 +78,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     aria-label="Valoda"
                 >
 
-                    ${supportedLanguages
-                        .map(
-                            function (language) {
-                                return `
-                                    <button
-                                        type="button"
-                                        data-language="${language}"
-                                    >
-                                        ${language.toUpperCase()}
-                                    </button>
-                                `;
-                            }
-                        )
-                        .join("")}
+                    <button
+                        type="button"
+                        data-language="lv"
+                    >
+                        LV
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="en"
+                    >
+                        EN
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="fr"
+                    >
+                        FR
+                    </button>
+
+                    <button
+                        type="button"
+                        data-language="it"
+                    >
+                        IT
+                    </button>
 
                 </div>
 
@@ -94,9 +120,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
-                        <path
-                            d="M22,4H2C0.9,4,0,4.9,0,6v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V6C24,4.9,23.1,4,22,4z M22,6l-10,7L2,6H22z M2,18V8l10,7l10-7v10H2z"
-                        />
+
+                        <path d="
+                            M22,4H2C0.9,4,0,4.9,0,6v12
+                            c0,1.1,0.9,2,2,2h20
+                            c1.1,0,2-0.9,2-2V6
+                            C24,4.9,23.1,4,22,4z
+                            M22,6l-10,7L2,6H22z
+                            M2,18V8l10,7l10-7v10H2z
+                        "/>
+
                     </svg>
 
                 </a>
@@ -104,23 +137,136 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
         </nav>
-        `
-    );
+    `);
 
 
     const navbar =
         document.querySelector(".navbar");
+
 
     const letters =
         document.querySelectorAll(
             ".logo-title span"
         );
 
+
     const languageButtons =
         document.querySelectorAll(
             ".valodu-izvele button"
         );
 
+
+    /* =========================================================
+       TEKSTI
+       ========================================================= */
+
+    const translations = {
+
+        lv: {
+            adventure: "PIEDZĪVOJUMI",
+            lifestyle: "DZĪVESSTILS",
+            contacts: "KONTAKTI"
+        },
+
+        en: {
+            adventure: "ADVENTURES",
+            lifestyle: "LIFESTYLE",
+            contacts: "CONTACTS"
+        },
+
+        fr: {
+            adventure: "AVENTURES",
+            lifestyle: "STYLE DE VIE",
+            contacts: "CONTACTS"
+        },
+
+        it: {
+            adventure: "AVVENTURE",
+            lifestyle: "STILE DI VITA",
+            contacts: "CONTATTI"
+        }
+
+    };
+
+
+    function updateNavigationText() {
+
+        const texts =
+            translations[currentLanguage] ||
+            translations.lv;
+
+
+        document
+            .querySelectorAll("[data-nav]")
+            .forEach(function (element) {
+
+                const key =
+                    element.dataset.nav;
+
+                if (texts[key]) {
+                    element.textContent =
+                        texts[key];
+                }
+
+            });
+
+
+        const contacts =
+            document.querySelector(".contacts");
+
+        if (contacts) {
+
+            contacts.setAttribute(
+                "aria-label",
+                texts.contacts
+            );
+        }
+
+
+        const heading =
+            document.querySelector(
+                ".page-heading h1"
+            );
+
+
+        if (heading) {
+
+            const page =
+                document.body.dataset.page;
+
+
+            if (
+                page === "adventure" &&
+                texts.adventure
+            ) {
+                heading.textContent =
+                    texts.adventure;
+            }
+
+
+            if (
+                page === "lifestyle" &&
+                texts.lifestyle
+            ) {
+                heading.textContent =
+                    texts.lifestyle;
+            }
+
+
+            if (
+                page === "contacts" &&
+                texts.contacts
+            ) {
+                heading.textContent =
+                    texts.contacts;
+            }
+        }
+    }
+
+
+    /* =========================================================
+       VALODU POGAS
+       ========================================================= */
 
     function updateLanguageButtons() {
 
@@ -129,6 +275,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 button.classList.toggle(
                     "active",
+
                     button.dataset.language ===
                     currentLanguage
                 );
@@ -157,6 +304,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     updateLanguageButtons();
 
+                    updateNavigationText();
+
 
                     document.dispatchEvent(
                         new CustomEvent(
@@ -179,10 +328,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateLanguageButtons();
 
+    updateNavigationText();
 
-    /* =====================================================
-       LOGO GOLD EFFECT
-       ===================================================== */
+
+    /* =========================================================
+       ZELTAINS PELĒ
+       ========================================================= */
 
     let targetX = 0;
     let targetY = 0;
@@ -191,6 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentY = 0;
 
     let active = false;
+    let touchActive = false;
 
 
     function setGlow(value) {
@@ -213,6 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
         targetX = x;
         targetY = y;
 
+
         if (!active) {
 
             currentX = x;
@@ -222,6 +375,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =========================================================
+       POINTER
+       ========================================================= */
+
     navbar.addEventListener(
         "pointerenter",
         function (event) {
@@ -230,14 +387,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+
             active = true;
+
 
             updatePosition(
                 event.clientX,
                 event.clientY
             );
 
+
             setGlow("1");
+
         }
     );
 
@@ -250,10 +411,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+
             updatePosition(
                 event.clientX,
                 event.clientY
             );
+
         }
     );
 
@@ -266,17 +429,125 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+
             active = false;
 
             setGlow("0");
+
         }
     );
 
+
+    /* =========================================================
+       TOUCH
+       ========================================================= */
+
+    navbar.addEventListener(
+        "touchstart",
+        function (event) {
+
+            if (!event.touches.length) {
+                return;
+            }
+
+
+            const touch =
+                event.touches[0];
+
+
+            touchActive = true;
+            active = true;
+
+
+            updatePosition(
+                touch.clientX,
+                touch.clientY
+            );
+
+
+            setGlow("1");
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    navbar.addEventListener(
+        "touchmove",
+        function (event) {
+
+            if (!touchActive) {
+                return;
+            }
+
+
+            if (!event.touches.length) {
+                return;
+            }
+
+
+            const touch =
+                event.touches[0];
+
+
+            updatePosition(
+                touch.clientX,
+                touch.clientY
+            );
+
+
+            setGlow("1");
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    navbar.addEventListener(
+        "touchend",
+        function () {
+
+            touchActive = false;
+            active = false;
+
+            setGlow("0");
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    navbar.addEventListener(
+        "touchcancel",
+        function () {
+
+            touchActive = false;
+            active = false;
+
+            setGlow("0");
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =========================================================
+       ANIMĀCIJA
+       ========================================================= */
 
     function animate() {
 
         currentX +=
             (targetX - currentX) * 0.12;
+
 
         currentY +=
             (targetY - currentY) * 0.12;
@@ -291,23 +562,34 @@ document.addEventListener("DOMContentLoaded", function () {
                         letter.getBoundingClientRect();
 
 
+                    const x =
+                        currentX - rect.left;
+
+
+                    const y =
+                        currentY - rect.top;
+
+
                     letter.style.setProperty(
                         "--mouse-x",
-                        `${currentX - rect.left}px`
+                        `${x}px`
                     );
 
 
                     letter.style.setProperty(
                         "--mouse-y",
-                        `${currentY - rect.top}px`
+                        `${y}px`
                     );
 
                 }
             );
+
         }
 
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(
+            animate
+        );
     }
 
 

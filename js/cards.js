@@ -18,12 +18,16 @@ document.addEventListener(
         ) {
 
             console.error(
-                "Kļūda: data/raksti.js nav ielādēts."
+                "raksti.js nav ielādēts."
             );
 
             return;
         }
 
+
+        /* =====================================================
+           VALODAS
+           ===================================================== */
 
         const supportedLanguages = [
             "lv",
@@ -49,6 +53,10 @@ document.addEventListener(
         }
 
 
+        /* =====================================================
+           VALODAS
+           ===================================================== */
+
         function getAvailableLanguage(
             raksts
         ) {
@@ -62,7 +70,6 @@ document.addEventListener(
 
 
             if (raksts.lv) {
-
                 return "lv";
             }
 
@@ -72,7 +79,10 @@ document.addEventListener(
                 of supportedLanguages
             ) {
 
-                if (raksts[language]) {
+                if (
+                    raksts[language]
+                ) {
+
                     return language;
                 }
 
@@ -83,6 +93,10 @@ document.addEventListener(
         }
 
 
+        /* =====================================================
+           KATEGORIJAS
+           ===================================================== */
+
         function getCategoryName(
             category
         ) {
@@ -90,17 +104,21 @@ document.addEventListener(
             const names = {
 
                 piedzivojumi: {
+
                     lv: "Piedzīvojumi",
-                    en: "Adventure",
+                    en: "Adventures",
                     fr: "Aventures",
                     it: "Avventure"
+
                 },
 
                 dzivesstils: {
+
                     lv: "Dzīvesstils",
                     en: "Lifestyle",
                     fr: "Style de vie",
                     it: "Stile di vita"
+
                 }
 
             };
@@ -111,11 +129,18 @@ document.addEventListener(
                 names[category][currentLanguage]
             ) {
 
-                return (
-                    names[category][
-                        currentLanguage
-                    ]
-                );
+                return names[category][
+                    currentLanguage
+                ];
+            }
+
+
+            if (
+                names[category] &&
+                names[category].lv
+            ) {
+
+                return names[category].lv;
             }
 
 
@@ -123,259 +148,9 @@ document.addEventListener(
         }
 
 
-        function getLanguageName(
-            language
-        ) {
-
-            const names = {
-
-                lv: "latviešu",
-                en: "angļu",
-                fr: "franču",
-                it: "itāļu"
-
-            };
-
-
-            return (
-                names[language] ||
-                language
-            );
-        }
-
-
-        function sortNewestFirst(
-            a,
-            b
-        ) {
-
-            return (
-                new Date(b.date) -
-                new Date(a.date)
-            );
-        }
-
-
-        function getVisibleArticles(
-            container
-        ) {
-
-            const category =
-                container.dataset.category ||
-                "all";
-
-
-            const limit =
-                container.dataset.limit
-                    ? Number(
-                        container.dataset.limit
-                    )
-                    : null;
-
-
-            let articles =
-                [...raksti];
-
-
-            if (
-                category !== "all"
-            ) {
-
-                articles =
-                    articles.filter(
-                        function (article) {
-
-                            return (
-                                article.category ===
-                                category
-                            );
-
-                        }
-                    );
-
-            }
-
-
-            articles.sort(
-                sortNewestFirst
-            );
-
-
-            if (
-                limit !== null &&
-                !Number.isNaN(limit)
-            ) {
-
-                articles =
-                    articles.slice(
-                        0,
-                        limit
-                    );
-
-            }
-
-
-            return articles;
-        }
-
-
-        function renderContainer(
-            container
-        ) {
-
-            container.innerHTML = "";
-
-
-            const articles =
-                getVisibleArticles(
-                    container
-                );
-
-
-            articles.forEach(
-                function (raksts) {
-
-                    const language =
-                        getAvailableLanguage(
-                            raksts
-                        );
-
-
-                    if (!language) {
-                        return;
-                    }
-
-
-                    const content =
-                        raksts[language];
-
-
-                    const card =
-                        document.createElement(
-                            "article"
-                        );
-
-
-                    card.className =
-                        "raksts-card";
-
-
-                    card.setAttribute(
-                        "tabindex",
-                        "0"
-                    );
-
-
-                    card.setAttribute(
-                        "role",
-                        "button"
-                    );
-
-
-                    card.innerHTML = `
-
-                        <img
-                            class="raksts-card-image"
-                            src="${raksts.image}"
-                            alt="${escapeHTML(
-                                content.title
-                            )}"
-                            loading="lazy"
-                        >
-
-                        <div
-                            class="raksts-card-content"
-                        >
-
-                            <div
-                                class="raksts-card-category"
-                            >
-                                ${escapeHTML(
-                                    getCategoryName(
-                                        raksts.category
-                                    )
-                                )}
-                            </div>
-
-                            <h2
-                                class="raksts-card-title"
-                            >
-                                ${escapeHTML(
-                                    content.title
-                                )}
-                            </h2>
-
-                            <p
-                                class="raksts-card-excerpt"
-                            >
-                                ${escapeHTML(
-                                    content.excerpt
-                                )}
-                            </p>
-
-                        </div>
-
-                    `;
-
-
-                    card.addEventListener(
-                        "click",
-                        function () {
-
-                            openArticle(
-                                raksts
-                            );
-
-                        }
-                    );
-
-
-                    card.addEventListener(
-                        "keydown",
-                        function (event) {
-
-                            if (
-                                event.key ===
-                                "Enter" ||
-                                event.key ===
-                                " "
-                            ) {
-
-                                event.preventDefault();
-
-                                openArticle(
-                                    raksts
-                                );
-
-                            }
-
-                        }
-                    );
-
-
-                    container.appendChild(
-                        card
-                    );
-
-                }
-            );
-        }
-
-
-        function renderAll() {
-
-            containers.forEach(
-                function (container) {
-
-                    renderContainer(
-                        container
-                    );
-
-                }
-            );
-
-        }
-
+        /* =====================================================
+           HTML DROŠĪBA
+           ===================================================== */
 
         function escapeHTML(
             value
@@ -414,16 +189,355 @@ document.addEventListener(
         }
 
 
-        function createModal() {
+        /* =====================================================
+           HTML TEKSTAM
+           ===================================================== */
 
-            let modal =
-                document.querySelector(
-                    ".raksts-modal"
+        function safeText(
+            value
+        ) {
+
+            return escapeHTML(
+                value || ""
+            );
+        }
+
+
+        /* =====================================================
+           ATTĒLA DROŠĪBA
+           ===================================================== */
+
+        function safeImage(
+            value
+        ) {
+
+            return escapeHTML(
+                value || ""
+            );
+        }
+
+
+        /* =====================================================
+           DATUMS
+           ===================================================== */
+
+        function sortNewestFirst(
+            a,
+            b
+        ) {
+
+            return (
+                new Date(b.date) -
+                new Date(a.date)
+            );
+        }
+
+
+        /* =====================================================
+           RAKSTU ATLASE
+           ===================================================== */
+
+        const pageArticles =
+            new Map();
+
+
+        containers.forEach(
+            function (container) {
+
+                let visible =
+                    [...raksti];
+
+
+                const category =
+                    container.dataset.category ||
+                    "all";
+
+
+                const limitValue =
+                    container.dataset.limit;
+
+
+                const limit =
+                    limitValue
+                        ? Number(limitValue)
+                        : null;
+
+
+                if (
+                    category !== "all"
+                ) {
+
+                    visible =
+                        visible.filter(
+                            function (article) {
+
+                                return (
+                                    article.category ===
+                                    category
+                                );
+
+                            }
+                        );
+
+                }
+
+
+                visible.sort(
+                    sortNewestFirst
                 );
 
 
+                if (
+                    limit !== null &&
+                    Number.isFinite(limit)
+                ) {
+
+                    visible =
+                        visible.slice(
+                            0,
+                            limit
+                        );
+                }
+
+
+                visible.forEach(
+                    function (article) {
+
+                        pageArticles.set(
+                            String(article.id),
+                            article
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           KARTĪŠU IZVEIDE
+           ===================================================== */
+
+        function renderCards() {
+
+            containers.forEach(
+                function (container) {
+
+                    container.innerHTML = "";
+
+
+                    let visible =
+                        [...raksti];
+
+
+                    const category =
+                        container.dataset.category ||
+                        "all";
+
+
+                    const limitValue =
+                        container.dataset.limit;
+
+
+                    const limit =
+                        limitValue
+                            ? Number(limitValue)
+                            : null;
+
+
+                    if (
+                        category !== "all"
+                    ) {
+
+                        visible =
+                            visible.filter(
+                                function (article) {
+
+                                    return (
+                                        article.category ===
+                                        category
+                                    );
+
+                                }
+                            );
+
+                    }
+
+
+                    visible.sort(
+                        sortNewestFirst
+                    );
+
+
+                    if (
+                        limit !== null &&
+                        Number.isFinite(limit)
+                    ) {
+
+                        visible =
+                            visible.slice(
+                                0,
+                                limit
+                            );
+
+                    }
+
+
+                    visible.forEach(
+                        function (article) {
+
+                            const language =
+                                getAvailableLanguage(
+                                    article
+                                );
+
+
+                            if (!language) {
+                                return;
+                            }
+
+
+                            const content =
+                                article[language];
+
+
+                            const card =
+                                document.createElement(
+                                    "article"
+                                );
+
+
+                            card.className =
+                                "raksts-card";
+
+
+                            card.dataset.articleId =
+                                article.id;
+
+
+                            card.setAttribute(
+                                "role",
+                                "button"
+                            );
+
+
+                            card.setAttribute(
+                                "tabindex",
+                                "0"
+                            );
+
+
+                            card.setAttribute(
+                                "aria-label",
+                                content.title
+                            );
+
+
+                            card.innerHTML = `
+
+                                <img
+                                    class="raksts-card-image"
+                                    src="${safeImage(article.image)}"
+                                    alt="${safeText(content.title)}"
+                                >
+
+                                <div
+                                    class="raksts-card-content"
+                                >
+
+                                    <div
+                                        class="raksts-card-category"
+                                    >
+                                        ${safeText(
+                                            getCategoryName(
+                                                article.category
+                                            )
+                                        )}
+                                    </div>
+
+                                    <h2
+                                        class="raksts-card-title"
+                                    >
+                                        ${safeText(
+                                            content.title
+                                        )}
+                                    </h2>
+
+                                    <p
+                                        class="raksts-card-excerpt"
+                                    >
+                                        ${safeText(
+                                            content.excerpt
+                                        )}
+                                    </p>
+
+                                </div>
+
+                            `;
+
+
+                            function activate() {
+
+                                openArticle(
+                                    article,
+                                    true
+                                );
+
+                            }
+
+
+                            card.addEventListener(
+                                "click",
+                                activate
+                            );
+
+
+                            card.addEventListener(
+                                "keydown",
+                                function (event) {
+
+                                    if (
+                                        event.key ===
+                                        "Enter" ||
+                                        event.key ===
+                                        " "
+                                    ) {
+
+                                        event.preventDefault();
+
+                                        activate();
+
+                                    }
+
+                                }
+                            );
+
+
+                            container.appendChild(
+                                card
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MODAL
+           ===================================================== */
+
+        let modal = null;
+
+
+        function createModal() {
+
             if (modal) {
-                return modal;
+                return;
             }
 
 
@@ -471,7 +585,13 @@ document.addEventListener(
                 )
                 .addEventListener(
                     "click",
-                    closeArticle
+                    function () {
+
+                        closeArticle(
+                            true
+                        );
+
+                    }
                 );
 
 
@@ -484,28 +604,33 @@ document.addEventListener(
                         modal
                     ) {
 
-                        closeArticle();
+                        closeArticle(
+                            true
+                        );
+
                     }
 
                 }
             );
 
-
-            return modal;
         }
 
 
+        /* =====================================================
+           ATVER RAKSTU
+           ===================================================== */
+
         function openArticle(
-            raksts
+            article,
+            changeUrl
         ) {
 
-            const modal =
-                createModal();
+            createModal();
 
 
             const language =
                 getAvailableLanguage(
-                    raksts
+                    article
                 );
 
 
@@ -515,10 +640,10 @@ document.addEventListener(
 
 
             const content =
-                raksts[language];
+                article[language];
 
 
-            const missingTranslation =
+            const translationMissing =
                 language !==
                 currentLanguage;
 
@@ -533,40 +658,47 @@ document.addEventListener(
 
                 <img
                     class="raksts-modal-image"
-                    src="${raksts.image}"
-                    alt="${escapeHTML(
-                        content.title
-                    )}"
+                    src="${safeImage(article.image)}"
+                    alt="${safeText(content.title)}"
                 >
 
                 <div
                     class="raksts-modal-category"
                 >
-                    ${escapeHTML(
+                    ${safeText(
                         getCategoryName(
-                            raksts.category
+                            article.category
                         )
                     )}
                 </div>
 
                 ${
-                    missingTranslation
+                    translationMissing
                         ? `
+
                             <div
                                 class="raksts-translation-notice"
                             >
+
                                 Šis raksts pašlaik nav
                                 pieejams
-                                ${getLanguageName(
-                                    currentLanguage
+                                ${safeText(
+                                    getLanguageName(
+                                        currentLanguage
+                                    )
                                 )}
                                 valodā.
+
                                 Tiek rādīta
-                                ${getLanguageName(
-                                    language
+                                ${safeText(
+                                    getLanguageName(
+                                        language
+                                    )
                                 )}
                                 versija.
+
                             </div>
+
                         `
                         : ""
                 }
@@ -574,7 +706,7 @@ document.addEventListener(
                 <h1
                     class="raksts-modal-title"
                 >
-                    ${escapeHTML(
+                    ${safeText(
                         content.title
                     )}
                 </h1>
@@ -582,7 +714,7 @@ document.addEventListener(
                 <div
                     class="raksts-modal-text"
                 >
-                    ${content.content}
+                    ${content.content || ""}
                 </div>
 
             `;
@@ -595,16 +727,43 @@ document.addEventListener(
 
             document.body.style.overflow =
                 "hidden";
+
+
+            if (changeUrl) {
+
+                const url =
+                    new URL(
+                        window.location.href
+                    );
+
+
+                url.searchParams.set(
+                    "raksts",
+                    String(article.id)
+                );
+
+
+                history.pushState(
+                    {
+                        articleId:
+                            String(article.id)
+                    },
+                    "",
+                    url
+                );
+
+            }
+
         }
 
 
-        function closeArticle() {
+        /* =====================================================
+           AIZVER RAKSTU
+           ===================================================== */
 
-            const modal =
-                document.querySelector(
-                    ".raksts-modal"
-                );
-
+        function closeArticle(
+            changeUrl
+        ) {
 
             if (!modal) {
                 return;
@@ -618,8 +777,170 @@ document.addEventListener(
 
             document.body.style.overflow =
                 "";
+
+
+            if (changeUrl) {
+
+                const url =
+                    new URL(
+                        window.location.href
+                    );
+
+
+                url.searchParams.delete(
+                    "raksts"
+                );
+
+
+                history.pushState(
+                    {},
+                    "",
+                    url
+                );
+
+            }
+
         }
 
+
+        /* =====================================================
+           VALODAS NOSAUKUMI
+           ===================================================== */
+
+        function getLanguageName(
+            language
+        ) {
+
+            const names = {
+
+                lv: "latviešu",
+                en: "angļu",
+                fr: "franču",
+                it: "itāļu"
+
+            };
+
+
+            return (
+                names[language] ||
+                language
+            );
+        }
+
+
+        /* =====================================================
+           URL → RAKSTS
+           ===================================================== */
+
+        function openArticleFromUrl() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const articleId =
+                params.get(
+                    "raksts"
+                );
+
+
+            if (!articleId) {
+                return;
+            }
+
+
+            const article =
+                raksti.find(
+                    function (item) {
+
+                        return (
+                            String(item.id) ===
+                            String(articleId)
+                        );
+
+                    }
+                );
+
+
+            if (!article) {
+                return;
+            }
+
+
+            openArticle(
+                article,
+                false
+            );
+
+        }
+
+
+        /* =====================================================
+           BACK / FORWARD
+           ===================================================== */
+
+        window.addEventListener(
+            "popstate",
+            function () {
+
+                if (!modal) {
+                    createModal();
+                }
+
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const articleId =
+                    params.get(
+                        "raksts"
+                    );
+
+
+                if (!articleId) {
+
+                    closeArticle(
+                        false
+                    );
+
+                    return;
+                }
+
+
+                const article =
+                    raksti.find(
+                        function (item) {
+
+                            return (
+                                String(item.id) ===
+                                String(articleId)
+                            );
+
+                        }
+                    );
+
+
+                if (article) {
+
+                    openArticle(
+                        article,
+                        false
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           ESC
+           ===================================================== */
 
         document.addEventListener(
             "keydown",
@@ -630,27 +951,88 @@ document.addEventListener(
                     "Escape"
                 ) {
 
-                    closeArticle();
+                    if (
+                        modal &&
+                        modal.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        closeArticle(
+                            true
+                        );
+
+                    }
 
                 }
 
             }
         );
 
+
+        /* =====================================================
+           VALODAS MAIŅA
+           ===================================================== */
 
         document.addEventListener(
             "zeltainsLanguageChanged",
             function (event) {
 
-                if (
+                const language =
                     event.detail &&
-                    event.detail.language
+                    event.detail.language;
+
+
+                if (
+                    supportedLanguages.includes(
+                        language
+                    )
                 ) {
 
                     currentLanguage =
-                        event.detail.language;
+                        language;
 
-                    renderAll();
+                }
+
+
+                renderCards();
+
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const articleId =
+                    params.get(
+                        "raksts"
+                    );
+
+
+                if (articleId) {
+
+                    const article =
+                        raksti.find(
+                            function (item) {
+
+                                return (
+                                    String(item.id) ===
+                                    String(articleId)
+                                );
+
+                            }
+                        );
+
+
+                    if (article) {
+
+                        openArticle(
+                            article,
+                            false
+                        );
+
+                    }
 
                 }
 
@@ -658,7 +1040,13 @@ document.addEventListener(
         );
 
 
-        renderAll();
+        /* =====================================================
+           SĀKUMS
+           ===================================================== */
+
+        renderCards();
+
+        openArticleFromUrl();
 
     }
 );

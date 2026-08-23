@@ -1,15 +1,23 @@
+/* =========================================================
+   BASE
+   ========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
+
 html {
     width: 100%;
     min-width: 0;
+
     scroll-behavior: smooth;
 }
 
+
 body {
     margin: 0;
+
     width: 100%;
     min-width: 0;
 
@@ -19,15 +27,20 @@ body {
     overflow-x: hidden;
 }
 
+
 button,
 a {
     -webkit-tap-highlight-color: transparent;
 }
 
+
 img {
+    display: block;
+
     max-width: 100%;
     height: auto;
 }
+
 
 main {
     width: 100%;
