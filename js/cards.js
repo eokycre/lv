@@ -1,6 +1,6 @@
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    async function () {
 
         const containers =
             document.querySelectorAll(
@@ -18,12 +18,47 @@ document.addEventListener(
         }
 
 
-        if (
-            typeof raksti === "undefined"
-        ) {
+        let raksti;
+
+
+        try {
+            const response =
+                await fetch(
+                    "data/raksti.json",
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+                throw new Error(
+                    `Rakstu dati nav pieejami: ${response.status}`
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            raksti =
+                Array.isArray(data)
+                    ? data
+                    : data.articles;
+
+
+            if (!Array.isArray(raksti)) {
+                throw new Error(
+                    "Rakstu datiem jābūt masīvam."
+                );
+            }
+
+        } catch (error) {
 
             console.error(
-                "raksti.js nav ielādēts."
+                "Rakstu dati nav ielādēti.",
+                error
             );
 
             return;
@@ -717,7 +752,9 @@ document.addEventListener(
                 <div
                     class="raksts-modal-text"
                 >
-                    ${content.content || ""}
+                    ${safeArticleContent(
+                        content.content
+                    )}
                 </div>
 
             `;
@@ -831,6 +868,35 @@ document.addEventListener(
         }
 
 
+        function safeArticleContent(
+            value
+        ) {
+
+            const markdown =
+                window.marked &&
+                typeof window.marked.parse ===
+                    "function"
+                    ? window.marked.parse(
+                        String(value || "")
+                    )
+                    : safeText(value);
+
+
+            if (
+                window.DOMPurify &&
+                typeof window.DOMPurify.sanitize ===
+                    "function"
+            ) {
+                return window.DOMPurify.sanitize(
+                    markdown
+                );
+            }
+
+
+            return safeText(value);
+        }
+
+
         /* =====================================================
            RAKSTA LAPA
            ===================================================== */
@@ -904,7 +970,9 @@ document.addEventListener(
                     </h1>
 
                     <div class="raksts-page-text">
-                        ${content.content || ""}
+                        ${safeArticleContent(
+                            content.content
+                        )}
                     </div>
 
                 </div>

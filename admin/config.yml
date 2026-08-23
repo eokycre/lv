@@ -1,0 +1,80 @@
+backend:
+  name: git-gateway
+  branch: main
+
+site_url: https://zeltains.lv
+logo_url: https://zeltains.lv/images/logo.png
+
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: raksti
+    label: Raksti
+    description: Add and edit ZELTAINS articles.
+    files:
+      - name: articles
+        label: Articles
+        file: data/raksti.json
+        format: json
+        fields:
+          - label: Articles
+            name: articles
+            widget: list
+            summary: "{{fields.id}} - {{fields.lv.title}}"
+            fields:
+              - label: ID
+                name: id
+                widget: number
+                value_type: int
+                min: 1
+              - label: Category
+                name: category
+                widget: select
+                options:
+                  - label: Piedzīvojumi
+                    value: piedzivojumi
+                  - label: Dzīvesstils
+                    value: dzivesstils
+              - label: Date
+                name: date
+                widget: datetime
+                date_format: YYYY-MM-DD
+                time_format: false
+                picker_utc: true
+              - label: Image
+                name: image
+                widget: image
+                media_folder: /images
+                public_folder: /images
+              - label: Latvian
+                name: lv
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Excerpt, name: excerpt, widget: text }
+                  - { label: Content, name: content, widget: markdown }
+              - label: English
+                name: en
+                widget: object
+                required: false
+                fields:
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Excerpt, name: excerpt, widget: text, required: false }
+                  - { label: Content, name: content, widget: markdown, required: false }
+              - label: French
+                name: fr
+                widget: object
+                required: false
+                fields:
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Excerpt, name: excerpt, widget: text, required: false }
+                  - { label: Content, name: content, widget: markdown, required: false }
+              - label: Italian
+                name: it
+                widget: object
+                required: false
+                fields:
+                  - { label: Title, name: title, widget: string, required: false }
+                  - { label: Excerpt, name: excerpt, widget: text, required: false }
+                  - { label: Content, name: content, widget: markdown, required: false }
