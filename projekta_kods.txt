@@ -1,3044 +1,0 @@
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\CNAME =====
-
-zeltains.lv
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\dzivesstils.html =====
-
-<!DOCTYPE html>
-<html lang="lv">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>DzÄ«vesstils â€” ZELTAINS</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <script
-        src="navbar.js"
-        defer
-    ></script>
-
-    <script
-        src="data/raksti.js"
-        defer
-    ></script>
-
-    <script
-        src="js/cards.js"
-        defer
-    ></script>
-</head>
-
-<body>
-
-    <main>
-
-        <section class="page-heading">
-            <h1>DzÄ«vesstils</h1>
-        </section>
-
-        <section
-            class="raksti-container"
-            data-category="dzivesstils"
-        ></section>
-
-    </main>
-
-</body>
-</html>
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\index.html =====
-
-<!DOCTYPE html>
-<html lang="lv">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>ZELTAINS</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <script
-        src="navbar.js"
-        defer
-    ></script>
-
-    <script
-        src="data/raksti.js"
-        defer
-    ></script>
-
-    <script
-        src="js/cards.js"
-        defer
-    ></script>
-</head>
-
-<body>
-
-    <main>
-
-        <section class="hero-text">
-
-            <p>Tu esi</p>
-            <p>You are golden</p>
-            <p>Tu es en or</p>
-            <p>Sei d'oro</p>
-
-        </section>
-
-        <section
-            class="raksti-container"
-            data-category="all"
-            data-limit="2"
-        ></section>
-
-    </main>
-
-</body>
-</html>
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\kontakti.html =====
-
-<!DOCTYPE html>
-<html lang="lv">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Kontakti â€” ZELTAINS</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <script
-        src="navbar.js"
-        defer
-    ></script>
-</head>
-
-<body>
-
-    <main>
-
-        <section class="page-heading">
-            <h1>Kontakti</h1>
-        </section>
-
-        <section class="contacts-content">
-
-            <p>
-                Sazinies ar ZELTAINS.
-            </p>
-
-        </section>
-
-    </main>
-
-</body>
-</html>
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\navbar.js =====
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    if (document.querySelector(".navbar")) {
-        return;
-    }
-
-
-    const supportedLanguages = [
-        "lv",
-        "en",
-        "fr",
-        "it"
-    ];
-
-
-    let currentLanguage =
-        localStorage.getItem("zeltainsLanguage") || "lv";
-
-
-    if (!supportedLanguages.includes(currentLanguage)) {
-        currentLanguage = "lv";
-    }
-
-
-    document.body.insertAdjacentHTML(
-        "afterbegin",
-        `
-        <nav class="navbar">
-
-            <div class="menu">
-
-                <a href="piedzivojumi.html">
-                    PiedzÄ«vojumi
-                </a>
-
-                <a href="dzivesstils.html">
-                    DzÄ«vesstils
-                </a>
-
-            </div>
-
-
-            <a
-                href="index.html"
-                class="logo-title"
-                aria-label="ZELTAINS sÄkumlapa"
-            >
-
-                <span data-letter="Z">Z</span>
-                <span data-letter="E">E</span>
-                <span data-letter="L">L</span>
-                <span data-letter="T">T</span>
-                <span data-letter="A">A</span>
-                <span data-letter="I">I</span>
-                <span data-letter="N">N</span>
-                <span data-letter="S">S</span>
-
-            </a>
-
-
-            <div class="header-right">
-
-                <div
-                    class="valodu-izvele"
-                    aria-label="Valoda"
-                >
-
-                    ${supportedLanguages
-                        .map(
-                            function (language) {
-                                return `
-                                    <button
-                                        type="button"
-                                        data-language="${language}"
-                                    >
-                                        ${language.toUpperCase()}
-                                    </button>
-                                `;
-                            }
-                        )
-                        .join("")}
-
-                </div>
-
-
-                <a
-                    class="contacts"
-                    href="kontakti.html"
-                    aria-label="Kontakti"
-                >
-
-                    <svg
-                        class="svg-envelope"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M22,4H2C0.9,4,0,4.9,0,6v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V6C24,4.9,23.1,4,22,4z M22,6l-10,7L2,6H22z M2,18V8l10,7l10-7v10H2z"
-                        />
-                    </svg>
-
-                </a>
-
-            </div>
-
-        </nav>
-        `
-    );
-
-
-    const navbar =
-        document.querySelector(".navbar");
-
-    const letters =
-        document.querySelectorAll(
-            ".logo-title span"
-        );
-
-    const languageButtons =
-        document.querySelectorAll(
-            ".valodu-izvele button"
-        );
-
-
-    function updateLanguageButtons() {
-
-        languageButtons.forEach(
-            function (button) {
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.language ===
-                    currentLanguage
-                );
-
-            }
-        );
-    }
-
-
-    languageButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    currentLanguage =
-                        button.dataset.language;
-
-
-                    localStorage.setItem(
-                        "zeltainsLanguage",
-                        currentLanguage
-                    );
-
-
-                    updateLanguageButtons();
-
-
-                    document.dispatchEvent(
-                        new CustomEvent(
-                            "zeltainsLanguageChanged",
-                            {
-                                detail: {
-                                    language:
-                                        currentLanguage
-                                }
-                            }
-                        )
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    updateLanguageButtons();
-
-
-    /* =====================================================
-       LOGO GOLD EFFECT
-       ===================================================== */
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-    let active = false;
-
-
-    function setGlow(value) {
-
-        letters.forEach(
-            function (letter) {
-
-                letter.style.setProperty(
-                    "--glow-opacity",
-                    value
-                );
-
-            }
-        );
-    }
-
-
-    function updatePosition(x, y) {
-
-        targetX = x;
-        targetY = y;
-
-        if (!active) {
-
-            currentX = x;
-            currentY = y;
-
-        }
-    }
-
-
-    navbar.addEventListener(
-        "pointerenter",
-        function (event) {
-
-            if (event.pointerType === "touch") {
-                return;
-            }
-
-            active = true;
-
-            updatePosition(
-                event.clientX,
-                event.clientY
-            );
-
-            setGlow("1");
-        }
-    );
-
-
-    navbar.addEventListener(
-        "pointermove",
-        function (event) {
-
-            if (event.pointerType === "touch") {
-                return;
-            }
-
-            updatePosition(
-                event.clientX,
-                event.clientY
-            );
-        }
-    );
-
-
-    navbar.addEventListener(
-        "pointerleave",
-        function (event) {
-
-            if (event.pointerType === "touch") {
-                return;
-            }
-
-            active = false;
-
-            setGlow("0");
-        }
-    );
-
-
-    function animate() {
-
-        currentX +=
-            (targetX - currentX) * 0.12;
-
-        currentY +=
-            (targetY - currentY) * 0.12;
-
-
-        if (active) {
-
-            letters.forEach(
-                function (letter) {
-
-                    const rect =
-                        letter.getBoundingClientRect();
-
-
-                    letter.style.setProperty(
-                        "--mouse-x",
-                        `${currentX - rect.left}px`
-                    );
-
-
-                    letter.style.setProperty(
-                        "--mouse-y",
-                        `${currentY - rect.top}px`
-                    );
-
-                }
-            );
-        }
-
-
-        requestAnimationFrame(animate);
-    }
-
-
-    animate();
-
-});
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\piedzivojumi.html =====
-
-<!DOCTYPE html>
-<html lang="lv">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>PiedzÄ«vojumi â€” ZELTAINS</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <script
-        src="navbar.js"
-        defer
-    ></script>
-
-    <script
-        src="data/raksti.js"
-        defer
-    ></script>
-
-    <script
-        src="js/cards.js"
-        defer
-    ></script>
-</head>
-
-<body>
-
-    <main>
-
-        <section class="page-heading">
-            <h1>PiedzÄ«vojumi</h1>
-        </section>
-
-        <section
-            class="raksti-container"
-            data-category="piedzivojumi"
-        ></section>
-
-    </main>
-
-</body>
-</html>
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\style.css =====
-
-@import url("css/base.css");
-@import url("css/header.css");
-@import url("css/cards.css");
-@import url("css/pages.css");
-@import url("css/contacts.css");
-@import url("css/responsive.css");
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\base.css =====
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    width: 100%;
-    min-width: 0;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    width: 100%;
-    min-width: 0;
-
-    background: midnightblue;
-    color: white;
-
-    overflow-x: hidden;
-}
-
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-main {
-    width: 100%;
-    min-width: 0;
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\cards.css =====
-
-/* =========================================================
-   CARDS CONTAINER
-   ========================================================= */
-
-.raksti-container {
-    width: 100%;
-    max-width: 1900px;
-
-    margin: 0 auto;
-
-    padding:
-        25px 24px 50px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            7,
-            minmax(0, 1fr)
-        );
-
-    gap: 18px;
-
-    align-items: start;
-}
-
-
-/* =========================================================
-   CARD
-   ========================================================= */
-
-.raksts-card {
-    position: relative;
-
-    width: 100%;
-    min-width: 0;
-
-    background: white;
-
-    overflow: hidden;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.22);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.raksts-card:hover {
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.3);
-}
-
-
-/* =========================================================
-   CARD IMAGE
-   ========================================================= */
-
-.raksts-card-image {
-    display: block;
-
-    width: 100%;
-
-    aspect-ratio: 4 / 3;
-
-    object-fit: cover;
-
-    margin: 0;
-}
-
-
-/* =========================================================
-   CARD CONTENT
-   ========================================================= */
-
-.raksts-card-content {
-    padding:
-        13px 13px 16px;
-
-    background: white;
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   CATEGORY
-   ========================================================= */
-
-.raksts-card-category {
-    margin-bottom: 7px;
-
-    color: #a47d00;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 9px;
-
-    font-weight: bold;
-
-    letter-spacing: 0.08em;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   TITLE
-   ========================================================= */
-
-.raksts-card-title {
-    margin:
-        0 0 8px;
-
-    color: #111;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 19px;
-
-    font-weight: normal;
-
-    line-height: 1.08;
-}
-
-
-/* =========================================================
-   EXCERPT
-   ========================================================= */
-
-.raksts-card-excerpt {
-    margin: 0;
-
-    color: #333;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.45;
-}
-
-
-/* =========================================================
-   GOLD BOTTOM ACCENT
-   ========================================================= */
-
-.raksts-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 3px;
-
-    background: gold;
-
-    transform:
-        scaleX(0);
-
-    transform-origin:
-        center;
-
-    transition:
-        transform 0.25s ease;
-}
-
-.raksts-card:hover::after {
-    transform:
-        scaleX(1);
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-.raksts-modal {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 5000;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 25px;
-
-    background:
-        rgba(0, 0, 0, 0.76);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
-}
-
-.raksts-modal.active {
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-
-/* =========================================================
-   MODAL CONTENT
-   ========================================================= */
-
-.raksts-modal-content {
-    position: relative;
-
-    width: 100%;
-    max-width: 900px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: white;
-
-    border-radius: 5px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(0, 0, 0, 0.5);
-
-    transform:
-        translateY(20px);
-
-    transition:
-        transform 0.25s ease;
-}
-
-.raksts-modal.active
-.raksts-modal-content {
-    transform:
-        translateY(0);
-}
-
-
-/* =========================================================
-   CLOSE
-   ========================================================= */
-
-.raksts-modal-close {
-    position: absolute;
-
-    top: 12px;
-    right: 12px;
-
-    z-index: 5;
-
-    width: 38px;
-    height: 38px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.94);
-
-    color: #111;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 27px;
-
-    line-height: 1;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 2px 8px
-        rgba(0, 0, 0, 0.18);
-}
-
-.raksts-modal-close:hover {
-    color: gold;
-}
-
-
-/* =========================================================
-   MODAL IMAGE
-   ========================================================= */
-
-.raksts-modal-image {
-    display: block;
-
-    width: 100%;
-
-    max-height: 430px;
-
-    object-fit: cover;
-}
-
-
-/* =========================================================
-   MODAL BODY
-   ========================================================= */
-
-.raksts-modal-body {
-    padding:
-        30px 35px 40px;
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   MODAL CATEGORY
-   ========================================================= */
-
-.raksts-modal-category {
-    margin-bottom: 10px;
-
-    color: #a47d00;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 0.08em;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   MODAL TITLE
-   ========================================================= */
-
-.raksts-modal-title {
-    margin:
-        0 0 24px;
-
-    color: #111;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 42px;
-
-    font-weight: normal;
-
-    line-height: 1.05;
-}
-
-
-/* =========================================================
-   MODAL TEXT
-   ========================================================= */
-
-.raksts-modal-text {
-    color: #222;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 17px;
-
-    line-height: 1.7;
-}
-
-.raksts-modal-text p {
-    margin:
-        0 0 18px;
-
-    color: #222;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 17px;
-
-    line-height: 1.7;
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   TRANSLATION NOTICE
-   ========================================================= */
-
-.raksts-translation-notice {
-    margin:
-        0 0 20px;
-
-    padding:
-        10px 13px;
-
-    border-left:
-        3px solid gold;
-
-    background:
-        #faf7e8;
-
-    color: #555;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.4;
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   DESKTOP
-   ========================================================= */
-
-@media (min-width: 1200px) {
-
-    .raksti-container {
-        grid-template-columns:
-            repeat(7, minmax(0, 1fr));
-
-        gap: 18px;
-    }
-}
-
-
-/* =========================================================
-   SMALLER DESKTOP
-   ========================================================= */
-
-@media (min-width: 901px)
-and (max-width: 1199px) {
-
-    .raksti-container {
-        grid-template-columns:
-            repeat(5, minmax(0, 1fr));
-
-        gap: 16px;
-    }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (min-width: 601px)
-and (max-width: 900px) {
-
-    .raksti-container {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        padding:
-            20px;
-
-        gap: 16px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE â€” 2 HORIZONTAL
-   ========================================================= */
-
-@media (min-width: 421px)
-and (max-width: 600px) {
-
-    .raksti-container {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        padding:
-            14px;
-
-        gap: 12px;
-    }
-
-    .raksts-card-content {
-        padding:
-            10px 10px 14px;
-    }
-
-    .raksts-card-category {
-        font-size: 8px;
-    }
-
-    .raksts-card-title {
-        font-size: 16px;
-    }
-
-    .raksts-card-excerpt {
-        font-size: 10px;
-    }
-}
-
-
-/* =========================================================
-   SMALL PHONE â€” 1 CARD
-   ========================================================= */
-
-@media (max-width: 420px) {
-
-    .raksti-container {
-        grid-template-columns:
-            1fr;
-
-        padding:
-            12px;
-
-        gap: 18px;
-    }
-
-    .raksts-card-image {
-        aspect-ratio: 16 / 9;
-    }
-
-    .raksts-card-content {
-        padding:
-            14px 15px 17px;
-    }
-
-    .raksts-card-title {
-        font-size: 22px;
-    }
-
-    .raksts-card-excerpt {
-        font-size: 13px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE MODAL
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .raksts-modal {
-        padding: 10px;
-    }
-
-    .raksts-modal-content {
-        max-height: 94vh;
-    }
-
-    .raksts-modal-image {
-        max-height: 280px;
-    }
-
-    .raksts-modal-body {
-        padding:
-            22px 20px 30px;
-    }
-
-    .raksts-modal-title {
-        font-size: 30px;
-    }
-
-    .raksts-modal-text,
-    .raksts-modal-text p {
-        font-size: 15px;
-
-        line-height: 1.6;
-    }
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\contacts.css =====
-
-.contacts-content {
-    width: 100%;
-    max-width: 700px;
-
-    margin: 0 auto;
-
-    padding:
-        20px;
-
-    color: white;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-
-    text-align: center;
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\header.css =====
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.navbar {
-    position: relative;
-
-    width: 100%;
-    height: 76px;
-
-    padding: 0 28px;
-
-    display: grid;
-
-    grid-template-columns: 1fr auto 1fr;
-
-    align-items: center;
-
-    background: white;
-
-    z-index: 1000;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   LEFT MENU
-   ========================================================= */
-
-.menu {
-    grid-column: 1;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    gap: 24px;
-
-    min-width: 0;
-}
-
-.menu a {
-    color: #111;
-
-    text-decoration: none;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 15px;
-    line-height: 1;
-
-    white-space: nowrap;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.menu a:hover {
-    color: #d4af37;
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
-.logo-title {
-    grid-column: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #111;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 54px;
-    font-weight: normal;
-
-    line-height: 0.9;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    letter-spacing: 0;
-
-    position: relative;
-
-    z-index: 2;
-}
-
-.logo-title span {
-    position: relative;
-
-    display: inline-block;
-
-    color: #111;
-}
-
-
-/* =========================================================
-   GOLD MOUSE EFFECT
-   ========================================================= */
-
-.logo-title span::after {
-    content: attr(data-letter);
-
-    position: absolute;
-
-    inset: 0;
-
-    color: gold;
-
-    pointer-events: none;
-
-    opacity: var(--glow-opacity, 0);
-
-    clip-path:
-        circle(
-            28px at
-            var(--mouse-x, 50%)
-            var(--mouse-y, 50%)
-        );
-
-    transition:
-        opacity 0.15s ease;
-}
-
-
-/* =========================================================
-   RIGHT SIDE
-   ========================================================= */
-
-.header-right {
-    grid-column: 3;
-
-    justify-self: end;
-
-    display: flex;
-    align-items: center;
-
-    gap: 18px;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   LANGUAGES
-   ========================================================= */
-
-.valodu-izvele {
-    display: flex;
-    align-items: center;
-
-    gap: 7px;
-
-    white-space: nowrap;
-}
-
-.valodu-izvele button {
-    appearance: none;
-
-    border: 0;
-    background: transparent;
-
-    padding: 2px;
-
-    color: #111;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 11px;
-
-    line-height: 1;
-
-    cursor: pointer;
-
-    opacity: 0.45;
-
-    transition:
-        color 0.2s ease,
-        opacity 0.2s ease,
-        transform 0.2s ease;
-}
-
-.valodu-izvele button:hover {
-    color: #d4af37;
-    opacity: 1;
-
-    transform: translateY(-1px);
-}
-
-.valodu-izvele button.active {
-    color: #d4af37;
-
-    opacity: 1;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   CONTACTS / ENVELOPE
-   ========================================================= */
-
-.contacts {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 27px;
-    height: 27px;
-
-    text-decoration: none;
-}
-
-.svg-envelope {
-    display: block;
-
-    width: 24px;
-    height: 24px;
-
-    fill: #111;
-
-    transition:
-        fill 0.2s ease,
-        transform 0.2s ease;
-}
-
-.contacts:hover .svg-envelope {
-    fill: gold;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .navbar {
-        height: 68px;
-
-        padding: 0 18px;
-    }
-
-    .menu {
-        gap: 15px;
-    }
-
-    .menu a {
-        font-size: 13px;
-    }
-
-    .logo-title {
-        font-size: 46px;
-    }
-
-    .header-right {
-        gap: 12px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .navbar {
-        height: auto;
-
-        min-height: 62px;
-
-        padding:
-            10px 12px;
-
-        grid-template-columns:
-            1fr auto;
-    }
-
-    .menu {
-        grid-column: 1;
-
-        gap: 10px;
-    }
-
-    .menu a {
-        font-size: 11px;
-    }
-
-    .logo-title {
-        grid-column: 2;
-        grid-row: 1;
-
-        font-size: 34px;
-
-        justify-self: end;
-    }
-
-    .header-right {
-        grid-column: 1 / -1;
-        grid-row: 2;
-
-        justify-self: center;
-
-        margin-top: 6px;
-
-        gap: 13px;
-    }
-
-    .valodu-izvele button {
-        font-size: 10px;
-    }
-
-    .svg-envelope {
-        width: 22px;
-        height: 22px;
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONE
-   ========================================================= */
-
-@media (max-width: 420px) {
-
-    .navbar {
-        grid-template-columns:
-            1fr auto;
-
-        padding:
-            9px 10px;
-    }
-
-    .menu {
-        gap: 7px;
-    }
-
-    .menu a {
-        font-size: 10px;
-    }
-
-    .logo-title {
-        font-size: 29px;
-    }
-
-    .header-right {
-        gap: 10px;
-    }
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\pages.css =====
-
-/* =========================================================
-   HOME INTRO
-   ========================================================= */
-
-.hero-text {
-    width: 100%;
-
-    padding:
-        28px 15px 18px;
-
-    text-align: center;
-}
-
-.hero-text p {
-    margin: 7px 0;
-
-    color: gold;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size:
-        clamp(17px, 2.5vw, 24px);
-
-    line-height: 1.3;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   PAGE HEADING
-   ========================================================= */
-
-.page-heading {
-    width: 100%;
-
-    padding:
-        25px 15px 8px;
-
-    text-align: center;
-}
-
-.page-heading h1 {
-    margin: 0;
-
-    color: gold;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size:
-        clamp(30px, 5vw, 50px);
-
-    font-weight: normal;
-
-    line-height: 1;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .hero-text {
-        padding:
-            20px 10px 12px;
-    }
-
-    .hero-text p {
-        margin: 5px 0;
-
-        font-size: 16px;
-    }
-
-    .page-heading {
-        padding:
-            18px 10px 5px;
-    }
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\css\responsive.css =====
-
-main {
-    width: 100%;
-    max-width: 100%;
-}
-
-img,
-video,
-iframe {
-    max-width: 100%;
-}
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\data\raksti.js =====
-
-const raksti = [
-
-    {
-        id: 1,
-
-        category: "piedzivojumi",
-
-        date: "2026-08-19",
-
-        image: "images/piedzivojumi-1.jpg",
-
-        lv: {
-            title: "Pirmais piedzÄ«vojums",
-
-            excerpt:
-                "Pirmais ZELTAINS piedzÄ«vojumu stÄsts.",
-
-            content: `
-                <p>
-                    Å is ir pirmais ZELTAINS piedzÄ«vojumu stÄsts.
-                </p>
-
-                <p>
-                    PiedzÄ«vojumi sÄkas tajÄ brÄ«dÄ«, kad ikdienas
-                    marÅ¡ruts vairs nav pietiekams un rodas vÄ“lme
-                    ieraudzÄ«t kaut ko jaunu.
-                </p>
-
-                <p>
-                    Å eit vÄ“lÄk bÅ«s pilns raksta teksts,
-                    fotogrÄfijas un cita informÄcija.
-                </p>
-            `
-        },
-
-        en: {
-            title: "The First Adventure",
-
-            excerpt:
-                "The first ZELTAINS adventure story.",
-
-            content: `
-                <p>
-                    This is the first ZELTAINS adventure story.
-                </p>
-
-                <p>
-                    Adventures begin when the familiar route
-                    is no longer enough and there is a desire
-                    to discover something new.
-                </p>
-
-                <p>
-                    The full article, photographs and additional
-                    information will be added here later.
-                </p>
-            `
-        },
-
-        fr: {
-            title: "La premiÃ¨re aventure",
-
-            excerpt:
-                "La premiÃ¨re histoire d'aventure de ZELTAINS.",
-
-            content: `
-                <p>
-                    Voici la premiÃ¨re histoire d'aventure
-                    de ZELTAINS.
-                </p>
-
-                <p>
-                    Les aventures commencent lorsque le chemin
-                    habituel ne suffit plus et que l'envie de
-                    dÃ©couvrir quelque chose de nouveau apparaÃ®t.
-                </p>
-
-                <p>
-                    L'article complet, les photographies et
-                    les informations supplÃ©mentaires seront
-                    ajoutÃ©s ici plus tard.
-                </p>
-            `
-        },
-
-        it: {
-            title: "La prima avventura",
-
-            excerpt:
-                "La prima storia di avventura di ZELTAINS.",
-
-            content: `
-                <p>
-                    Questa Ã¨ la prima storia di avventura
-                    di ZELTAINS.
-                </p>
-
-                <p>
-                    Le avventure iniziano quando il percorso
-                    abituale non Ã¨ piÃ¹ sufficiente e nasce
-                    il desiderio di scoprire qualcosa di nuovo.
-                </p>
-
-                <p>
-                    L'articolo completo, le fotografie e
-                    ulteriori informazioni saranno aggiunti
-                    qui in seguito.
-                </p>
-            `
-        }
-    },
-
-
-    {
-        id: 2,
-
-        category: "dzivesstils",
-
-        date: "2026-08-18",
-
-        image: "images/dzivesstils-1.jpg",
-
-        lv: {
-            title: "DzÄ«vesstils bez steigas",
-
-            excerpt:
-                "Par dzÄ«vi, kurÄ nav nepiecieÅ¡ams visu paspÄ“t.",
-
-            content: `
-                <p>
-                    DzÄ«vesstils bez steigas nozÄ«mÄ“ nevis darÄ«t
-                    mazÄk, bet izvÄ“lÄ“ties to, kam patieÅ¡Äm
-                    ir nozÄ«me.
-                </p>
-
-                <p>
-                    IkdienÄ mÄ“s bieÅ¾i cenÅ¡amies paspÄ“t visu,
-                    taÄu daÅ¾reiz vÄ“rtÄ«gÄkais ir vienkÄrÅ¡i
-                    apstÄties un paskatÄ«ties apkÄrt.
-                </p>
-
-                <p>
-                    Å eit vÄ“lÄk bÅ«s pilns raksta teksts,
-                    fotogrÄfijas un cita informÄcija.
-                </p>
-            `
-        },
-
-        en: {
-            title: "A Life Without Hurry",
-
-            excerpt:
-                "A life where there is no need to rush everything.",
-
-            content: `
-                <p>
-                    A life without hurry does not mean doing
-                    less. It means choosing what truly matters.
-                </p>
-
-                <p>
-                    In everyday life, we often try to accomplish
-                    everything at once. Sometimes the most valuable
-                    thing is simply to stop and look around.
-                </p>
-
-                <p>
-                    The full article, photographs and additional
-                    information will be added here later.
-                </p>
-            `
-        },
-
-        fr: {
-            title: "Un style de vie sans prÃ©cipitation",
-
-            excerpt:
-                "Une vie oÃ¹ il n'est pas nÃ©cessaire de tout faire dans l'urgence.",
-
-            content: `
-                <p>
-                    Vivre sans prÃ©cipitation ne signifie pas
-                    faire moins. Cela signifie choisir ce qui
-                    compte vraiment.
-                </p>
-
-                <p>
-                    Dans la vie quotidienne, nous essayons
-                    souvent de tout accomplir en mÃªme temps.
-                    Parfois, le plus prÃ©cieux est simplement
-                    de s'arrÃªter et de regarder autour de soi.
-                </p>
-
-                <p>
-                    L'article complet, les photographies et
-                    les informations supplÃ©mentaires seront
-                    ajoutÃ©s ici plus tard.
-                </p>
-            `
-        },
-
-        it: {
-            title: "Uno stile di vita senza fretta",
-
-            excerpt:
-                "Una vita in cui non Ã¨ necessario fare tutto di corsa.",
-
-            content: `
-                <p>
-                    Vivere senza fretta non significa fare meno.
-                    Significa scegliere ciÃ² che conta davvero.
-                </p>
-
-                <p>
-                    Nella vita quotidiana cerchiamo spesso
-                    di fare tutto contemporaneamente. A volte
-                    la cosa piÃ¹ preziosa Ã¨ semplicemente fermarsi
-                    e guardarsi intorno.
-                </p>
-
-                <p>
-                    L'articolo completo, le fotografie e
-                    ulteriori informazioni saranno aggiunti
-                    qui in seguito.
-                </p>
-            `
-        }
-    }
-
-];
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\images\dzivesstils-1.jpg =====
-
-ÿØÿà JFIF  ` `  ÿÛ C 		
-
-
-
-	ÿÛ CÿÀ tó" ÿÄ           	
-ÿÄ µ   } !1AQa"q2‘¡#B±ÁRÑğ$3br‚	
-%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ        	
-ÿÄ µ  w !1AQaq"2B‘¡±Á	#3RğbrÑ
-$4á%ñ&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ   ? ı ¢Š+ôÃùì(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ÿÙ
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\images\piedzivojumi-1.jpg =====
-
-ÿØÿà JFIF  ` `  ÿá "Exif  MM *               ÿÛ C 		
-
-
-
-	ÿÛ CÿÀ tó" ÿÄ           	
-ÿÄ µ   } !1AQa"q2‘¡#B±ÁRÑğ$3br‚	
-%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ        	
-ÿÄ µ  w !1AQaq"2B‘¡±Á	#3RğbrÑ
-$4á%ñ&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ   ? ı„¢Š+ğóêŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š£7Š4ËyZ95‘	VV¸@T Œõ¨.üq£ÙÛ´¯©Y•\dG(‘ºã…\“ùWS8ÀSMÔ¯mï(«[{êdëÓ[É}æ­ÏÂÕĞ?çÿ ÿ  Iÿ ÄÑÿ W@ÿ Ÿÿ ü'ÿ \ëfGÿ A´¿ğd?ÌÏë¸ùù½ÏÂÕĞ?çÿ ÿ  Iÿ ÄÕËOh÷–ë*jVa[8J#n¸å[~Uµ$Ê+K–*œŸe8¿É•U;FiüÑ«ES´ñŸp±Ag4¯©êÌxÏ J¹^¥E*Ñæ£%%İ4ÿ #XÉI^.áEVÅQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@ÏkŸ4}hûGÛ°vÛbLy';{tÎyW!¬|lÔ/­œÙÌOšàç¨$ŒqÈ=ÿ ˆÎ¼DÈrËÆ­e9¯³yıëİOÕ£‚¾g‡¥£•ße©ê…ª|IÑt¬†¾g	¼, É»¯(<w"¼‹U×/5ÉwİÜÍpA,±!3× ÃÒª×å¹¯Õåxå¸u9¶ßş­gÿ o3È­ŸÉéJ?yèÚ§Ç8—+ea#å8yÜ.ÖçøFr:w‡ZÄ¾øË¬İÄ3kjAÎø¢É>ß1#‡jå(¯Ïñş#q-¾|L¢ŸHÚ?ŒR;Üó*f˜©ï;zhjİøãX¼¸i_R¼ØÈSôÇ
-¸ò¬É¦{‰ZIG%™˜ä±=I>´Ú+äñXüV%ßRSÖşóo^ú½Î9Ôœş&ØQEÈ@QE QE T–—’Ø\,°K$2¦v¼lU‡àjŠ¨NP’”]šÙ6Ñ¯cãÍgO”¼z•Ó6âWóGäÙ÷­KŒºÍ¤Ed6·Dœï–,íò1øw®RŠ÷°|WœáŠ¨—nf×ÜÛ_Ñex|3yéVí$ßö«ˆq¾S‰3ëœíÇoZèô¯iÔ¾]½ü&L…
-ùŒ±= OÒ¼JŠûœ³Æ<óÒÅ(V]n¹_]œl—şöù…,óÒü?/ò>„¢¼'Gñ6¡áöÎîh %¶ÊF2TğN=Ga]f‹ñ¾æ©kÂ ÉØøş&#O°Ú?§éY?Œ™>&ĞÆÆTeÿ GïJÿ ù-¼ûz´3ÊÒ¢qüWõò=*ŠÄĞ>!i^"U\¬31
-!œ„rI Îœv'¨­ºıC™aq´•|HÎ/¬ZğÏÉêzÔêÂ¢æƒº
-(¢»MŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ›4ÉoI#*F€³3©'Ò¹OüZ²ÑPÅbc¿¹9VıÔ|dÃïrG úò+ÎüCâíCÅî»¸fŒ¬KòÆqê2FNN;×æ<OâU•¹PÃşúªéî§ç-WÉ_³±äâóz4}ØûÏËo¼ôüb²Ò÷Å`¿nœdoéG^­È8 ıêàuïj^#wûMÔSñä¡ÛÈG\ç'ÍeQ_ÏüEÇ™ÆpÜq9i¿±#óë/›gÍâ³õô“²ì¶
-(¢¾4á
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-ÛĞ>!j¾e\´Ğ¨
-!œ—@  ÎTö# ¬J+·™b°UU|IBK¬[_ğëÉèiN¬é¾h;3Öü7ñkMÖğ—û>sÚVıÙëÑútñÉÀÍu5óİløoÇš—…°¶óï€Ë	~hûôG'<“×5û_øÏV£Sæ_Ï“ÿ ·£¢~±µ–Ñg½…ÏZ÷k«ù¯ò=®Šæ¼%ñBÃÄî!qö+£ŒG#²p·=8À<ñœWK_»eYÆ2 ±8Šp}Wê©ù4™ô4kÓ«znè(¢ŠôBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š(  Õ5KmL¸½½¸‚ÎÎÎ&yçG¨,ÎÌp@’x TõÃ~Ôòm??ìYÔ¿ô–ZèÂQU«Â‹væi}îÆ”aÏ8Áõiü5ÃOú(ÿ Áõ¯ÿ £şƒá§ıOÿ àú×ÿ WãeûßüA¬ıËîGİÿ ©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç(ÿ † øiÿ EÀ¿ø>µÿ ã•øÙEñ°_ô/¹úGş~?¹²ğÔ?è¢xÿ Ö¿ürøj†ŸôQ<ÿ ƒë_ş9_”Qÿ kÿ A2û©Ôçãû‘û'ÿ AğÓşŠ'ğ}kÿ Ç*}/öŒø{®jvöV^;ğmååä«A­[I,ò1
-¨ª–bH I5øË]Ïì¿ÿ '-ğïşÆm7ÿ J¢®l_„:4'Yb$ùS{.Šæu¸FŒ!)ªDŞÈı“¢Š+ğSáŠ( Š( Š( Š( Š( Š( Š( Š( Š+–ñ·ÅoşâØGyxr
-‡ù!##æÇ|ÿ ¯#Œùy¾u‚Êğï¨¡÷¿$–­ú~F5ëÓ£zÈÙñŠl¼+h%¼—füˆÑF^Bpõ<r2y¯2ñŸÄëÏ³ÁkK,I*‘œƒÓ¯yÎ¬SV¹Ö®Ì÷sÉ<§øœç$àz“Àâ«×óxŸÍù°Ø[Ò ú/Š_âk§’Ó£¹òxÜÚ¥kÆGñù…Q_˜HQE QE QE QE QE QE QE QE QE QE QE QE QE QE W_á?‹·š*¬Ê×ÖùûìÇÎ\‘Üıà9àúõ W!Ezù6}Ê«ıcQÂ]{5Ù§£^¦Ô1(Ëš›±ïZ>·kâ!qg2Ï	%rØƒÈ?_QV«Ât^xfõg´™äL’ã<0î9?Lñƒ^¯àßˆV~.‹oËkv	pKu9SÆáÏcèOôçx•ƒÎ”p¸«SÄvû2ÿ }ºİûsj×Ö`3XW÷'¤¿?Oò7è¢Šı4õ‚Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¸oÚƒşM§â'ı‹:—ş’Ë]Ípßµü›OÄOûu/ı%–»²¿÷Ú?âæğ¿Æ‡ªüÏÆÊ(¢¿¶ÚBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( »ŸÙşN[áßıŒÚoş•E\5w?²ÿ üœ·Ã¿û´ßı*Š¸sO÷*ßá—äÌ1_ÁŸ£üÙ:(¢¿‰OÅ‚Š( Š( Š( Š( Š( Š( Š( Š+Í~%üKşÑó4í:Oô»<ê×zªŸîúÿ N¿7ÅQƒÈ°oŠwoHÅo'Ùyw{%çdùqx¸aáÏ?’îMãß‹/æËe¥:ùx)%ÈêOûÓ¨İïÆ0	óú(¯ä."â\vuŠxœl¯ü±û1]’üŞï«gÅb±U+Ï£ÿ €QEx0QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE S¡™íåY#fI†VS‚¤t úÓh¦›NèNø}ñOûnálµ#w-…ŠP6¬ÇÁôb}89Æí«çºô¯†Ÿÿ ´|½;Q“ı#îÁ;õŞŠÇûŞ‡¿×¯ôO‡>%¼D£•ç÷Ş›û_İ—Ÿg×g®ÿ O•æ¼ÍQ®õèÿ FwTQE~ì}QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE WûPÉ´üDÿ ±gRÿ ÒYk¹®ö ÿ “iø‰ÿ bÎ¥ÿ ¤²×vWşûGüQüÑ¾øĞõ_™øÙEWöÑûHQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE Wsû/ÿ ÉË|;ÿ ±›Mÿ Ò¨«†®çö_ÿ “–øwÿ c6›ÿ ¥QWişå[ü2ü™†+ø3ô‘û'EWñ)ø°QE QE QE QE QE QE QEp¿¾ }&Ò-Ff‘6ÜHG¬>èõ$½õéáñarl±Ø·¢Ñ.²—H¯7o’»z#Ÿ‰…
-n¤ÿ áÌÿ ‰ÿ ´|Í;N“ıîÏ:ŸõŞª§û¾§¿Ó¯EüoÄ<CŒÎq’Æc%vö]"º$»~-êõ>‰yóÔÿ †
-(¢¼3œ(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ô¯†Ÿÿ ´|½;Q“ı#îÁ;õŞŠÇûŞ‡¿×¯u_=×­ü6øÿ 	e¹¶¹¿712äŞÇ$d{äzéüA–-,£3ê/áÉı¥ü­ÿ 2èşÒÑê½ï©Ê3'?ÜUzô}ü¦Š(¯Ü|(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +†ı¨?äÚ~"Ø³©é,µÜ×ûPÉ´üDÿ ±gRÿ ÒYk»+ÿ }£ş(şhßühz¯Ìül¢Š+ûhı¤(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +¹ı—ÿ äå¾ÿ ØÍ¦ÿ éTUÃWsû/ÿ ÉË|;ÿ ±›Mÿ Ò¨«‡4ÿ r­ş~LÃüú?Èı“¢Š+ø”üX(¢Š (¢Š (¢Š (¢Š (¢Š (¢£¼»ÂÒYåm‘B†Gl…$ñíS9Ær“²[±6’»1¾ øµ|%¡4Šsuq˜à Œ«cïàõô<;×M3ÜJÒHÌò9,ÌÇ%‰êIõ­?xšOk²İ7İÂ»@+' ûó“ÏSéŠÊ¯ãïxºYæbİ&ı;¨.ıåë/ÊÇÄæX×ˆ«§Â¶ÿ 0¢Š+à8(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š *m?PŸJ½âŞFŠhäuê?úŞİê*éÔ9ª”ÛM;¦´i­š}Æ›Nè÷Ox/h±^D6oÊ¼e1°ê?1ìAÇ5¡^1ğûÅ­á-udc›[ŒG8$áW?©_¡à‘Ş½¿°ø‹£ŸeÜõ?NÊkÏ¤ºi+=:4×CíòÜoÖ)]üKóù…Q_tzEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP\7íAÿ &ÓñşÅKÿ Ie®æ¸oÚƒşM§â'ı‹:—ş’Ë]Ù_ûíñGóFø_ãCÕ~gãeQ_ÛGí!EPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP]Ïì¿ÿ '-ğïşÆm7ÿ J¢®»ŸÙşN[áßıŒÚoş•E\9§û•oğËòf¯àÏÑşGìQ_Ä§âÁEPEPEPEPEP^{ñ«Äÿ êt¨_Ò[ŒûåNâAİ5Ükšªhz=ÍÛí+op¶‡ p¹õ'ñ¯ÕµIu­J{¹ÎeË·$ì3Ø°¯Ç¼_âo©åë+¢ÿ y[(-ÿ ğ'§¥Ï;ÅòRö1Ş_‘^Š(¯æä‚Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ½Oàï‰ÿ µ4V°•ó=ÜÉå£=:œ§˜h¯,«Ş×çğÎ±ÜÙB7 8¦yS×ƒôãƒÔW×ğ?¼“5†.Wöoİš_Êúú§gò·S·/Å}^²›Ûgè{µ¥Üwö‘OoŠd#`Œ©Ÿj’¿³á8Î*QwOf}Òi« ¢Š*†QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE Ã~Ôòm??ìYÔ¿ô–Zîk†ı¨?äÚ~"Ø³©é,µİ•ÿ ¾Ñÿ 4o…ş4=Wæ~6QEı´~ÒQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE ÜşËÿ òrßÿ ìfÓôª*á«¹ı—ÿ äå¾ÿ ØÍ¦ÿ éTUÃš¹Vÿ ¿&aŠşıä~ÉÑEüJ~,QE QE QE QE QE yÿ Æï¼Ko¥Ç¹VAçÊz!G^FA$ÙkÎê÷‰µƒâ~îğ–"y	MÀp ãŒ… ~F¿‰øË=y¾o[Ÿ»{Gü+E÷ïêÙğXìG¶¯)ôéèQE|¹ÈQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE z¯ÁÏ¾« Ii.æ“O!U9FÎÑœõ#°muõã_µƒ£xÊĞå¼»“öw
--»×¶í§OÂ½–¿®<,Ï^c‘ÂGyÑ|Í-bÿ ğ—ªgÚek‡Iï?È(¢Šı õŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¸oÚƒşM§â'ı‹:—ş’Ë]Ípßµü›OÄOûu/ı%–»²¿÷Ú?âæğ¿Æ‡ªüÏÆÊ(¢¿¶ÚBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š+ìŸ…ÿ ğI/øY<;â/øXbşßÓ-µ³ÿ ayGÉ³wÚìnÆp3‚¼lçˆrü¦©˜TäRvZIëÿ n¦qã3>*X‰Y?&ÿ $Ï¨¯¹¿áËßõRòŞÿ îš?áËßõRòŞÿ îšùïø‰\7ÿ A?ù%OşDóÿ ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #áš+îoør÷ıTŸü·¿û¦ør÷ıTŸü·¿û¦ø‰\7ÿ A?ù%OşD?ÖL»ş~~ÿ #ášîeÿ ù9o‡ö3i¿úU}[ÿ ^ÿ ª“ÿ –÷ÿ tÖïÂÿ ø$—ü+‰~ñü,¶ÿ `jvÚÙÿ °¼¿?É•dÙ»ínvã88ÏC\˜ÿ ¸v¦¥8b.ÜZ^ä÷iÿ tÊ¿eò¥(Æ¦­>’ÿ #ìš(¢¿—ÌŠ( Š( Š( Š( °>&ëFğmÙÊù—#ìèw§}»>Ÿ…o×œüsÕ7]ØY)lFÆ~FÉÚ¿ˆÚßŸ¹¯ãüÙåù"¼~'Uë/wïI·ò8s*ŞË)-öûô8(¢¿Œ…
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-÷oëÄ¥à*Lñ‚ûA 8á€Ï8ü+ÂkÓ¾jŸhĞ®­	‘šÚ`ã'*ªã€?cøû×ëşæÏœOö­üš¯Ã˜öò*Üµİ?æ_—ôÎÚŠ(¯êëBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¸oÚƒşM§â'ı‹:—ş’Ë]Ípßµü›OÄOûu/ı%–»²¿÷Ú?âæğ¿Æ‡ªüÏÆÊ(¢¿¶ÚBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¿dÿ eÿ ù6Ÿ‡ö,é¿úK~6WìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯Æ¼eÿ rÃ‰şGÇqğiú¿Èîh¢Šş|> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ù/ş
-ñÄ_¿áşÀ×µ­íoóÿ ³ï¥¶ó¶ı›níŒ7csc=7Zù/ş?âı¾4ÿ ÁİÏÿ _MÁ]æÿ ÜKÿ m+ãşığO(ÀWà¼ZÔ!)?ivãßïj-Ú?Îï3œÂ‡c©P¯8Å{+%)$¿sMì·;Oøhÿ ˆô>øÓÿ w?ü]ğÑÿ ÿ è}ñ§şîøºâè¯Õ°2¿ú§ÿ €GüÉ?Ö,×ş‚ªàrÿ 3´ÿ †ø‡ÿ Cï?ğwsÿ ÅÑÿ ñş‡ßàîçÿ ‹®.Š?°2¿ú§ÿ €GüƒıbÍè*§ş/ó;Oøhÿ ˆô>øÓÿ w?ü]ğÑÿ ÿ è}ñ§şîøºâè£û+ÿ  jøÈ?Ö,×ş‚ªàrÿ 3´ÿ †ø‡ÿ Cï?ğwsÿ ÅÑÿ ñş‡ßàîçÿ ‹®.Š?°2¿ú§ÿ €GüƒıbÍè*§ş/ó;Oøhÿ ˆô>øÓÿ w?ü]}[û9êz¾¹ğwG¾×oµCR½M$Ú•Ô³ÊÊdaBHBH
-s»ø‰?Wè€´)¼-àmL¸hŞãN°‚ÖFŒ’ŒÉ© 28ÈüôşÆ`òşËr¬-8S•zîo•(·Pi­¼yªÅ´ú¨³÷¿ «c±¹'‰«9Æœ´¤ÚNRºz½í—•Íj(¢¿Êcú¤(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +¯ø-¨_IHÊ. eTçà†Ù
-“ïë\…mü9¾M?ÆÚt«HbzåÔ ü2Â¾“ƒña+^ÉTŠ~ÙşXòb!/4{MQ_Û‡ßQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@pßµü›OÄOûu/ı%–»šá¿jù6ŸˆŸö,ê_úK-weï´ÅÍáUùŸ”QEm´…Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@~ÉşËÿ òm?ÿ ìYÓô–*ül¯Ù?ÙşM§áßı‹:oş’Å_xËşå†ÿ üãàÓõ‘ÜÑEüø| QE QE QE QE QE QE QE QE QE QE QEñü×şiïıÄ¿öÒ¾1¯³¿à®¿óOî%ÿ ¶•ñ¡ŞÉÿ ¸¿úz¡şnxùÿ %æ?şáéšaEWëGãÁEPEPEPI¸×õ{[HüÛ»Ù’Sp]îìFI d‘É8¯Ğúø+à÷ü•ÏØ^Óÿ G%}ë_åŸíÌ*O5Ép-.XS­4úŞr¦õµ­M[N®íéoê¯£1Âck­å(/+EI¯ı)şEWùÆIQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@\ğíÜv °VÙ7Èí‚p¡'j§Em‡¯*5cZ;Å¦¾NåFN-It>„¢Š+ûèı(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +†ı¨?äÚ~"Ø³©é,µÜ×ûPÉ´üDÿ ±gRÿ ÒYk»+ÿ }£ş(şhßühz¯Ìül¢Š+ûhı¤(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢¦Óôùõkø-m`šæêæEŠbBòJìpªª9$’ ’M”’W{Ñ]÷Æ_Ù«Ål4Ë­zÒkªF
-Ío'›¼¤`‘€À2¬ÚÍµ±ÀÔÆq’¼]ÎLc…ÇQXœE8;ÙÅİi£×Ô(¢Š£°(¢Š (¢Š +öOö_ÿ “iøwÿ bÎ›ÿ ¤±Wãe~ÉşËÿ òm?ÿ ìYÓô–*ükÆ_÷,7øŸä|wÿ Ÿ«üæŠ(¯çÃàŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Œà®¿óOî%ÿ ¶•ñ}ÿ uÿ š{ÿ q/ı´¯Œkığ3şHŒıÅÿ ÓÕósÇÏù/1ÿ ÷ÿ LÓ
-(¢¿Z?
-(¢€
-(¢€
-(¢€:?ƒßòW<-ÿ a{Oı•÷­~~ø]‡ÂŞ9Ñu;…‘íôëø.¤XÀ.Ê’+ gŒ‘_ UşV~Ğü-Xçy>!ÇÜ•*±O£qœ[_%(ıèş®ú:UƒÀã)§ªœ[^M;}öpQEşuÑÁEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPE%¥¤—÷qAï–g¢ä±8Ÿz¨BS’ŒUÛÙ&İ‘ôQ_ßÇèáEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP\7íAÿ &ÓñşÅKÿ Ie®æ¸oÚƒşM§â'ı‹:—ş’Ë]Ù_ûíñGóFø_ãCÕ~gãeQ_ÛGí!EPEPEPEPEPEPEPEPEP^Áû|<Oˆ´F–Ó,2Zè1¾­*;²3Ê¬Evõ+3ÄØ$ç=×ÛğM¯‡áï…:§ˆ&Y’Oİ„„Vàƒr«€9Sæ<ÊwB. \eNJM÷Ğøs¿ìÎÄU‹´æ½œu¶³ÑÛÍG™¯O™ÜşÚ?âìï¯(XMÖöµ»Èì«„ü½I„Ê Œ°éÔ~u×ëE~_|iøxÿ 
-~+kŞe™cÓnİ-Ì®¯#À~h]Šñ–‘ôÉ–TÑÁúŸœxóĞÄe3zÅª‘×£÷eeÙ5ë/¿˜¢Š+Õ?¡BŠ( Š( ¿dÿ eÿ ù6Ÿ‡ö,é¿úK~6WìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯Æ¼eÿ rÃ‰şGÇqğiú¿Èîh¢Šş|> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š øÇş
-ëÿ 4÷şâ_ûi_×ÙßğW_ù§¿÷ÿ ÛJøÆ¿Ğï?äˆÀÿ Ü_ı=Pÿ 7<|ÿ ’óÿ p¿ôÍ0¢Š+õ£ñà¢Š( ¢Š( ¢Š( ¯ÑK;ÈuH®-å{yĞI±°d‘HÈ`GÈ"¿:ëîÏ:µ¾µğkÃZÉæÆšl01ÚWÜr;:0ÏC2+üåı¢Dªe.h¯jU+SÛİ½XÂJï£ıÓ²ê¹»ÒGLb3„ÒòŒ%çî¹-»{úöÓ¹ÖQEşXŸÕEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPZ~…çñn˜¨¬ì.£bdà0$ı ş™]/ÂKI.<slè¹XI$9jí+ŸÍ‡ç^ßa^'7ÂĞW÷ªAiÛ™]ü–§FÕ¡í~g¯ÑEıÊ~€QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE Ã~Ôòm??ìYÔ¿ô–Zîk†ı¨?äÚ~"Ø³©é,µİ•ÿ ¾Ñÿ 4o…ş4=Wæ~6QEı´~ÒQE QE QE QE QE QE QE QE QE M§éóê×ğZÚÁ5ÍÕÌ‹0Ä…ä•ØáUTrI$ $šıFøgàx>|>Ñ´cG¤ÚGnd
-ÎáFùv‚p]·9äœ±É'šøOöøxŸ?h-¦XdµĞc}ZTwdf1•XŠíêVg‰°H)ÎzĞŠñó:—’‚è1xñûL^*ƒÒ	Î^²Ò?4“ÿ À¾â¾5ÿ ‚—|7şÌñ–‰â›xq«nlnÚ;mª&ˆåIî´ÎÛ~	öUy_í£ğñ>!şÎúò…„İhÑÿ k[¼Ê±˜AiËÔ˜LªËG&§%TÏÎ|8Îÿ ²ø‡]»FO’^“Ó_$í/—Èüë¢Š+èÏî0¢Š( ¢Š( ¯Ù?ÙşM§áßı‹:oş’Å_•û'û/ÿ É´ü;ÿ ±gMÿ ÒX«ñ¯Ü°ßâ‘ñÜcü~¯ò;š(¢¿Ÿ€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€>1ÿ ‚ºÿ Í=ÿ ¸—şÚWÆ5öwü×şiïıÄ¿öÒ¾1¯ô;ÀÏù"0?÷ÿ OT?ÍÏ?ä¼Çÿ Ü/ı3L(¢Šıhüx(¢Š (¢Š (¢Š +ë?ØƒÄmªü%¸±–æ9_K¿tT<0º«ŒÎ™pO\0>L¯iı‡|[ıñ:óJ’ãË‡X³;"òóçMÜ¼ã#™P¹Å1ı08FY÷…øÿ eÏËˆ—Ò›÷Ú²mZ”ªj­¦¨¶ÏÔ<Î_Å8~whÕ½7­¾/‡µıå>ë»WÑEşŸİEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP]÷ÀÍ/uİıë	ÄXãälÍø«ùûŠàkØ~hçHğlƒ	.É¸`H nÀ\c±P§ñ?Jı7Â\­â¸‚š¼iEÉö½¹WÎîëĞõ²j<ø•/åÔèè¢Šş³>È(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +†ı¨?äÚ~"Ø³©é,µÜ×ûPÉ´üDÿ ±gRÿ ÒYk»+ÿ }£ş(şhßühz¯Ìül¢Š+ûhı¤(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢­è×Š5Û-2Æ/>ûQ¸ÖŞ=Á|É‚ªäI$A3œa9»%«o¡ö‡ükáãø{áN©â	–d“Äwa!Õ£x ÜªàTù2Ç‹€'èÚÉğ‚¬>x7MĞ´Èü».İ`*¡Ÿ—m ìrÌ@f'½kWÌW©í*9÷?x¯:y¶oˆÌzNNßáZGçÊ•ÂŠ(¬Ÿ?2¿h_‡‰ğ¯ãWˆô(VílîËÚ¤nÎ±Á Ä››æ%cu9äOSÆWÕßğS‡·şñ\K3G$m¤Ü±uòã ´°€¿{-º|Fz½ò}.§=5#ûÃ³¿íl‹“¼œm-nù£îÊş­_Ñ¯P¢Š+sëŠ( ¿dÿ eÿ ù6Ÿ‡ö,é¿úK~6WìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯Æ¼eÿ rÃ‰şGÇqğiú¿Èîh¢Šş|> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š øÇş
-ëÿ 4÷şâ_ûi_×ÙßğW_ù§¿÷ÿ ÛJøÆ¿Ğï?äˆÀÿ Ü_ı=Pÿ 7<|ÿ ’óÿ p¿ôÍ0¢Š+õ£ñà¢Š( ¢Š( ¢Š( ­ox²oøÏLÖ óôë”œ¢Jb2¨?4{†pr§ƒÃJÉ¢¸ó¿ÂÕÀâãÍN¬e	Eìã$Ô–šê›FØlEJc^‹´¢ÓO³Néıçè¥ä:¤WòÇ=¼è$XØ2H¤d0#‚äRW–~È_›Æÿ 	aµ¸’6¼Ğ_ì,®ö„(11PÑ·äÎ|¢rNqêuÿ :~ pv+…8“Ã¸ÏRP¿ó$ıÙ/)Å©-³Õ'¡şğösK6ËhfT~‘OÑõ_'uò
-(¢¾<öBŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Z”úæ±mh›ƒ\H•]Å<¶= Éü+Ş!…-âXãUHĞUQ€ t zW‰xFî]+VKØv‡·û»†A$`È‘ø×¡hÿ â‘BßBÑ¹ oˆezõ ò01Ó9æ¿°üğã3\=,ö.e^Z[âä…ÒvvÑË›kİYúuå\E—akOˆŸ,ôÕí¶×éó±ÖÑPØj0j–â[yRhÏu9ÇÁô<ô55~RœéÉÂjÍnŒûªu#8©Áİ>«`¢Š*
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-á¿jù6ŸˆŸö,ê_úK-w5Ã~Ôòm??ìYÔ¿ô–ZîÊÿ ßhÿ Š?š7Âÿ «ó?(¢ŠşÚ?i
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-÷ø'ÿ ÃøMş<Ã¨Ï™cá«w¾röŞlM1ıÜJXğòsÀã#Ã«îø'7ÃÄğÏÁYõ×XM×‰nÙÃ£±o"Ñ"2Ÿ” œü½CŒÃ—S’“óĞüïÅ<ïû7‡+Ê.Ò«û¸ÿ ÛÛÿ äª_?¼úŠ(¯?‰ÂŠ( <ıªşÿ ÂÒøâ:8|ëè-Íõ[o´KçCûÀ±¯PîG•çCùµ_­ù•ûBü<O…¼G¡B°Çkgv^Õ#vu	 –$Üß1+¨9Ï òzŸ_,©½?™ı#à.wxâr‰½­R?„eÿ ¶ıïçÆQEêŸÑaEP_²²ÿ ü›OÃ¿ûtßı%Š¿+öOö_ÿ “iøwÿ bÎ›ÿ ¤±Wã^2ÿ ¹a¿Äÿ #ã¸Çø4ı_äw4QE> QE QE QE QE QE QE QE QE QE QE QE |cÿ uÿ š{ÿ q/ı´¯Œkìïø+¯üÓßû‰í¥|c_èwŸòD`î/ş¨›>Éyÿ ¸_úf˜QEúÑøğQE QE QE QEé_²ŸÄy¼ñjÆÜ™Ç]uÓç‰rFç`"|n*äœáYğ2kìêüç¯µ¿fÏ‹­ñsáâOy,o¬iïö{à¡P¹ê’mà2÷À•ğ şc}><'©í0Ü€‚å²£ˆ¶éÿ Ëª£M^›nÖµ5­ıßê 8¶<µ8-u>Öûqÿ Û’ëï=-¯¡QEşhÓEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEoI´ó¦Ş~ìg?S_MÁÜ+ŒâLç’à¿VV¿HÇyIùF7“êíe«HæÅâ¡‡£*ÓÙVùšP}šÙW8ÉúÔ´Q_ì.O•aòÌ»­N”c¯(«-­®šùŸ”U«*“u'»wos%¤ÂH¤x¤^ŒŒTÄWG¥|O½´Ü.‘.Ôò°éÜc¯nık™¢§2É°8øòã))ù½×£Z¯“;rüß—6£—GêæPÑüe§ëJs¬R—)Ä“€cøÔV¥xİjhş2Ô4V9ÚXÀË”—P À¸üè+óLÛÃç—Tÿ ·eúI~^¯©ú.WâFĞÌ)ÿ ÛÑıSülıCÔ(®cFøiuÛÕkY å€.Ó¦9øöë]%½Ìwp‰"‘%º20`_šæy.7/Ÿ..›ŸGèöyú&]œ`ñÑæÂÔRòê½Vè}Q^YéQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@pßµü›OÄOûu/ı%–»šá¿jù6ŸˆŸö,ê_úK-weï´ÅÍáUùŸ”QEm´…Q@Q@Q@Q@Q@Q@Q@Q@ô
-ëÅí–™cŸ}¨ÜGkoà¾dÁUrH$’@¯ÔÏxføOKÑ­^i-t›H¬¡iH22F± pp Ïjøgş	ÿ ğßş0ê3ÃæXøjİïœ½·›Lw–<#‚ÆE<œÀp8ÈûŞ¼lÊ¥ä ºË;g~Û0¡•ÁéJ<Òÿ ¶OÒ)?û{î(¢ŠóÁ‚Š( ¾Eÿ ‚›ü<u¿ğçŠâYš9#m&å‹¯—¥„ûÙmÓäò0‹Ğıï®«Ï?j¿†ÿ ğ´¾xƒN:ús}dÛíùĞşğ,kÔ;€ÑåyÄ‡ƒĞôajrUR>ËÃüïû+?Ãb¤ínY†^ë+ßä~mQEô‡÷PQE WìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯ÆÊı“ı—ÿ äÚ~ÿ Ø³¦ÿ é,Uø×Œ¿îXoñ?Èøî1ş?WùÍQ_Ï‡ÀQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@ÿ Á]æÿ ÜKÿ m+ãû;ş
-ëÿ 4÷şâ_ûi_×úàgü‘û‹ÿ §ªæçŸò^cÿ îş™¦QE~´~<QE QE QE QE ŞşÎßá£S+PÛm~¬Ïµ°ÄÀ.rÉÉAp0[#‚¢¾w‹x[.âLŸ‘fğç¡^.[;=š}%iEôi>‡£”f¸œ³Oƒ—-JnéşºkFº£ôbŠğ_ØããŸöîŸƒõ.ì!g°åÉ¸ˆ˜ˆcÈÊŠx2Şõ_óùâŸ†¹§q&#‡3UySw„¶U)¶ù*-]”’ÚíÅŞ/TÏô#…8›Ÿe´ó,&ÒİuŒ–ñ{lúÛUf´aEWç‡Ñ…Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@
-ˆdp£’Ç¶ímÅ¬!8ê}MUÑìö5ğ Şµz¿Ñ£…ÒÉ²×Ä¹Œ-ˆÄ¤ ğ¥½ıji-uQQµ¯$|æ^Ú§Õé¿v;ù¿øEWõaóEPEPSXj3éw[y^u8Ï9Áõt5)Â¤\&®éê‹§RP’œšê·:­âÅº„¼‰nGïÀg:n+ªÒ<Qc­ªy	æ?ü²c¶Lã$c¾=FG¼®Šø|ßÃÜ³yĞ^ÊOùvÿ Àvû¬}WÇ™Ğ®ı¬|÷ÿ À·ûî{%æšW5-+pó¾Ò­ü3åğxç9Ïn™Ç5Õhÿ ,59k9Ió)Éşğü3œu¯ÌsnÍ0K1ö‘ï_Î;ı×^gé_e˜ÇÉ){9v–‹äöüŸ‘ĞÑMEš5tetp
-°9zŠu|kM;3ëSM]QHaEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP\7íAÿ &ÓñşÅKÿ Ie®æ¸oÚƒşM§â'ı‹:—ş’Ë]Ù_ûíñGóFø_ãCÕ~gãeQ_ÛGí!EPEPEPEPEPEPEPEo@Ğ®¼Q®Ùi–1y÷ÚÄv¶ñîæHìW$€2H$
-	œã¹ÍÙ-[}·?àœßÃ?g×]a7^%»gÅ¼ˆKDˆÊ~PD‚sòõ2{ k;ÂƒÁ~ÒôkWšK]&Ò+(ZRŒ‘ E,@ œœ 3Ú´kæ+Tç›Ÿsø‰³‰f¹®#0—ü¼“kÊ;E|¢’ùQYQE QEù«ûMü*Oƒµ­Ú)£ÓD‚æÀ¼lª`URÄ—KG¿'&3œÀ××_ğS‡ˆÖñ\K
-É¤Ü±vó$4°€¿w¶|]z»ò-}&§=%&uğxól‡‹›¼íË&÷rºÛõ·7Ì(¢Šè>Ä+öOö_ÿ “iøwÿ bÎ›ÿ ¤±Wãe~ÉşËÿ òm?ÿ ìYÓô–*ükÆ_÷,7øŸä|wÿ Ÿ«üæŠ(¯çÃàŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Œà®¿óOî%ÿ ¶•ñ}ÿ uÿ š{ÿ q/ı´¯Œkığ3şHŒıÅÿ ÓÕósÇÏù/1ÿ ÷ÿ LÓ
-(¢¿Z?
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€,èúµÆ«ÚßÚIå]ÙL“ÂûClt`ÊpAÅ}·ğ'ã¿Æ?E}›hµ8?wkä>N®áÔu\’¦¾­ÿ †¯¾øÎÏX±’@`p'‰_hº‡ ¼MF¸88#+ù³é+àÄœ}VĞÌ0÷•¿µ¦´fÿ ’nÖ{ÂIIiÏ~—á—ˆxg0ıíå‡©e8öí5çßii½šûæŠÅøñKø›áˆ5m&:Úo••¸’Ìn;0Èö ‚	µ_áÆi•âòÜ]L>”©V¥'ÂI©FIÙ¦©¦uaqTq4cˆÃÉJI¦ÓOf˜QEÂnQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE gM±û\¹`|µëî}*;KF»—jğSé[1D!‰Qz(ÅLı<—ãVw›ÓR¤ôMiZiü:ï¿Ù§ğ5¾w>ÍÖÆ“÷ßà¿Ï·Ş:Š(¯ôŒüô(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ³¦k7Z4ÅígxXõİzƒÁêz×O£|S)ËøYÈInTñêrá\}âf¼9—f*øªIËù–’ûÖ¿'¡ìåœAËßû5F—g¬~ç§ÍjzÎ™®Ùë
-µÄR’	Ú q’§‘ùUºñØähdWFdt «‚¨­İâ%ö•„˜ı²!ÚFùÇ^õ=óÓµ~e›xe^šsËês¯å–äö>Sôl¯Äz3jørÿ z:¯»uò¹è´V‘ñNÔÕ’}–Và¬¼ÆOÍÓ\}+r¿8Çe¸¬ı*›ƒó[ú=Ÿª?AÁfl\=¦jkÉíëÛæQEqEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP\7íAÿ &ÓñşÅKÿ Ie®æ¸oÚƒşM§â'ı‹:—ş’Ë]Ù_ûíñGóFø_ãCÕ~gãeQ_ÛGí!EPEPEPEPEPEPEP_@ÿ Á9¾?‰¾5O®ºÌ-|5hÎBùó‰”üÄÌçåèPdö??WßğOÿ †ÿ ğ„|‡Q.ûÄ·|åí¼©Vû¸”±åĞ…2)àbsÎO:§%'ç¡ù¯‹9ßöwVŒ_½[÷kşŞø¿òU/½p¢Š+çÏâĞ¢Š( ¢Š( ¢Š(Œı¡~?ÅO‚¾#Ğ¡Y¤º¼´/j‘º£I<dKno”‘ã‚yGæU~´Wæ×íWğßşoÇŸiÑÃäØÏpo¬‚Û}/&oŞzBZ<¯Œğ:W,©½?™ıà.wibr‰½íR?„eÿ ¶ıÏåç”QEzçôˆWìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯ÆÊı“ı—ÿ äÚ~ÿ Ø³¦ÿ é,Uø×Œ¿îXoñ?Èøî1ş?WùÍQ_Ï‡ÀQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@ÿ Á]æÿ ÜKÿ m+ãû;ş
-ëÿ 4÷şâ_ûi_×úàgü‘û‹ÿ §ªæçŸò^cÿ îş™¦QE~´~<QE QE QE QE QE QE vş.ß|ñœ°K!ÓçtMBØÂâó…$ê	*r0xÎö—‚üs¤üCĞ×QÑ¯c¾³gh÷¨*U‡Ue`OC‚„üı®³àÿ ÆSàß‰Åıó­¦Â^Y»b;¤£­Œ‚OPYOñÿ Òsè¿…ñ„³ì•ªY¥(Ù|*ÒÚ®¦–”æİ’´gîÚPıÂÿ ªğõE€Ç{ØY=wn›}b¿—¬£kõZİKîÊ+áÿ Ä/âo† Õ´™üëi¾VVâHc1¸ìÃ#Ø‚$NÕŒ¹¦W‹Ëqu0úR¥Z”œg	&¥'fšz¦™ı¥…ÅQÄÑ#%(I&šwM=šaEW	¸QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE T–ö¯tøAœu=…-¥£]Ëµx©ô­ˆ [h‚ À­Bx'àf'Œjÿ hæ<Ô°1ms-%RKìÂé«'ñJÍ/…]İÇÁÎ3¨á³§¬ßáëú ¶·[hB.8ê}O­>Š+ı,Ë²ü6Oƒ‚…:iF1[$•’Gç•*Jrs›»aEWaEPEPEPEPEPEPEPEPWt¯Şè›¾Ëpñ+u^{sƒÆxÕ*+øzUàéÖŠ”_F“_s5¡^­ª”dã%Õ;?½¾ñN)-ô-’ø†W¯R#3k¥Óõ[mV=ÖÓÅ0 µ²W=2:Æ¼Ÿos%¤ÂH¤x¤^ŒŒTÄWçù·†Ø
-÷N”»o¹ê¾ONİ»ÊüBÆĞ´1qU#ßi}û?š×¿SØh¯?Ñ¾%Şiñì¹E¼@0¤¶×:œş#<õ®«Hñ¶¬²$syr¿HåO\„Ÿ@kóÛƒ³L¾ò©OšÍWÏªù¤Ñò®-ËqÖŒ*rËùe£ùt&Íj(¢¾\úP¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®ö ÿ “iø‰ÿ bÎ¥ÿ ¤²×s\7íAÿ &ÓñşÅKÿ Ie®ì¯ıöø£ù£|/ñ¡ê¿3ñ²Š(¯í£ö¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š(GÂŸÆ,ÒôkW†;­Zî+(ZRDjò8E,@$‘œqÚ¿S4
-×Âú–™c‘c§[ÇkoâŞ\h¡UrI' ’I¯ˆÿ àœßÄß§×]f¾´g¡|ùƒDˆÊ~bfsòô(2{¹ëÅÌª^j¡ü­ã¦wíó:Yd”cw¯Úº¯(¤×øŸÌ¢Š+Í?
-(¢€
-(¢€
-(¢€
-ùGş
-oğñÃÃ+‰aY#‘´›–.Şd€†–îávÏ“ÁË¯Q÷~®®3ö…øxÿ >
-øB…f’êòĞ½ªFê$ñ‘,I¹¾PDPs	äuáªrTR>³³¿ìœ÷“´T­-l¹eîÊş‰ßÕ/Só*Š(¯¥?¼¿dÿ eÿ ù6Ÿ‡ö,é¿úK~6WìŸì¿ÿ &ÓğïşÅ7ÿ Ib¯Æ¼eÿ rÃ‰şGÇqğiú¿Èîh¢Šş|> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š øÇş
-ëÿ 4÷şâ_ûi_×ÙßğW_ù§¿÷ÿ ÛJøÆ¿Ğï?äˆÀÿ Ü_ı=Pÿ 7<|ÿ ’óÿ p¿ôÍ0¢Š+õ£ñà¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š(£ømñ[\øO«½ŞwäùÛDğº‡†åU²”ş##6É¯¯>|}Ñ¾4ZJ¶bK=JÕî,§#xº÷Ğ1ÛœÓ*»†~ ©,ï&Ó¯"¸·–H. q$rÆÅ^6!‚ Šşoñ×èÏÃ~#Ğx©%†Ì÷kÆ)·²µX¦½¤l­µ(}—kÅş•À~'f\7QR_½Ã½é·¶úÁëÊîîô³ê¯ªı¢¼àgío®Ä»ÆÛX]‰ú!Xn
-D d#gæİÂ`Ÿ¹´n÷ªÿ ¼Jğ³‰84yWáİ9}™«ºuµİ9Ù)%u~±nÒIègğÏå¹öëymNeÕm(¾Ò[­º=Óh(¢Šüğú0¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢ŠP $‚ª1”¤£vÁ±*Íš×xcòÇ½ÏÒ¬YiHyqÇğ_¯ì_şŒÕñ¿AÓ§£¤¥ÖõïÓ“I·ñrÚÒù,ÛˆãÒÂ;¿æè½;úíê6İ6¢…ê(¯îÌ„¡6
-à’Œb”c¶I+$—DŠœå)9Iİ°¢Š+¤¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š(ODñuö…†]Ñùe'ÌúzrsÆ+¨Ò>(ÚÜ*-äoo'Bê7GÓ¯¨ÉíƒÛšá(¯šÍ¸K,Ì[jv›ûQÑüú?šgÑe|S™`…—Šû2Õšù4zı¥ì7ñ—‚h¦@pZ6ôâ¥¯ ´½šÂBğM,.FFÅIœWK£üQ¸·P—‘-ÀÈıâaóÇCíÓ¥~e›xk ¹ğ2Um¥øèşõè~•ø‰ƒ¬ù1±tß}ãşkî~§uEghş+°×,¯š@>[­Ó8ç®0sŒÖ~{ŠÂWÃTt±q—fš‰÷¸lUD=­	©Gºw_€QEÎnQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE Ã~Ôòm??ìYÔ¿ô–Zîk†ı¨?äÚ~"Ø³©é,µİ•ÿ ¾Ñÿ 4o…ş4=Wæ~6QEı´~ÒQE QE QE QE QE QE QZ>ğÌş4ñf—£Z¼1İj×qYBÒ’#W‘Â)b dŒàÔ7mH«R4àêMÙ%wè¹ÿ àŸÿ ÿ áø£<>]÷‰nùËÛyR¬#÷q)cË¡
-dSÀÄçœŸpªš…ká}
-ËL±‹È±Ó­ãµ·qo.4Pª¹$“€ É$Õºùzµ9æäúŸç÷æÓÍ3*ù„ÿ åä›^K¢ù+/QE™ã…Q@Q@Q@Q@›_µ_ÃøU¿|A§G“c=Á¾²möx¼™¿x5èQ	hò¼f3Àè<ò¾Ëÿ ‚—|7şÓğn‰â›xs6•plnÚ;mÌa”eI*ˆë´Æë'ñ¥}&¯=$Ïî3ïí|ƒ‰“¼Òä—ø£¥şjÒù…~ÉşËÿ òm?ÿ ìYÓô–*ül¯Ù?ÙşM§áßı‹:oş’Å_‘xËşå†ÿ ü8Çø4ı_äw4QE> QE QE QE QE QE QE QE QE QE QE QE |cÿ uÿ š{ÿ q/ı´¯Œkìïø+¯üÓßû‰í¥|c_èwŸòD`î/ş¨›>Éyÿ ¸_úf˜QEúÑøğQE QE QE QE QE QE QE QE W{ğö‰×şN"‚Oí(áZÂåØÆƒ~âb9ıÛ· Kd«1ÁQ_;Å<%“ñ&]<§=ÃF½	ï««­šë.’‹Mthôr¬ß–bcŒÀTtêGf¿'Ñ§Õ=÷GÂ¿øÁ‹¤ÜÈ—§™-ÂysÆ»ŠîÆJ°éÊ“ËœŠì+ó®Îòm:ò+‹yd‚âG,lUã`rÈ ò¯eøYûhkòm<Aöí‚íO;!.â_”gwI0¡ÌÜ½™~/}³<êf<[ë·öUcİB¦šŞÊ\’JÊóz¿éîñï^1Ãq=œöö‘MÅÿ Š:¸ùÚêúÚ+Cêú+˜øqñ‹Ãßmèú„rÜß%¤Ÿ»¹‡…ÎPò@,eÊç€ÆºzşÎòË&ÆO.Í¨N…h|Pœ\d½SIú=ŸCúÃchÇ„¨§	lâÓOæ‚Š(¯$ë
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-+gÃ~Ô¼S†·ƒdş[ËòÇß¡êyà¸®Ş…:‡´+É¥-{tHUäD;[¿ˆêO##÷¼'áÆqŸU‡±‡³§&—<ôZõKy|•º6ºxÓ¦ê¥h¤İß—cÍ­4ù.Î@Ú¿Ş?Òµ-l£´ 9=IêjZ+ığÏÀ¾àõLcíñKş^Í+§ÿ Nãª§£µÓrkG&´?(Ìsªø¿uû±ì¿^áEWíGQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE ¯£xãPÑ#òÒEš 0©0,§CœLãÚ²(®Lf‹§ì±0Sf®ua1ØŒ,ı¦n/ÉØô-#âU È“«ÚHİÛæ9À¿© u­û{˜îáE"Ktd`Àş"¼z¬éšÍÖ1{YŞ=@ä7^ ğzµùÎmá¢sËçÈûKXıû¯ü˜ı+ñM¨cáÎ»­İ³ü[¢¸­#â£Æ¨—¶şf82DpOİ<Ÿq×¥u:Wˆlµ½ße¸IYz¯*İ¹Áçkó<×†3,ºïIòÿ 2Ö?zÛçf~•ñ&_ÓQs+Ò_sßåt\¢Š+À=À¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Šá<sı­£ê7Û.~Ë;f6BªŸìÏ¯\ãÜÈ2_íLOÕ•U	Zê÷×Éyõ<ló8şÍÃıeÓsWÖÖÓÍşGwExì’4Ò3»3»’Y‰É'ÔÓkôáS¶¸¯ü“ÿ ·>øœ¯¦ÿ 'ÿ íOd®7öŒÒîuÏÙïÇvVVóŞ^^xwP‚ ŒÉ,ò5´Š¨ª2Y‰  9$×Eo†ğÁÑ­
-Ë~VŸÁÙßùÊ§â$ÔÖgÿ ´?4?á—ş%ÿ Ñ;ñ×şn¿øİU“ö~ñì22?‚<^„†S£Ü¡ù+ôæŠı––cˆO÷¼¯Ñ5ú³êjøûŠk÷x8¯Y·ÿ ¶£óşÿ èJñoş	î?øŠ?áAxïş„¯ÿ àãÿ ˆ¯Óº+oí9)üGÌıÃÿ ‘ù‰ÿ 
-Çô%x·ÿ ÷üEğ ¼wÿ BW‹ğOqÿ ÄWéİiËùCş#æ?şaÿ HüæĞ¿c?‰¾"Ò¢¼·ğÜpÍ«uq¬£ƒ˜åuuäq20G·ÿ 1ñOş…oü©ZñÚı¢§ûN¯eı|Î	øñ¹7
-4RéxÍş<êÿ rô?<á†>)ÿ Ğ­ÿ •+Oş;Gü0ÇÅ?ú¿ò¥iÿ Çkô:Š?´ªö_ù‘ÿ ß?ÿ Ÿ4ğÿ òÃóÇşcâŸı
-ßùR´ÿ ãµ¹áŸø'gÄMzÁæº]E‘d( ½½/#Œ¼VEÁÉ°9Œ`Ÿ¼¨¤ó*¯±•ø†qåŒ)E÷Q•ÿ µøÃ´¼wÿ Ao	àUÇÿ £ş¥ã¿úxKÿ ®?øÅ}ÃEOö…cş#Oÿ 4?ğ|=ÿ Òñßı¼%ÿ Wüb½ö]ı‡ußƒß-|G¯jDğéÖó}™4ùäfi|¿œ<J6ly:wmíšúvŠ™ãªÊ./©Ã™xµÄ8ì-LyÇ’¢qvŠNÍYëæ‚Š(®3ó@¢Š( ¢Š( ¢Š( ¢Š( ¢Š(˜øÓğñ>+|)×¼>ËI©Z:[™]’4œ|Ğ»ç"£@èGä_øv—ÿ è-á/ü
-¸ÿ ã÷ÑGR’´O´á>ÍòÃåòJ2|Í5}mk®Ú%Cáïøv—ÿ è-á/ü
-¸ÿ ã÷çÁ¿Ağóá…tÔ–[ÍG´Óçx hH¡HØ©$¤©Æ@8ì+Šñxƒ*Ãç4áK›QwVv=\Šùş2*5¥.ÑGÿ SOÿ 7¿÷Âÿ ñUj?ˆzKÆ¬nY	 •1>WØàb¼ÚŠù¾åV‹œ}$¿TÎ
-^!æ±~ò„½Sı=/ş‘ÿ ?ù	ÿ ÂøXGüıÿ ä'ÿ 
-óJ+ø†_üü©÷Çÿ 6ÿ ˆ‘™ÿ %?º_ü‘éğ°4ùûÿ ÈOşÂÀÒ?çïÿ !?øWšQGüC¯ş~Tûãÿ ÈüDŒÏù)ıÒÿ äT·ñV›su¾¶
-İÈşG¤ÿ „Oÿ Ÿû/ûş¿ã^OErKÂÜß-y[ÑQñ/eÍF7õg¬ÂG§ÿ Ïı—ıÿ _ñ£ş=?şì¿ïúÿ y=¿âáçü¾ä?ø‰xŸùó½±ÿ 	Ÿÿ ?ö_÷ıÆ§´½†ş2ğMÈFÁ€>œWQYÔğ²ƒîñ?8§ú¯ÌÒŸ‰•“÷è&¼¤×èÏd¢¼nŠçÿ ˆUÿ Q_ù'ÿ noÿ ;ş¡¿òşĞöJ+Æè£ş!WıEäŸı¸ÄNÿ ¨oüŸÿ ´=’ŠñçñÓ§™¯ŞÆÒi¦s9Š8Ô³±È  9'°¯×à©ºwƒµ±Ò´ÚFùošÏq#%Ub÷›9 `b>çx¥/ì¥íÚé¤4õ“Q¿—5ßMŒñ2dXW›ËØ)lõ¾J1rkÏ–ËKî}…E|cÿ uÿ ª{ÿ •ßşç£şëÿ T÷ÿ +¿ıÏKş gÿ ĞşU£ÿ Ë?â>pıÿ å*ßü¬û:ŠøÇşëÿ T÷ÿ +¿ıÏGü=×ş©ïşWûøœoÿ @?ùVÿ ,øœÿ Aÿ ùJ·ÿ +>Î¢¾1ÿ ‡ºÿ Õ=ÿ Êïÿ sÑÿ uÿ ª{ÿ •ßşç£ş gÿ ĞşU£ÿ Ëş#çÿ ĞşR­ÿ ÊÃş
-ëÿ 4÷şâ_ûi_×³ş×µßü5Oü#ßñO`ÿ `ı§ş_şÕçùŞWı3M¸ò½ó»¶9ñŠşËğ£"ÇdÜ+…Ës(rU‡?4n¯RrZÅ´îšz?Äş%ñw?Àg|[‹ÌòÊÒOgË+J7å¥½$“Vi­WàQE~†~lQE QE QE QE QE QE QE QE QE QE Igy6yÅ¼²Aq‰#–6*ñ°9äyW®|?ı´<Oá8 ¶Ôâ¶×í"à´ÄÇtT U_4d	,¬Ç''GÑ_ÆŞp¿á–‰p4ñW³’÷£}ù'N±’g¹‘ñ6i“ÕöÙeySo{=¬]âşiŸixö©ğo¼ÅşÑşÇš<Ÿ/T)o¹Fß˜>â‡–Æ7nàœ`f½¿9ëÁ|CğòUmW½±Ev“ÉWİ1]¥š6Ê1Æ9 ô‚¿†8ûö}à+¹b8;1t¶¥]sÆöÑ*°´¢¯½áQëå¯îü?ô…ÄSJs†S_ÍMÙÿ à/Fÿ íè¯¿O¾h¬/ØÂçTı¢¾]k•Õ´:–Ÿ¨É§‚íK€@êíÏÊÅ¤l•é…ç§—G.Šœ©¯à,ğ[‹¸0ÄeØœ#©*Òt¿yUeÍoX£ú£‡ã[:Ëiæ¹})J•H©-5Ißt¯m™VŠt‘4M‡VS×b›_—Ö£R”İ:±q’İ5f½S.p”$ã5f‚Š(¬É
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-*Å†‘wªïû-­ÅÏ—ŞTeöç¦p8è*èl>ëW›üÄ·µÛŒy²ƒ»é·wëµìe¼?™ãõÁPœ×un½v[>»èoKV§ğâÙËS¡…î%XãVy…UQ’Äô z×§hÿ ôû6y<×¤òå!è@$ç<ğGoÇªÒ´;=-––ĞÛ‚’Š|tÉêO¹õ¯Òò3\E¥˜TÛã—àùòo—V†EZZÔj?‹ÿ /ÄòÍá6«­*É*-Œ$Œ™òŒH^¹ïŒäWm |&Ò´VY%F¾˜“>
-‚	Ó=óŒ
-éè¯×rò<³–~ÏÚÔ_jzëå…yiu¦·Ôö°ùV–¶»îÿ «Q_ ‘ã²FĞÈÈêÈèHe#CM­Z5Ÿ‰¯QŠ’e2qèß0ıgWõ«áá]}¤ŸŞ®-âè:çEı–×ÜìQEtœáEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPöñPÒÔ$Œ·q‚8—%€Ï8n¼ûçWQ£üCÓõF	#5¤„%ÀRqÎ§øÏç4WÈfÜ•c¯.NI¾±Ó_5³óÒşgÕå|g™à­~x®’×î{¯-mä{r,Ñ«£+£€UÈ#ÔS«Ê4¯Şè›¾Ëpñ+u^{sƒÆx×Q¤|TIößËÏH@çû§1îzt¯Ì³o³-ç…µXùi/¹ş¿#ôl«òüM¡‰½)yë½~©/3¯¢«išÍ®³	{YÒe@à¯^ ò:µf¾µ”¦éÕ‹Œ–é«5ê™öô«S«R””¢öiİ?˜QE™ QE QE QE QE QE QE QE QE QE QE QE QE QE QE Sdf‘Õ]ÊFA†E4ÚwBi5fq^*øpbİq§.cUË@I-Ç÷}~‡ğÎq\”‘´22:²:HÁĞ×±V7‰|kâ,Éş¢èã÷ª3;œ;õàv¯Ô¸gÄ9Ñ¶4nQé=Úÿ uç¿©ù§ğ+_–¥u†Éÿ ‡³òÛĞóJ*Ş±¢\èWF+ˆÙ9![,ê{õR¿d¡^jj­))EìÖ©Ÿ’V£RŒİ*±q’İ=ĞQE©QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE W'ñwãF‡ğS@ÿ Y–RnË·µCÜ\7mR@Âƒ’I p3’ ùíûii²ºÒ¼)<Z¦²è _ÄR[;]À’U²D’Œ¹$©Cò‡‰üOã=~ëTÕ.¥½¿½2i¤<±è8   €    úp5|]±ÛÂŸoµ/ò^{ùu?/âÏ0øl.]j•{ı˜ÿ òMvÛ»ÒÇañËö‹×>:^Ä·¢+.ÑÙíì`'b’NÉûò;w`¸UÜÙà(¢¿cÂ`èái*x¨Ål‘ø;ˆÆV–#7)½Û
-(¢ºN@¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š(ôş	Mÿ &ñ¬ÿ ØÅ?ş“Z×u\/ü›şMãYÿ ±Šı&µ®ê¿„ø›şJüÛş¾/ÉŸë§Ñ·şHÌ'ı{‡ç1C)õšlã1(Ç§Ê§¢¼Ç%ËóòcèBªí8ÆK{ı¤úëê~ï‰Áañ—N3^i?Ì¦úÄ‚ê=â¡ÿ „{ş›ãŸızÒ¢¾à×bçÏWõ~ëœ¾P”W¢Ùt±à×àÌ–³¼ğéz7ı%¯ø–Ğ%Üpñ‘Û$ÓdĞçEÈØşÀÿ lQ_/ˆú:ğ…HÉB5!~ª{zs)/½3Ë©áÖO$ÒR^’ÛïOñ1?².?çŸş<?Æµmşk—vñËèåPê|èÆAÅSWªx{ş@?õïş‚+ã3ÿ £Ï`iÂt«Ww}eOô¦–Ïø§	ÒœİßWÒ(òøUZÿ üøäxÿ øª¹iğ_X¸·Wv³s’ËÏ} Ö½^Šùêä4åyJ¤¼œ£úE?Äù¨äXtõmüÿ à_ÀıM¥Q%ÕŠÆHÜUˆÈFOâ+B²©“SfŒ¸-¾ÒGpãƒøô
-+ÔÃøSÃT¾*.~³—èÒûîkŸ
-·şlå,~hÖ’–]]1²Yp¿ÊÏãŞµ,|£iñMµ`NìÊiüÛ'Õ¯E}6…2l/ğ0´ÓïÊ›ûÚoñ:áƒ¡†î
-(¢¾€é
-(¢€
-(¢€
-(¢€<ëâU§Ù¼Pï»wÚ#Y1Œmşã¹ükºß‹Š—–s‚ÛäFŒØRÿ ĞrUı1Âm“aç}£oü¸ş‡ó§Ğö9½x[y_ÿ J_¨QEô‡ÏQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@·¹’Òa$R<R/FF*Gâ+Hø•}§ª$ê—q¯vùdÆ0ïêA=k¢¼ÜÇ(Ác£É‹¦§ë¿Éî¾Lô0®3.l-GM¾kgóG¥é^<Óu]ÃÎû3/ğÏ„Èãœçúg<VÍxİhèş+¿ĞÔ,·”>[Ë×8ç¦rsŒWæù·†1kŸ.©gü²Ûå$¯÷§êĞò¿$Ÿ&aNëù£¿Í?Ñ¯CÔè®WGø£opÁ/"ksûÄË©8ç£Û¯Zé,55Kq-¼©4gºœãŒàúzüÓ3Èqù|­‹¤â»î¾õ§Ê÷?DËs¼=_QIöÙıÏ_¬MEWz¡EPEPEPEPEPEPEPEPEPEPEPEPEPEP7út¥¹Šâ$š3Ù†qÆ2==Ep^'øq¢«MnZæÕAf8£î;ñÜzzôYã2š—¢ï¼^ÏÓ³ó_;ì|şyÃxLÒ¬­5´–ëü×“ù[sÆè®÷Å?!¿ç±U†àû¡…ñè;Ó|×yg.ŸtğÌ±œ2ÕûŞEÄ˜<ÖŸ6ÚKx½×ù¯=¾gáùßbòºœµÕâö’Ùÿ “òÜŠŠ(¯|ğÂŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š+Ë?hÚ“Gø3eucm$Z‰Â/•dƒx$<Ì8  ÀwËĞ6ñ×ÀWÆVT0Ñr“ş®û/6pæ9–AâqsQŠïù.ï²Zß¾ hÿ 4ÔõËø´û%uˆ;†bîİUAf=N <zkäÚö¼Õ¾-gOÒEÖ…¡®ôxÒr&¿S¹zWR‡˜Á+’r[åÇŸüJø«®|Y×äÔ5«én	vxmÃoh ¬HI
-0ªs´IÉ®v¿gáÎ	Ãàm_ïÕÿ Écèº¿7òKsù÷‹<CÅf\ØléÑÿ É¥êú/%óodQE÷GæáEPEPEPEPEPEPEP_Mÿ Ã©¾!ÿ ĞgÁøsÿ Èõó%~ÎWà~8x‡œp¿Ô¿²¥í}§74y¾gkvø™ıà7†ù/ı{û^2~ÇÙròË—ãö—¿…Ÿßğêoˆôğ_şÜÿ ò=ğêoˆôğ_şÜÿ ò=~€Ñ_‚ÄÂñóÓÿ ÀùŸĞßñ.ü•?ğcÿ #óûşMñşƒ>ÿ À»ŸşG£şMñşƒ>ÿ À»ŸşG¯Ğ(ÿ ‰…âÿ ç§ÿ €/óø—şJŸø1ÿ ‘ùıÿ ¦ø‡ÿ AŸÿ à]Ïÿ #Ñÿ ¦ø‡ÿ AŸÿ à]Ïÿ #×èÄÂñóÓÿ Àù‡üK‡%Oüÿ Èüşÿ ‡S|Cÿ  Ï‚ÿ ğ.çÿ ‘èÿ ‡S|Cÿ  Ï‚ÿ ğ.çÿ ‘ëôŠ?âax¿ùéÿ àüÃş%Ãƒ?’§şä~Ã©¾!ÿ ĞgÁøsÿ ÈôÃ©¾!ÿ ĞgÁøsÿ ÈõúEñ0¼_üôÿ ğşaÿ áÁŸÉSÿ ?ò??¿áÔßÿ è3à¿ü¹ÿ äz?áÔßÿ è3à¿ü¹ÿ äzı¢ø˜^/şzøÿ 0ÿ ‰pàÏä©ÿ ƒùŸßğêoˆôğ_şÜÿ ò=ğêoˆôğ_şÜÿ ò=~€ÑGüL/ÿ =?ü˜Ä¸pgòTÿ ÁüÏïøu7Ä?úø/ÿ îùøu7Ä?úø/ÿ îù¿@h£ş&‹ÿ Ÿş ¿Ì?â\83ù*àÇşGç÷ü:›âı|ÿ w?üGü:›âı|ÿ w?ü_ 4Qÿ Åÿ ÏOÿ  _æñ.ü•?ğcÿ #óûşMñşƒ>ÿ À»ŸşG£şMñşƒ>ÿ À»ŸşG¯Ğ(ÿ ‰…âÿ ç§ÿ €/óø—şJŸø1ÿ ‘ãß±?ìı¬şÍÿ 
-õ\¹Ó.îîõY/‘ìdy#ĞÂ€è‡vcnØÁ×Kÿ 
-¿Pÿ Ö÷Ûñ5ŞQ_šã8»0ÄãëæUZö•å¦—ò]İ8FŒxo/†Y–iN	Esjì¯m~làÿ áWêóÚÏşûoş&øUú‡üö³ÿ ¾Ûÿ ‰®òŠÏıiÇ÷_qõëN?ºûş~¡ÿ =¬ÿ ï¶ÿ âhÿ …_¨Ïk?ûí¿øšï(£ıiÇ÷_p­8şëî8?øUú‡üö³ÿ ¾Ûÿ ‰£ş~¡ÿ =¬ÿ ï¶ÿ âk¼¢õ§İ}Áş´ãû¯¸àÿ áWêóÚÏşûoş&»]*Õ¬t»h©xbTb: TõãıVãDğİÕ¬TñlÚÛCc. ğxèMxœAÄµ~§<N/XÒŒ¦ì•íÛ¶«[-5G™šguñ4¯ˆÕFïEälÑ^9ÿ W_ÿ Ÿÿ üÿ Gü-]şÿ òüM~/ÿ ¯#ÿ ŸUğòÃå?·°ı¥ø™ìtWÂÕ×ÿ çÿ ÿ  Gÿ ÄÑÿ W_ÿ Ÿÿ üÿ GüF¼ş}Uÿ Àaÿ Ëû{Ú_‡ùÇExçü-]şÿ òüMğµuÿ ùÿ ÿ Èÿ ñ4ÄkÈÿ çÕ_üü°?·°ı¥ø™ìtWÂÕ×ÿ çÿ ÿ  Gÿ ÄÑÿ W_ÿ Ÿÿ üÿ GüF¼ş}Uÿ Àaÿ Ëû{Ú_‡ùÇExçü-]şÿ òüMğµuÿ ùÿ ÿ Èÿ ñ4ÄkÈÿ çÕ_üü°?·°ı¥ø™ìtWÂÕ×ÿ çÿ ÿ  Gÿ ÄÑÿ W_ÿ Ÿÿ üÿ GüF¼ş}Uÿ Àaÿ Ëû{Ú_‡ùÇExçü-]şÿ òüMğµuÿ ùÿ ÿ Èÿ ñ4ÄkÈÿ çÕ_üü°?·°ı¥ø™İ|V·FÑ­¥#÷‰6Å9è
-’ôùW	C|AÕµ‘ök»Á$ıåò‘sG Ô
-è|#¢Ùê–4ñ‰%I1÷È `c€~µû¿xó‘å[‰ñTkJ…
-ŞÉÆ1ƒšsåiÙÔQQ¼íw-ï¡ùÎo’ÔÏ3åCÔe8_ŞÑ{·Oe+».ß‘ÏQ]·ü":wüûÿ äFÿ ?áÓ¿çßÿ "7ø×Çÿ Ä÷pıã?ğ]şh;âg_óö—ş?ş@âh®Ûş;ş}ÿ ò#ğˆéßóïÿ ‘ühÿ ‰îàúÆàº?üĞñ3¯ùûKÿ Ÿÿ  q4Wmÿ ÿ >ÿ ù¿ÆøDtïù÷ÿ Èş4Ä÷pıã?ğ]şhøƒ™×üı¥ÿ Oÿ 8š+¶ÿ „GNÿ ŸüˆßãGü":wüûÿ äFÿ ?â{¸ş€ñŸø.ÿ 4üAÌëş~Òÿ À§ÿ ÈMÛÂ#§Ï¿şDoñ£ş;ş}ÿ ò#ñ=Üÿ @xÏüGÿ šş æuÿ ?iàSÿ ä&Ší¿áÓ¿çßÿ "7øÑÿ ÿ >ÿ ù¿Æøîÿ  <gş£ÿ Íÿ s:ÿ Ÿ´¿ğ)ÿ òEvßğˆéßóïÿ ‘ühÿ „GNÿ ŸüˆßãGüOw ÿ Ğ3ÿ Ñÿ æ€ÿ ˆ9ÏÚ_øÿ ù‰¢»oøDtïù÷ÿ Èş5Èjp­¾¥q"JÊ£Ğkõß¾Ü9â.3‚É(×§*R—µ8¦›²·%I»ßºGÌñ?c²*P«‹œ$¦Ú\­½µÖñDQE~ğ|hQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE T¶—³XH^	¥…ÈÁhØ©#ÓŠŠŠ™Â3‹ŒÕÓ*”4]š:#âÕ»"ŞF—ô.£lzúØ¹®£Dñu¿…†]²Ÿùe'Êıúzğ3ÆkË¨¯ˆÍ¼?Ë1iÊŠöSï¾qÛî±öY_æXV£YûXö–ÿ øÿ }Ïd¢¼ÇHñ¶££*$sy‘'Hå‡L @kªÑ¾%Ùêl¹F³rp¤¶ä=:œ~#u¯Ì³nÍ0W8ûXwÿ 8ï÷]yŸ£å\q–ã-	ËÙË´¶ùKo¾Ş‡IE2Şæ;¸D‘H’Æİ0?ˆ§×ÅJ.-ÆJÍa)%(»¦QE!…Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q×¼=mâ+QÂ·Èr§¸>ÿ çµ^¢·ÃbjáêÆµ	8Ê;5¹#J½7F´T¢÷Lòÿ øJçÃR)“lÈHIW¡ö>‡ãõ85—^Å$k4lªèà†R2ô5Æx«áÁ‹uÆœ¹W-$·İõúÃ9Å~ÏÃ ÒÄÛ™{³é-¢ı•şËcò#àJ˜{â2ÿ zcö—§ó/ÅyîrS¤¡‘‘Õ‘ĞÊF>†›_¦¦šº?9i§fQE1Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@E}}™e5ÍÌÑ[ÛÛ£K,²¸D‰d³À I=+“øµñ×ÃŸ4ß;W»ßtûLVå^îebFà„Œ(Úß3¿)ÎøÏã_í	¯ünÔ›íó}ŸI†s-¦<«~6‚N‘±Ÿ™ºm¡Cb¾«‡øK™¾‚Ÿó5¿øW_ËÏ¡ñ\QÇ,>Ïø•zE=¼äúzjßkj½KãÇíÍ6µúWƒ¶–²£Å6§*¸o› ÀùQ÷˜oùøTó•WíùVO…Ë©{,lº¾¯Õÿ It?3¼ûš×öøÉİ­–Éz.Ÿ›êÂŠ(¯LñÂŠ( Š( Š( Š( Š( Š( Š( Š( ¿g+ñ¿g+ù/éGÿ 2Ïûÿ ¸ì/¢üÍîşæ
-(¢¿’Ïì ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®{â¯üˆWÿ öÏÿ F-t5Ï|Uÿ ‘
-ÿ şÙÿ èÅ¯ŸâÏùãëÕOı!œØß÷zŸá‘ã”QEŸ QE QE QE QE QE QE >İÄw±à+:ï¼p«ssçPãÓ ‘ÿ ³
-óêí|xY
-H¸Œ¨çîñ»úWîÜGûSÂş,ÉšMÂ•:é'gû¦êIİ»Z>Î.Û»µ­Ò1ÀVú¿`+Ş×“ş¹WßÌvtQEŸÑÁEPEPEPEPEPEP\³ÿ !‹¿úìÿ ú®ş¸gşCõÙÿ ô#_ß@ùæ¿õæúYøÇŒÿ îXoñ?È­EWú€=Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@4ıVçJ“u´òÂIílÇL‡ñ®—Gø§,lú‘ |CÓ©ƒ“˜Ç5ÉQ^6iÃù~`ŸÖ©&ûí/½kú¾[ã°}Z£K¶ëîz~§«hŞ#³×£Í´ÊÎZ3Ã¯N£ñê8÷«Õæğ¼úıòÈ¬ğ[ÀÀ´ËÁs…ÿ kùuôÒëğn-Épyf/Øajó÷OxöM­ı]w?oálã˜á}¾*Ÿ/f¶—v–êßsé°QEò§ÓQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Ş%ğM¯ˆ³'ú‹£Ş¨Î@ìFpxï×Øb¼ÿ XÑ.t+£Älœ­–Ou=úŠõš†ÿ NƒT·1\D“F{0Î8ÆG¡ç¨¯¹á®8Åe¶¡^õ)vëğ¾ŞONÖ>/ˆ¸3˜ŞµB¯~ÕwóZ÷¹ä4WCâ‡÷*´Öå®mTc€1ã¿Ç¡àW=_ºe¹¦EWÂMJ?ŠòktıOÅs·ªèb ã/ÏÍ=šô
-(¢»Î¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢ŠÇñ×Äá¦€Ú¹Ÿd®±pÌ]Û¢ª¨,Ç©À€O@M]*S©5Nšm½’Õ¿‘jÔéAÕ«%­[nÉ/6ÍŠğÚöÕ²ğ‡¤xIíu]FH>mJ9VKk6lcfYX.O]ªvçvG”~Ğµæ­ñk:~’.´-w£Æ“‘5úËûÒ¸Â”<Æ	\“’ß.<v¿WáÎQ¶#3W}!ÿ É5¿¦İï±ø—xšçÍ„Éİ–Î§_ûu=½^½­£/øŸÄ÷ş3×îµMRê[Ûû×ó&šCËƒÀ       T(¢¿P„#¨ÅY-‘øÕIÊrs›»z¶÷l(¢Š¢BŠ( Š( Š( Š( Š( Š( Š( Š( Š( ¿g+ñ¿g+ù/éGÿ 2Ïûÿ ¸ì/¢üÍîşæ
-(¢¿’Ïì ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®{â¯üˆWÿ öÏÿ F-t5Ï|Uÿ ‘
-ÿ şÙÿ èÅ¯ŸâÏùãëÕOı!œØß÷zŸá‘ã”QEŸ QE QE QE QE QE QE Óx6í¢¾±p%Ä|ú·ùW3ZúÃÃ
-ºœ4Re:cù×ô/ÑÒ—×ólÇ –±Æa+R³ø[|¶æën^e¢o]8­ì=-Ë¹ÆZo£éç±ê4QEŸÇõ QE QE QE QE QE QE W¬ÿ Èbïş»?ş„k¿®Yÿ Åßıvı×÷ÇĞşGù¯ıy‡ş–~1ã?û–üOò+QEş ÏAEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPE-œº…ÒC
-4’Èpª;ÔÎq„\æì–­¾…Bœ”b®ŞÈŠºŸ
-ü;’ÿ l÷Áàˆ7•!ä×û£?‰ç§µ¼#àô¯*êï÷—kóÈ)íõaëÓòºZü‡Š¼Anø\©ù9ÿ ò?ü—İÜıW†xiŠÌ×š‡ÿ %ÿ Èıı†ÇÃ¢*¢ T =:Š+òFÛwgê‰$¬‚Š(¤0¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®cÅ?!¿ç±U†àû¡…ñè;Ó|×OEzYVoŠË«*øYYõì×fº¯évg•a±ô]Tnºw^iôÓ<‚òÎ]>éá™9c8e=ª*õk@µ×íÄw1îÛŒ	Aş8ç¾"ğuß‡X³¯ny 8ànô=?>¦¿tá®6ÂæiQ«ûº½Òÿ ı¾»ŸŠñbrÖêÒ÷éwê¿Ä¿U§¦ÆMQ_l|pQE QE QE QE QE QE QE QE QE QE QE QUunËÃšl—º…İ­…œ8ó'¸•b‰2@f ’ÔŠù{ãÇíÍ6µúWƒ¶–²£Å6§*¸o› ÀùQ÷˜oùøTìäù/2©É†dö^¯ôZ}Ä¸¢—´ÅËW´WÄıêô=cöı©4ƒ6WV6ÒE¨øœ"ùV@1H7‚CÌÃ€  ìyÜ½o|Jø«®|Y×äÔ5«én	vxmÃoh ¬HI
-0ªs´IÉ®vŠı¿!á|&WÁsTë'¿Ë²ş›gó§q–;9ª>J] ¯ùŸ‹²AEWÒ"QE QE QE QE QE QE QE QE QE QE QE û9_Œuû9_ÉJ?ù–ÜoıÄa}ÿ ækÿ p?÷0QEü–aQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@sßäB¿ÿ ¶ú1k¡®{â¯üˆWÿ öÏÿ F-|ÿ Èÿ ^ªéæÆÿ »Ôÿ ü¢Š+ø|ø ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ­œJ2p1ÇçYÕoFp·„¬¤
-ıÀLÑ`8÷.«'¤¦á½¿‰	Azë$Òêì·<œòŸ>¢]¯÷;§¡ºÉ£Z•!‡”£ƒ@Á«U—àÙ–]%S“2·±É?ÈŠÔ¯æ²™eœešåò¿îñ5¢®¬ÚU%Ë+z6k£NëCú‡q+•a«/µNNüªëäô
-(¢¾öBŠ( Š( Š( Š( Š( ¸gşCõÙÿ ô#]ıpÏü†.ÿ ë³ÿ èF¿¾>€ÿ ò?ÍëÌ?ô³ñÿ Ü°ßâ‘ZŠ(¯õ şz
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(­Ï
-ø"í™Ï“hŞ]¿Ë'õÁÅ˜f8|ˆÅK–+ú²îü‘Ù€ËñÊÊ†<ÒÕßeæPÑt­~àÇmí¸ŞÄáPÔŸé×ƒ^‰áß
-Úørå.ùÙvÉ+u~ÿ €öƒ9«¶t]¸ŠŞ$†1ÙF3Æ2}OMM_‚ñ?bsFèÒ¼(öêÿ ÅßÉmêÕÏÜ8o„0ùbUª{õ{ô_áíë¿¢Ğ(¢Šø£ìŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ›$k4lªèà†R2ô4ê)¦ÓºI«3‹ñOÃqoq§!@&ß–>åOSôúû
-äd¡‘‘Õ‘ĞÊF>†½~æá--ä–C¶8”»g šò›‡»¸’Yé%bìqŒ’rk÷_s¼v>Jx§Ì©ÚÒ{»ßFúÚÛ½uÖçâœ{“`°UiÔÂ®W;Ş+en¶é{ì´ÓK¢Š+ôcóğ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®'ãGÇà¦-Åüñ\jEZé±ÊÅÉmÁN9+U²ä`m e°§¶¯˜ÿ à¢ÿ ‘wÄ1[ÏM:æãÌÿ ¶¦Òë¹ÈS÷kİá¼˜ÓÃb[Q•öëe{|ím5ì|ßfx¬¿*«‹Â$ço­“i^İm{ë¦š=ñ¯ö„×ş7jMöù¾Ï¤Ã9–ÓN‹U¿A' ÈØÏÌİ6Ğ¡±\%Wô>	GIQ¡­’ş¾÷»?•q¸ÜF.´±™¹N[·ımÙl¶AEWAÊQE QE QE QE QE QE QE QE QE QE QE QE û9_Œuû9_ÉJ?ù–ÜoıÄa}ÿ ækÿ p?÷0QEü–aQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@sßäB¿ÿ ¶ú1k¡®{â¯üˆWÿ öÏÿ F-|ÿ Èÿ ^ªéæÆÿ »Ôÿ ü¢Š+ø|ø ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ©ôçŞÆNy8üø¨)ĞÉåJ­Œí ãÖ½îÌÖ[`óíìjÓí{rMJö[ÚÛbiûJ3§İ5÷£Ò<p­a<X;’MçÓcÿ e5½\¯€noç‹kÇ¼úäìÆºªãúYd¿ÙŞ(f<«İ«ìê-oñS7§¾¥eÚÇêâı¿P¾ñæ‹ùIÛğ°QEüâ}ØQE QE QE QE QE W¬ÿ Èbïş»?ş„k¿®Yÿ Åßıvı×÷ÇĞşGù¯ıy‡ş–~1ã?û–üOò+QEş ÏAEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEMa§Oª\­ây¤=”gã'ĞsÔ×¡xWÁx{lÎ|ë²¸,~êzíşY?¦H¯šâ.(Âe4ïWŞ›Ú+wëÙyıÉŸEpÖ+5©j~ìò{/NïËïhÉğÃ¿õWz€ÿ imÊşE¿øŸ¦{Šì¨¢¿Ÿó¬óšWöø©^Û.‰v_ç»êÏİr|—–Ñö8hú¾­÷å²èQEyªQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE `|GÕ>ÁáÖ‰[]0ŒağBõcî8Áÿ z¼êºoŠ:‡ÚuÈàWÜ¶ÑŒ®1µ›“Ï~6ÿ œ×3_Ñ\—,.QNM{Õ=çóÛÿ %HüñïšÎ)éu|·ü[
-(¢¾Èù¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®ö”ğü,‚Úå„qy·ÁöË@¶ş|¾l_8XÇ]ÎG‘Î$<‡º¢º0˜™áëÂ½=âÓ_'s—„§ŠÃÔÃUøfœ_£V?1è®ŸãGƒá_üWñ¶ßd‚ÒöO³Eæy› c¾›$œÆÈy9çs\ÅOáëFµ(Ö†ÒI¯G©üq‰ÃÎ…iĞ©ñE´ıS³
-(¢µ0
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-ıœ¯Æ:ıœ¯ä¿¥üË?î7şâ?°¾‰ÿ ó5ÿ ¸û˜(¢ŠşK?°‚Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¹ïŠ¿ò!_ÿ Û?ıµĞ×=ñWşD+ÿ ûgÿ £¾‹?äGÿ ¯U?ô†scİê…şGQEü>| QE QE QE QE QE QE QEÙxåÿ ¶-È yÈCusüÀ®Ú¼ëÂ²İØÌš«{nÆ?.+Ñkô¥ô>·šdœ@ì/FRÓŞrNRr“[¶§îÛkgá=^\'ü•]»Y¥¢ù¦şaEWòú¨QE QE QE QE QE W¬ÿ Èbïş»?ş„k¿®Yÿ Åßıvı×÷ÇĞşGù¯ıy‡ş–~1ã?û–üOò+QEş ÏAEPEPEPEPEPEPEPEPEPEPEPEPEPEPZ~ğ­×ˆæRì[l’·DïøŸaê3ŠÓğ€$Õ|««¿İÚ7Ì$<£·ÑO¯_ÌîlìâÓíRQcŠ1…QÚ¿8â®<¥‚æÂà•]›Ş1ïë%ÛeÖû ğÏUÅÛ¼iî–Î_äŸ}ßKnA¢èº¹Ú=»±½‰Ë9©?Ó§&®QE~!ˆÄU¯QÕ­')=Ûwlıš…
-tiªTb£²Z ¢Š+P¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¦É"Ã;²¢ %˜œ =M:²<u©3Ã7+¾qä¨ œîëÿ äşÙ—á%ŠÅSÃCy´¾÷ú˜ü\p¸j˜‰íßÜ:ÕuÕu)î[p39lİ´vö~^Š+ú²•(Ó‚§d•—¢?˜jÔ•Iº“wmİú°¢Š+BŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( ”?à ŞşÎñfâH"ÄZ”Îå’ßj‰c9FyVdm vÁÁ qóµ}Õû`x7ş€šÇ—mö›­+f£ï6y^Yıãõ â/9ì3ŠøV¿yàL{Äåq„´ÛËuø;|æòÅ„Î¥R+İª”¾{?ÕşaEWÙŸŸ…Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@~ÎWã~ÎWò_ÒşeŸ÷ÿ qØ_Dÿ ùšÿ ÜıÌQE%ŸØAEPEPEPEPEPEPEPEPEPEPEPEPEP\÷Å_ù¯ÿ íŸşŒZèkø«ÿ "ÿ ı³ÿ Ñ‹_?ÅŸò#Æÿ ×ªŸúC9±¿îõ?Âÿ #Ç(¢Šş> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ÔÑû3Œ†éø
-õ(f[ˆRD9GPÊ}A¯(ĞÜ‘{ÿ ?zo‡®çDµeN}Wƒü«õè,ÃÂ~ÍÖô'^ƒ³M'&ÚRê¤ãEIm£z;£İğÖ·³Îq¸oæŒeç¦šy{Úü‹”QEµ…Q@Q@Q@Q@Q@pÏü†.ÿ ë³ÿ èF»úà5Ÿù]ÿ ×gÿ Ğ|}ÿ äšÿ ×˜égã3ÿ ¹a¿Äÿ "µQ_êüôQE QE QE QE QE QE QE QE QE QE QE QE QVô}ç]º[ÆÏÈØùc÷cÛ¡¬«×§F›«VJ1[·¢F´hÔ­5J”[“Ù-ÙZ8ÚiYİÈ
- d“è+¹ğ¯Ã¸ì6Ï|yJñ	PR2}¼qøzğkOÂşƒÃ0¶Öó®$á¥+ƒ@;çùcZ¿â®>©Š¾.n4úËg/N±_‹ëmQûp=<5±9‚R©Ò;¨úôoğ^z0¢Š+ó3ôP¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ®â¦©æß[Ú+|°¯˜à>FãĞê Ïü
-»ŠòŸêcW×®®©G|! Œ¨à}€¯Ğü6Ëı¾fñZSşoEøs}ÇÁx‡ö9rÃÅëQÛäµ¾òQ_¼ŸˆQ@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@_XÃ©ÙMmsW÷ÑK¨%F*ÀğA‚Züäø…àé¾xãVÑ.¬úeÓÀHŒFdä“iÎ®rxaÉë_¤ñ¿íéàWğ÷ÅÈu”YM¿ˆ-UË»©t@Fê r A	ç©sƒØ~‰áÎ?Ùãg…“ÒjëÖ?ğûÊ¼XË=¶]O­9Yÿ †ZéJ?yáôQE~Ğ>Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@~ÎWã~ÎWò_ÒşeŸ÷ÿ qØ_Dÿ ùšÿ ÜıÌQE%ŸØAEPEPEPEPEPEPEPEPEPEPEPEPEP\÷Å_ù¯ÿ íŸşŒZèkø«ÿ "ÿ ı³ÿ Ñ‹_?ÅŸò#Æÿ ×ªŸúC9±¿îõ?Âÿ #Ç(¢Šş> (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š µ£É²ôgx#éßúW¤x*ãÎĞÕq%Ù3¿ÅıkÌìÇyå±ùñ^ƒà†kk˜°6£¹ ı”Wì™Íí?1ĞŸ¼ğ8ÊuNXÔQ¦­o‰¹TöNıºøJ·°âšiiíiÊ>¶÷¾_
-:(¢¿‡ÏßBŠ( Š( Š( Š( Š( ¸gşCõÙÿ ô#]ıpÏü†.ÿ ë³ÿ èF¿¾>€ÿ ò?ÍëÌ?ô³ñÿ Ü°ßâ‘ZŠ(¯õ şz
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(®·Â_švóõ(Ù#ÇÉpÍ‘Õ±ÈúuÏ\wò³Œë	–PuñR·eÕù%×ò]lzyNOŠÌk*8hß»è¼Ûéù¾†o…¼qâWNé8Ëc²ëÓ¯¦+Ğ4"Å-íÓj/$®{’{š8ÖÕU 
- `è)ÕøñV/6©iû´ÖÑ[z¾ïğì‘û¯ğÆ+…áïT{Éïè»/Ç»
-(¢¾\ú@¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š(3Æ§öG‡ne¶F_.<>Ó¹¸È÷ŸÂ¼º»OŠÚ˜ÚÙ‚¤’fqƒ‘Ô/=9ù¿*âë÷ïrÿ a•ûy-j6şKEú¿™øgˆÿ o™ûô¦’ù½_è¾AEWßQE QE QE QE Q[Şğ%Î¸Ë,¡­ír	fi3òËœ÷Æ+‡0Ì°Ø.¾*j1_’[·èvà2üF6ª¡†‹”Ÿõ«è½L+ºÖ~ÛÍj¿avŠd ~ñ‰Y=Iã ı8ã¥qwútú]ÁŠâ'†AÙ†3Î2=GEyù/`3H¿ªËU¼^ÖİWš;óÆå­}f:>«U÷÷õ!¢Š+Ş<0¢Š( ¢Š( ¢Š( ¢Š( ¯ı·¼ÿ 	Ái¯á‹}ç‡ç[Å)oæJÑ’Urª	ò1Èã#Øj‡Š|=‹|3¨éW-*[êv²ÚJÑRD(J’Î	ÆAúW~UxLe<Jû-?—_½hy™Ö_v¶_n-|ú?“³?5¨«ZŞsáÍjóO½É¼°íçpm’#aH8 ò*­NFJIJ.éŸÇ’‹‹q’³AES$(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +ör¿ëör¿’ş”ó,ÿ ¸ßûˆşÂú'ÿ Ì×şàî`¢Š+ù,şÂ
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-ç¾*ÿ È…ÿ lÿ ôb×C\÷Å_ù¯ÿ íŸşŒZùş,ÿ ‘7ş½Tÿ ÒÍÿ w©şù9EWğùğEPEPEPEPEPEPEP£˜Ü0à©È®ïÀNÃU•rv˜‰#<ÿ ù×]o‚f_ík6g‚2ORTÏ5ûß†0şĞà^,Éw–ÛE|ZÑS“´o¼Ÿ"ºÚÉëdJU}†u€ÄÓÅÓâioå©İÑEüI…Q@Q@Q@Q@Q@pÏü†.ÿ ë³ÿ èF»úà5Ÿù]ÿ ×gÿ Ğ|}ÿ äšÿ ×˜égã3ÿ ¹a¿Äÿ "µQ_êüôQE QE QE QE QE QE QE QE QE QE -œº…ÒC
-4’Èpª;Õ¿øv_¢Qy’B8ŒSè?úæ½Ã¾ƒÃv"(†çndd?Ğzş¹¯â~1Ãe1t¡ïÖ{GµúÉş›¿%©õ¼7ÂxŒÒJ¬½Ê]eßÊ+õÙy½ï	x-|ë‘ÅÑ9SŒ¬X<mÏËß¡¢Šü2Ìñ8úïŠ—4ŸÜ¼’èÜrì·¢¨a£h¯½ù·Õ…Q\pQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QET×u1£è÷$¨1!+H-ÑAÇ©ÅkBŒëUjò“Iz½•zĞ¥NUj;(¦ß¢ÕuãMAµ]³n'1(-œãLN=ë.Š+ú·…<6‚KîV?˜q˜™b+Ï=äÛûİÂŠ(®£˜(¢Š (¢Š (¢Š *k:}RàEoÍ!ì£8ç>ƒ¦¶<1àKq–YC[ÚäÌ0Ògå—=9ïŒWw£è–Ú¨ŠŞ5N fÇÍ'»ıM|'ñÖ.½?ï*öû+Õş‹çcí¸‚±XûV¯ûº}ú¿Eú¿•Ì_|9ƒMÄ·».gälÆb_ÀO××§®–Š+ñÓ6Åæ½¶.nO§eä—Cöl·+Âà){,9W^ïÍ¾¡U5Û]µ1\F¯Á
-Øù£÷SÛ «tW
-õ(ÔUiIÆKf´hë­Fh:Ub¥º{3Î|OàKšXƒ\ZäÊ2ÑŒgæŸ=8íœV{%s^%øs¥™l¶[OÀÙŒDß€§§Ns_®ğßˆ±•°ù®e5ÿ ·.«îê~WÄ< ãzùf«¬şÚúú?¼à(©¯ôéô»ƒÄOƒ³gœdz:Š†¿W§R"§tökT~_Rœ¡'	«5ÑîQEYEPEPEPÇ‚¾xÅtÓßx3ÂW—şs´óO¥[Ë4ìÄ¶ö%2I$òsœÙÿ †pøyÿ B‚ÿ ğImÿ ÄU_…Ú˜¶Ö%¶b ]&Wƒ’Ë“È·å]í~Æ˜ÜË›U„+ÔQ•¤½ùl÷¶»^ëä~İÂvWŒÊéÎxznQ÷_¹Ö×Ó{Yœgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtWÊÿ oæŸôSÿ —ùŸMş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â(ÿ †pøyÿ B‚ÿ ğImÿ ÄWgEÛù§ıÔÿ Àåşaş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â(ÿ †pøyÿ B‚ÿ ğImÿ ÄWgEÛù§ıÔÿ Àåşaş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â(ÿ †pøyÿ B‚ÿ ğImÿ ÄWgEÛù§ıÔÿ Àåşaş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â(ÿ †pøyÿ B‚ÿ ğImÿ ÄWgEÛù§ıÔÿ Àåşaş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â(ÿ †pøyÿ B‚ÿ ğImÿ ÄWgEÛù§ıÔÿ Àåşaş®å_ôOÿ  ùgü3‡ÃÏú¼ÿ ‚Koş"øg‡Ÿô!x/ÿ –ßüEvtQı¿šĞMOü_æêîUÿ @´ÿ ğÿ ‘ÆÃ8|<ÿ ¡Áø$¶ÿ â+Sâ7Åá.‰¥âïìû)çÉ'“$»¤*Ì¬z#ãVıxügşH•ÿ aÈ¿ôâ»òxÕÎs*<}YÊ2vÖMµ}íÍt¶]ÄPÃå˜ZµğT¡ké“¶×µ¯k³ªÿ †×øcÿ C7şS®ÿ øÕğÚÿ èfÿ Êußÿ ¯€è¯Ùÿ âäÿ óö¯şş@øÏõÓüûŸÿ $}ùÿ ¯ğÇş†oü§]ÿ ñª?áµşÿ ĞÍÿ ”ë¿ş5_ÑGüBŸş~Õÿ À¡ÿ ÈúéşH}Ïÿ ’>üÿ †×øcÿ C7şS®ÿ øÕğÚÿ èfÿ Êußÿ ¯€è£ş!Oÿ ?jÿ àPÿ äıtÇ$>çÿ É~Ãkü1ÿ ¡›ÿ )×üjøm†?ô3å:ïÿ WÀtQÿ ‡'ÿ Ÿµğ(òşºc¿’sÿ ä¿?áµşÿ ĞÍÿ ”ë¿ş5Gü6¿Ãú¿òwÿ Æ«à:(ÿ ˆC“ÿ ÏÚ¿ø?ù ÿ ]1ßÉ¹ÿ òGßŸğÚÿ èfÿ Êußÿ £ş_áıßùN»ÿ ãUğÄ!Éÿ çí_ü
-ü€®˜ïä‡Üÿ ù#ïÏøm†?ô3å:ïÿ Qÿ ¯ğÇş†oü§]ÿ ñªøŠ?âäÿ óö¯şş@?×LwòCîü‘÷çü6¿Ãú¿òwÿ Æ¨ÿ †×øcÿ C7şS®ÿ øÕ|EñrùûWÿ ‡ÿ  ë¦;ù!÷?şHûóş_áıßùN»ÿ ãTÃkü1ÿ ¡›ÿ )×üj¾¢ø„9?üı«ÿ Cÿ õÓüûŸÿ $}ùÿ ¯ğÇş†oü§]ÿ ñª?áµşÿ ĞÍÿ ”ë¿ş5_ÑGüBŸş~Õÿ À¡ÿ ÈúéşH}Ïÿ ’?L~üQĞ¾-h’ê^¾şĞ²‚slòy2E¶@ªÅpê§£©Î1Í7ş®ÿ ?ÿ ùOş&¼‹ş	Íÿ $GUÿ °ä¿úOoP×ñï|I‰àüÊ8<²1œ[šıâmû¼–ø\WÚwÓ±õ/9¬°´kÙ^i·½ºm©ìğµtùÿ ÿ Èñ4ÂÕĞ?çÿ ÿ  Iÿ Ä×Q_Šÿ ÄkÏ?çÕ/üü°çşŞÄvãşg±ÿ ÂÕĞ?çÿ ÿ  Iÿ ÄÑÿ W@ÿ Ÿÿ ü'ÿ ^9EñóÏùõKÿ Ÿÿ ,íìGhş?æ{ü-]şÿ òŸüMğµtùÿ ÿ Èñ5ã”Qÿ ¯<ÿ ŸT¿ğÿ òÀşŞÄvãşg±ÿ ÂÕĞ?çÿ ÿ  Iÿ ÄÖ7ü¤k~»µµ»óg—fÕòs‡Ry#¯5¢¸ó³Œf®­*J5#(»Fw´“N×›×]4dUÎ«ÔƒƒJÍ[¯_˜QEùYã…Q@Q@Q@Q@Q@Q@Q@oxZá!’ÕØáb”8é†Ïò¬ÓĞÜyÈlşşªşƒú4Ô¥S‹jeu£‹ÃÖ¢ûÙ¥7ËÓšĞ¾©«_CÄÏ¥*xx×ğ”eå£ëå©ê´TvWk³Š\móP>3œdf¤¯àœf®<.!Zpn2Z;4ìÕÕÓ³]4?§éUH*wM]z0¢Š+˜Ğ(¢Š (¢Š (¢Š (¢Š +€Öä1wÿ ]Ÿÿ B5ß×¬ÿ Èbïş»?ş„kûãèÿ #ü×ş¼Ãÿ K?ñŸıËş'ù¨¢Šÿ Pç ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Štq´Ò*"³»@É'ĞRm%v4›vCk¡ğ—%×Î¹ÛÚ•8ÃK‘ÆÜö÷ü½µ¼%ğé`_?R^Lüç*¸=[§LuÏn¶¿(â¯#l&Vîösè¿Ãß×n×ÜıC†xSåÅfJËu¿ö÷oO¾ÛYÙÅ§Ú¤0¢Çc
-£µKEøìç)ÉÎníêÛê~³FQŠ²[ ¢Š*J
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-å~*ê›ml»€Ë1Œ…Çwåü+ª¯6ø©KÄÓ*RÜA sŸö‰…}·‡ùÖsxTkİ¦œŸ®Ëñiüã¬Õò©A?z£Q_›ü¾f%Q_ĞÇà¡EPEPEĞøcáıÆ´«5ÁkkV”àg°íÇsê85Á™f˜\_5ş/É-Ûô;²ü·ª¨a`å/ËÍ½’õ1´Í.ãXºÛDÒÈA8¹']¿†¾Á¦â[İ—3ò6c1/àG'ëëÓŒÖî™¥Ûèö¢h–(Á''$÷$òjÅ~'Ä\‹Ç^ôéÿ äÏÕôô_{?cÈ8‚µl_ï*ä«Ñuõr
-(¢¿>>ì(¢Š (¢Š (¢Š ¯©évúÅ©†æ%–2AÁÈÁÁŠá<OğşãEVšÜµÍª‚ÌpF3Üwã¸ô<
-ô:+èò(Æå3ıË¼ñ{?NÏÍy^ëCçóÎÁæıò´ÖÒ[¯^ëÉùÚÛ7Ez‰şÛëLÓ[•¶ºbY	Y;Ü÷§ƒ\&§¥Üh÷F˜š)  ÷pk÷lƒŠ0Y´?rí5¼^ëÓºó^W³ĞüO<á¬fW?ß+Áí%³õìüŸ¯¹^Š(¯£>|(¢Š (¢Š ±¥j¥jP\®âapØ·pî3î8ükÖ£‘f]]¬A¢¼v½7Àº˜Ôü3nr»àK ÆŞŸøîã_”ø¡—óQ£ŠÖ-Åú=WÜÓûÏÓü6ÇòÖ«ƒ“Ñ®eê´ƒ_q¯EWã'ë¡EPEPEPEPEPEPEPEPEPEPEP^ÿ ÿ ’#¥Ør/ı'¸¯~¯ÿ ‚Œÿ ÉÒ¿ì9ş“ÜWÕpGüp¿âıägÿ ò/«è|[EWõ±øĞQE QE QE QE QE QE QE QE QEô÷ìYûCø;á/ÂÛı7Ä:Çö}ìú¬—)Ù'—tfT6QuFÎx¯Nÿ †ªø9ÿ A-;ÿ ×üf¾¢¿3Ï<(É3l\ñ˜Ç');ı†•û^­»ŸI†â|M
-1¡E¨«+§Ìû³ş«àçı´ïü\ñš?áª¾ĞKNÿ Á5Çÿ ¯„è¯ş _ÿ ,¾êü¬ÛınÅÏ¸}Ïÿ ’>ìÿ †ªø9ÿ A-;ÿ ×üføj¯ƒŸôÓ¿ğMqÿ Æká:(ÿ ˆÃ?Ë/ºŸÿ +õ»ÿ >á÷?şHû³ş«àçı´ïü\ñš?áª¾ĞKNÿ Á5Çÿ ¯„è£ş _ÿ ,¾êü¬?ÖìWüû‡Üÿ ù#îÏøj¯ƒŸôÓ¿ğMqÿ Æhÿ †ªø9ÿ A-;ÿ ×üf¾¢ø|3ü²û©ÿ ò°ÿ [±_óîsÿ ä»?áª¾ĞKNÿ Á5Çÿ £ş«àçı´ïü\ñšøNŠ?âğÏòËî§ÿ ÊÃınÅÏ¸}Ïÿ ’>ìÿ †ªø9ÿ A-;ÿ ×üføj¯ƒŸôÓ¿ğMqÿ Æká:(ÿ ˆÃ?Ë/ºŸÿ +õ»ÿ >á÷?şHû³ş«àçı´ïü\ñš?áª¾ĞKNÿ Á5Çÿ ¯„è£ş _ÿ ,¾êü¬?ÖìWüû‡Üÿ ù#îÏøj¯ƒŸôÓ¿ğMqÿ Æhÿ †ªø9ÿ A-;ÿ ×üf¾¢ø|3ü²û©ÿ ò°ÿ [±_óîsÿ ä»?áª¾ĞKNÿ Á5Çÿ £ş«àçı´ïü\ñšøNŠ?âğÏòËî§ÿ ÊÃınÅÏ¸}Ïÿ ’>ìÿ †ªø9ÿ A-;ÿ ×üføj¯ƒŸôÓ¿ğMqÿ Æká:(ÿ ˆÃ?Ë/ºŸÿ +õ»ÿ >á÷?şHû³ş«àçı´ïü\ñš?áª¾ĞKNÿ Á5Çÿ ¯„è£ş _ÿ ,¾êü¬?ÖìWüû‡Üÿ ù#îÏøj¯ƒŸôÓ¿ğMqÿ Æhÿ †ªø9ÿ A-;ÿ ×üf¾¢ø|3ü²û©ÿ ò°ÿ [±_óîsÿ ä»?áª¾ĞKNÿ Á5Çÿ ¨Ûã'>$İ¥¯…uyï`F–XbÓå·İTn,È à1×æö5ğ½zì¹©Ïañ—OŠ'ÙìSC0À;ĞFÒÏO™ñééšôr¯	r<§Ç¤ªBí|SOh'ªmhÑæçC_ƒ©‡©N	5Ñ4ôwïä}ae«İÚ#À÷0¸Ÿ™ö©¿²µÏïÜÿ à@ÿ â«SÀÓ4º)V9ÊU}†şdÖÍœ~(}$óŞâÜÇ"§”åÓ
-ÓŒe*rq½âäı¬SŸ+\Í$¹¯mĞ¸{€°xü²†2XšéÎ)´¦’NÚÛİz_mv9/ì­sû÷?ø?øª?²µÏïÜÿ à@ÿ â«­¢¾ş&÷?ÿ ¡6[ÿ „Óÿ åÇ±ÿ Çÿ Auÿ ğbÿ äKû+\şıÏşş*ì­sû÷?ø?øªëh£ş&÷?ÿ ¡6[ÿ „Óÿ åÁÿ Çÿ Auÿ ğbÿ äKû+\şıÏşş*ì­sû÷?ø?øªëh£ş&÷?ÿ ¡6[ÿ „Óÿ åÁÿ Çÿ Auÿ ğbÿ äKû+\şıÏşş*ì­sû÷?ø?øªëh£ş&÷?ÿ ¡6[ÿ „Óÿ åÁÿ Çÿ Auÿ ğbÿ äKû+\şıÏşş*ì­sû÷?ø?øªëh£ş&÷?ÿ ¡6[ÿ „Óÿ åÁÿ Çÿ Auÿ ğbÿ äKû+\şıÏşş*±îRHîdYsæ«ù99Ï<×¢×¬ÿ Èbïş»?ş„kú¯è«ãVcÆù®;Àápê•8É<=)Snòµ¤İIİvVZŸœxÂt2Œ5”kTŸ4š÷ä¤–,‘ZŠ(¯íÃò@¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢ŠÖğ¿„gñ4Íµ¼›xøiJägĞçù~YåÆã¨a(Ë‰—,#»Ö¾‹VtàğuñU•<y¤ö_×æô)iDúİò[Û¦çnI=w$öèğU¿‡£I\,·˜;¤çÊ?¯^¾¸­D¶Ğ­DVñªp6>i=Ø÷êjİ~Å<o_1o…¼(ş2õòşïß~Ÿ¶p×PËÒ¯‰´êşôóóû¬QE|öáEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP:ßö~Ÿ<ûwù´›sØã5ärHÓHÎìÎîIf'$ŸS]÷ÄíLZè+n
-ïºp0Aû«É#ñÛù×Ÿ×î>eşËS%­Geéø-ıßwã#cı¦6X½ ®ıeÿ /¿ï(¢Šı,üè(¢Š *Æ™¥ÜkBhšY' w$ğ+gÃî5¥Y®[Z°§ ´ƒ=‡n;ŸQÁ®ïLÒíô{Q´K`““’{’y5ğ<IÇ˜\èa-Rªÿ ÀcêÖïÉyİ¦}ÏpF'jø«Ó§ÿ “KÑt^oÊÉ£ÃíôVY®
-Üİ)§,g‡~{ŸAÀ®†Š+ñË4Åcë:ø¹¹Kğ^Il—¡û._–á°4•,cùù·»~¡EWÜQE QE QE QE QE _SÒíõ‹SÌK,dƒƒ‘‚;‚9bŠÒ•YÒš©Mµ%ªkF½iB¤:‰4÷OTıQç'øq¢«MnZæÕAf8£î;ñÜzsÕì•ÏxŸáı¾´Í5¹[k¦%˜à•ã¸íÏqêx5ú×x¶6ùM/ı)/Íy]nÏË8ƒÃıëåøÿ Û[üŸÈóÊ*Æ§¥Üh÷F˜š)  ÷pj½~µJ¬*ÁT¦Ó‹Õ5ª~Œü²­)Ó›§Q4Öéè×ª
-(¢´ +­øS¨2Ş]ZÅ£æáH =ò9ÿ f¹*½á­Liõ­Ã‡$…<Ç±5áñ&]õì²¶+¶®½V«ñVÿ 3ÙáìÔó8†ì“³ôz?Á­EWòùı&QE QE QE QE QE QE QE QE QE QE QE à?ğQŸù":Wı‡"ÿ Ò{Š÷êğø(Ïü‘+şÃ‘é=Å}WÈ÷ş/ÑFÿ "ú¾‡Å´QE[Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@t?	n¥³ø£á×†I"s¨À…‘Š’­"«;$Ü+¢”•Õ‰”y“Gè‡Ãù¿ãê2ÿ İe\ır@ü¿Jé+Œøy¨Au¨$±K±]AºFÜ²†Áæ»:ÿ >˜ù7Ô|NÅWI¥ˆ§J¢ÒËàTÛ]Ótİßós-Ñû×…¸¯mÃôàşÄ¥Ç›^ßİ`¢Š+ùlı(¢Š (¢Š (¢Š (¢Š +€Öä1wÿ ]Ÿÿ B5ß×¬ÿ Èbïş»?ş„kûãèÿ #ü×ş¼Ãÿ K?ñŸıËş'ù¨¢Šÿ Pç ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢¥³³—PºHaF’YGzî¼#àô¯*êï÷—kóÈ)íõaëÓò¾>âLSK»¼Ñ[¿ò^®‡»‘ğö/4«ËAZ+y=—ù¿#'Â¿ä¿Û=ğx"Ä%Hy õşèÏâyéÁ®æ8ÖÕU 
- `è)ÔWàïâóZŞÓô[El¿Í÷o_•‘û®Iárº^Ïµ{Éîÿ àvKO¡EW„{AEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEË›„´·’YØâRìqœ 2iÆ.MF*íŠRQNRvHà>&ßı«ÄB_m´aH'Çæ$~*çj[Û¶¿¼šw
-g20'<TUıS“`Kü±Iúõün2æøçŒÆÕÅ3mztüŠ+¦ğ×Ã™õ,K{¾ÚFÌbVüà}}:sš3LÛ	—ÑöØ¹¨®ß’]E–åx¬}_c…‡3ëÙy·ĞÂÓ4k­fb–°<Ì:‘À^½Iàt=kºğÇÃû}–k‚·7JC)ÁÇaßçĞp+nÃNƒK·[ÄÆ;(ÆxÆO©ã©©«ñ."ãÌ^`7îé?ü	ú¾‹Éz6ÏÙ2ÂàZ­ˆıåEÿ €¯EßÍú¤‚Š(¯‚>à(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š ¯©évúÅ©†æ%–2AÁÈÁÁŠâ|Kğæ}72Ùo¹ƒ³• 9O^œf»ê+èr.'ÇeSıÄ¯±{?ò~kñ<ë‡0Yœ?K¤–ëü×“<nŠôoøÛ\V– ¶÷X$2Œ,‡9ù‡çÏ^{ãÂk%Î…tb¸“’±òÉî§¿Q_ºğÿ à³XÚ“å©Ö/—uéóHüS=áŒfY+Ô\Ğé%·Ï³õù6T¢Š+éœ=OÂZƒj~´™÷o)µ‰mÅŠ’¹'ßükF¸ÿ …:˜1İY’ ‚&Aƒ“Ğ7=8ù:ì+ù‹Š2ÿ ©f•¨%e{¯Ij¾ëÛäHpÖ?ë™m×»µŸªÑıö¿Ì(¢Šğp(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +Àà£?òDt¯ûEÿ ¤÷ïÕà?ğQŸù":Wı‡"ÿ Ò{Šú®ÿ ‘îü_£<Œÿ şEõ}‹h¢Šş¶?
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€>Öıµ«{ßxVx\ËÙElHR0êSqÑÁöã5ëÕó—ì‰â?µ|.´_'oöEìıüù¿0›=8ÿ Yı3ßôm“¿OÜ•ÑâL³4åÒ­Ó½Ö¾Ê§5­º·¶½úßM™úß„ölVÿ Ô¿ğ%oÇ”(¢Šş?a
-(¢€
-(¢€
-(¢€
-(¢€
-à5Ÿù]ÿ ×gÿ ĞwõÀk?ò»ÿ ®Ïÿ ¡şøúÿ Èÿ 5ÿ ¯0ÿ ÒÏÆ<gÿ rÃ‰şEj(¢¿Ôùè(¢Š (¢Š (¢Š (¢Š (¢Š *î‹ ]k÷;h÷mÆö'
-€¤ÿ N¼¿á_Oâ³9òm`±ûÏë·ùdş¸"½
-ÃNƒK·[ÄÆ;(ÆxÆO©ã©¯€â9£—_„´êõí^ïÉm×±÷\3Áu±öÄb¯
-];ËÓ²óëÓ¹KÃ¾µğä#Ê]ó²í’Vêıÿ ì=sZtQ_…âñ•ñU]|Dœ¤÷oúû–Ë¡ûV	GIQ¡­’ş¾÷»
-(¢¹€¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¬?ˆ—ÿ bğ¼ª«\2Ä¥N=Î}ˆ~5¹\/Åk¶}VÖdqï–$ıWÔpfbóŠ0{Eó?ûwUøØù®/Ç<.SVky.Uÿ oiù\åjŞ¢\ë·B+xÙù›,~ì{t5·á¯‡3êX–÷}´˜Ä­øÀúútç5ÜXiĞivâ+x’ÇeÏÉõ<u5úqöz+T©ßìÅù÷~KæÏÍx{±ËWÆ^û}¦¼»/7÷şğ%¶†«,¡n.°	fXÎsòË¼vÎ+zŠ+ñLÃ2Äã«:ø©¹IşIl—¡û/Ãà©*h¨ÅZ¾¯Ô(¢Šá;BŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ¡¿Ó Õ-ÌW$ÑÌ31‘èyê*j*éÔ9)ÁÙ­šÑ‘Rœg	«§Ñìp>%øs>›™l·ÜÁÀÙŒÊ¿€§¯N3\Í{%`øŸÀ–Úâ´±·ºÁ!”ad9ÏÌ?>zóß¯ÕøoÄYFØ|×U²šÿ Û—_U÷u?/â R½|³GÖÿ m}=Şq¾ÔNñ5£.â%q ØÈn9õÁ ãÚ½B¼£ZÒ.ôkÒ8	•J0Î~SéÎy¯OÒnÚÿ J¶Â‡š%‘€è	 ñ\ş%P§Uáó-54ãtï{jŸâı<Î+Ô¤«åõ“N-JÏK_F¿êX¢Š+òÓô°¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¯ÿ ‚Œÿ ÉÒ¿ì9ş“ÜW¿W€ÿ ÁFäˆé_ö‹ÿ Iî+ê¸#şG¸_ñ~Œò3ÿ ùÕô>-¢Š+úØüh(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š úö/ÖeŸB×tò±ˆmgŠá¸´ŠÊÀóŒb%ÇÏáõf™3\i¶ò9Ë¼JÌ}I¾2ıu9âñÖ©f¯‹iì<éæt‘œõàHÿ Ÿ°¯°ü&í'‡íËÇ99à1¿ÏÚ”F|9—fvW§ˆpÛ_ŞR”ŸEû¥uÕòö>ÿ ÂšîÆ'ÒPRò÷Z_½§ÌÑ¢Š+ü«?}
-(¢€
-(¢€
-(¢€
-(¢€
-à5Ÿù]ÿ ×gÿ ĞwõÀk?ò»ÿ ®Ïÿ ¡şøúÿ Èÿ 5ÿ ¯0ÿ ÒÏÆ<gÿ rÃ‰şEj(¢¿Ôùè(¢Š (¢Š (¢Š (¢¦°Ó§Õ.Vñ<ÒÊ3q“è9êj*T…8¹ÍÙ-ÛÑNœ§%+·ÑnC]—„~ÿ ª»ÔûKnWò-ÿ Äı3ÜV·…|‡¶ÌçÎ»+‚Çî§®ßå“údŠÜ¯Æ¸«Ä	V¾+vÎ}_”{/=û[¯ëœ3À±£lVd¯.è¼ßwå·{ô(¢Šü¬ı4(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š *)ì¡º’7–¤xQ™A(}G§AùT´UBrƒæ‹³&pŒ—,•ĞQE%Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@]ÙCIáŠd!dPÀ^jZ(ªs“Š‹z"T"›’Z°¢Š*J
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-ğø(Ïü‘+şÃ‘é=Å{õxügşH•ÿ aÈ¿ôâ¾«‚?ä{…ÿ èÏ#?ÿ ‘}_CâÚ(¢¿­Æ‚Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ïökÕ²ş2é;®~ÍÏ›™“bËº6Ú‡×.»mïŠûwÀN§J•r7	I#<€@ÿ ùWçï€µ84_h·—/å[Z_Á4¯‚ÛdRÇ“€JûßÀ
-·71`îu=0	û0¯å?¦VK<†Xê”îåEÒ©eÕF¤T¯ä£'/‘ô|ˆT8“å´Ô£ø6¿/™ÓÑEş'ŸÓ!EPEPEPEP\³ÿ !‹¿úìÿ ú®ş¸gşCõÙÿ ô#_ß@ùæ¿õæúYøÇŒÿ îXoñ?È­EWú€=Q@Q@WMá IªùWW»´o˜&HyGo¢Ÿ^¿˜5ææ™¶. ñ©Ytîßdº³ĞË2¼N>²¡†ßà—vú#3Ã¾ºñÃÊ]+m’Vèÿ ì=Fq^‹¢èº¹Ú=»±½‰Ë9©?Ó§&§³³‹OµHaE(ÆGj–¿ân.ÄæÓt×¹Imşrîÿ Ó»ıË‡8S•ÁMûÕ^òíåËñ}{"Š(¯‘>¨(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š +Àà£?òDt¯ûEÿ ¤÷ïÕà?ğQŸù":Wı‡"ÿ Ò{Šú®ÿ ‘îü_£<Œÿ şEõ}‹h¢Šş¶?
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-(¢€
-ûßá_ˆb×…ô	 ‡TµY£€È¬¡Æ@ÈÎ8ëø×ÁögìÓâ&Õşø^åb…m6–İ‘0–í×nqÛ8çùW¹*Íx5Àòó9áë(İÙsªrpÕv’O¶šİho–â>¯šá1²HßÑµÂç´QEÿ ?õ¨QE QE QE QE W¬ÿ Èbïş»?ş„k¿®Yÿ Åßıvı×÷ÇĞşGù¯ıy‡ş–~1ã?û–üOò+QEş ÏAEPN6šEDVwr¨$ú
-³£è—:íĞŠŞ6~@fÇË»İz…ü#†am­ç\IÃJW€vÏòÇÊq'á2˜r¿z«Ú+óo¢ü_N­}?p¶+4Ÿ2÷i­äÿ $º¿Áuè_„¾-ƒyú‚Å4„|‘}åLwv'· ÷ãUWàY¶qŠÌ«û|T®ú.‰vK§ëÔıÏ+ÊpÙ}a…—WÕù·×ú°QEåQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE W€ÿ ÁFäˆé_ö‹ÿ Iî+ß«Àà£?òDt¯ûEÿ ¤÷õ\ÿ #Ü/ø¿Fyÿ ü‹êúÑEıl~4QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE ôïì¬ÜÏğÁƒI‘§jGoòİ®Ô“9ùİ9ëéŠùŠ½ëö+º•í|G’CmnécµY„¡ˆ!W'¾Ñé\
-u°Ò¥V*QjÍ5tÓÑ¦4ì×cÚ¥ÏfšhúêŠ«¡ºÉ£Z•!‡”£ƒ@Á«Uÿ 8ÙæY,·1ÄeÓwtg86Õ¯É'Û[mµİì!W¡
-ëí$ûî¯¸QEåEPEPEP\³ÿ !‹¿úìÿ ú®ş¸gşCõÙÿ ô#_ß@ùæ¿õæúYøÇŒÿ îXoñ?È­EWú€=løWÁÓøŠáYÕá´´¤cw8ÂúÓô:øtÓ·Ÿ©FÉ>Hs†l­GÓ®zã¿kkjˆªˆ€P0 ôù‡qı<?6-|Óë=Òôîÿ çª_¤ğÇT¯ËŠÌW,:Gfı{/ÅùuƒHÒ Ñ,RŞİ6¢òIêç¹'¹«4Q_‹V­R­GV«¼­½Û?_£F ©ÓVŠÑ%²AEVfEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEPEP^ÿ ÿ ’#¥Ør/ı'¸¯~¯ÿ ‚Œÿ ÉÒ¿ì9ş“ÜWÕpGüp¿âıägÿ ò/«è|[EWõ±øĞQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE WªşÇ÷Q[üQ¹I$}:DY€27™`zªÇ°'µyUv µ˜´/Œ:ó,Œ9· 't¨Ñ)ä8Ï¶zô¬«Æôä¼Œ11æ¥%ä}áàÙ–]%S“2·±É?ÈŠÔ¬ Ü+XOä“yôÁÿ ÙMoWøô„ÉŞYâFs†i®jó©®ÿ ½µ^=ãåkİêMpF+ë§h(éıßwô×Ì(¢Šülú¢Š( ¢Š( ¢Š( ®Yÿ Åßıvı×g¬khĞv&>XÁù›ü½rúN‹?‹õ©|¥òÑÜÉ#D@œş'Ğwüëıúğîe—O2â\}O:q„jKE)FW|©ûÒVN-û©óh~!âÖ&–2X|³.zÊMò­Zº¶½Íí®Å;9u¤†i%áTw®ûÂ^‹C_:äEqtNTã+sßßò÷Ğğ÷†-¼;j««ÍŒ<Å~géŸ àqıy­ş®â¾:«¾xÒêúËü—–ıûpU,±8ËJ¯EÒ?æüöíÜ(¢Šüìûğ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¢Š( ¯ÿ ‚Œÿ ÉÒ¿ì9ş“ÜW¿W€ÿ ÁFäˆé_ö‹ÿ Iî+ê¸#şG¸_ñ~Œò3ÿ ùÕô>-¢Š+úØüh(¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š (¢Š *ÿ …µ¿øF¼O§j>WŸıŸuÏ—»o™±ÃmÎ3Œg¨QCWĞM]YŸ¡^¸e¿,¯óëqÿ ³ê«Î~kóëÚv‰(%ÔìcšeA…ËÄœ3ï^_âçÓc'X/eˆ²_X¡J¦›»sR÷¼ÿ um/¥ºİ¸øO‰u2/dÿ åÜåÊZà_}ÂŠ(¯äcôÀ¢Š( ¢ŠGu1
-ª2I8 UBœ” ®Ş‰.¢m%v-ckŞ-MÌPm–á[œíO¯©úVoŠ¼x–Öò43¥½´(^k‡;¨''î€9'Ûóù—ã'íP÷¾n›ái6ÛIÙuŒ’’qÄ@à®Ab3’qŒ?èÑëèoWìøƒi¸ÃICï=^¸ŠÙªió;ûî6p—âü]âLœ¥€ÈİŞÒ©º_àîÿ ½·òßuÙürı¥müío¦Ékªë’9óC6ømB¶>Ò>n#©Ç¾Šø7.«ğÂ÷s²µÅæ“kq3¾G…Y›  2Ä=kóN¿I¾Éğwı€ì¿ô+ûwÅ,W„Âá¢¡»(¤’IFÉ$´I-Z$|çÑQÄÖœŸ4šÕ½İŞºUQ_†Ÿ¦Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@Q@xügşH•ÿ aÈ¿ôâ½ú³üGá=+Æ6)k«éš~«m‚UŠòİ'Ep à‘Ÿsë^ÆA™G/Ìicge{.§c…xœ4èEÙÉXü¿¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠı›ş#şå÷£á¿Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌüÙ¢¿I¿áEx#ş„ï
-ÿ à¦ßÿ ˆ£şW‚?èNğ¯ş
-mÿ øŠ?â1`ÿ è_zõ&¿üı_s?6h¯ÒoøQ^ÿ ¡;Â¿ø)·ÿ â(ÿ …àú¼+ÿ ‚›ş"øŒX?ú—ŞƒıI¯ÿ ?WÜÏÍš+ô›şW‚?èNğ¯ş
-mÿ øŠ?áEx#ş„ï
-ÿ à¦ßÿ ˆ£ş#şå÷ ÿ Rkÿ ÏÕ÷3ófŠı&ÿ …àú¼+ÿ ‚›ş"øQ^ÿ ¡;Â¿ø)·ÿ â(ÿ ˆÅƒÿ  y}è?Ôšÿ óõ}ÌñÏÙwV¸Ôşøbi¥-*æ ÀùVWDP=ûæ½Æ¸ïx?LğmüPi:]•g,{Ìv–Éo&H'
- -€¹=qj£ı³yÿ ?w?÷õ¿Æ¿Ÿ<yğâ¾#å˜¨aù)Ê-N-¶œ®µ‹éï+[N›»spïSájØœ"›çtÓ·NÏäwôWı³yÿ ?w?÷õ¿Æí›Ïùû¹ÿ ¿­ş5øüH>ÿ CZ?øÏ¨ÿ ˆÏ‚ÿ  i}èïè®ûfóş~îïëÛ7Ÿó÷sÿ [ühÿ ‰Ïÿ èkGÿ  ˜ÄgÁĞ4¾ôw¡—jÓLØUè;±ôõç_>,Úx_DŸQÔgkm>•"S—¸n¡@ÏÌÇ:H šÜĞ¼9{ã	Ë™Ê
-ÓJKcØzsÔfºËï…^Ö-mâÔ4-#Tû("6½³á—8ÜrÊqœãĞz
-ı›Â¿8WÃLsÒ__ÌSv’ŠP¢´·$dß¿ı÷ïYÙ(«óyù†m›qU7
-+êø_=çóVÓËk÷éğwÆš—ÄÛ©í y,´"ËåÚà—i$4„rI<íÎÑ…êFãÀWé7ü(¯Ğá_üÛÿ ñÂŠğGı	Şÿ ÁM¿ÿ _ÓPñhá¥÷£Í§ÀµaXÔIz3óf¿I¾Éğwı€ì¿ô(ÿ …àú¼+ÿ ‚›ş"º[4»mmaŠÚÚÚ5Š(¢@‰(Âª¨à   •ñ\oÆô3Ê©R¤áÈÛÕ§º·Cè²‚¦_RsœÓº¶„´QE~p}8QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QEÈ|Y·v·²”İ£:1ÏB@#ÿ A?•qUè-ãÃ;Ô¨J²6{WÅ…yåAøwˆö™4!ü’’üyµÿ ÀÁøú‡³Íå?æQ‡/èQO·¶’îaQ¼²7EE,Oà+î%%å'dŒŒ\šŒUÛ]O…~É¶{àğDˆJòëıÑŸÄóÓƒZŞğzW•uwûËµù‚dˆöú°õéù]-~AÅ^ ·|.Tüœÿ ùşKîî~­Ã<´ÅfkÍCÿ ’ÿ ä~şÃcaQQ ª ‚Eù#m»³õD’VAERQE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QE QEâëE¼ğÍê1`FN=Wæ¨¯,¯a¹·K»y"nU(Ã8È#¸-á¥õÕĞûX[hTß8faşÎ2??^õú¿‡ÙöƒÄCQE&¤“{İYò­ÛÑ^Ë±ù‡d˜¬f.„°´Ü›N-®–wW{%«µßs#EĞ.µûƒ´{¶ã{…@OR§^z'‡|+káÈG”»çeÛ$­ÕûşØzæ®ØiĞivâ+x’ÇeÏÉõ<u55|ïñ¦'4n+Ân¯ü]ü–Ş­\÷øo„0ùbUª{õ{ô_áíë¿¢Ğ(¢Šø£ìŠ( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( Š( ÿÙ
-
-
-===== FILE: C:\Users\eokyc\OneDrive\Desktop\ZELTAINS\lv\js\cards.js =====
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const containers =
-            document.querySelectorAll(
-                ".raksti-container"
-            );
-
-
-        if (!containers.length) {
-            return;
-        }
-
-
-        if (
-            typeof raksti === "undefined"
-        ) {
-
-            console.error(
-                "KÄ¼Å«da: data/raksti.js nav ielÄdÄ“ts."
-            );
-
-            return;
-        }
-
-
-        const supportedLanguages = [
-            "lv",
-            "en",
-            "fr",
-            "it"
-        ];
-
-
-        let currentLanguage =
-            localStorage.getItem(
-                "zeltainsLanguage"
-            ) || "lv";
-
-
-        if (
-            !supportedLanguages.includes(
-                currentLanguage
-            )
-        ) {
-
-            currentLanguage = "lv";
-        }
-
-
-        function getAvailableLanguage(
-            raksts
-        ) {
-
-            if (
-                raksts[currentLanguage]
-            ) {
-
-                return currentLanguage;
-            }
-
-
-            if (raksts.lv) {
-
-                return "lv";
-            }
-
-
-            for (
-                const language
-                of supportedLanguages
-            ) {
-
-                if (raksts[language]) {
-                    return language;
-                }
-
-            }
-
-
-            return null;
-        }
-
-
-        function getCategoryName(
-            category
-        ) {
-
-            const names = {
-
-                piedzivojumi: {
-                    lv: "PiedzÄ«vojumi",
-                    en: "Adventure",
-                    fr: "Aventures",
-                    it: "Avventure"
-                },
-
-                dzivesstils: {
-                    lv: "DzÄ«vesstils",
-                    en: "Lifestyle",
-                    fr: "Style de vie",
-                    it: "Stile di vita"
-                }
-
-            };
-
-
-            if (
-                names[category] &&
-                names[category][currentLanguage]
-            ) {
-
-                return (
-                    names[category][
-                        currentLanguage
-                    ]
-                );
-            }
-
-
-            return category;
-        }
-
-
-        function getLanguageName(
-            language
-        ) {
-
-            const names = {
-
-                lv: "latvieÅ¡u",
-                en: "angÄ¼u",
-                fr: "franÄu",
-                it: "itÄÄ¼u"
-
-            };
-
-
-            return (
-                names[language] ||
-                language
-            );
-        }
-
-
-        function sortNewestFirst(
-            a,
-            b
-        ) {
-
-            return (
-                new Date(b.date) -
-                new Date(a.date)
-            );
-        }
-
-
-        function getVisibleArticles(
-            container
-        ) {
-
-            const category =
-                container.dataset.category ||
-                "all";
-
-
-            const limit =
-                container.dataset.limit
-                    ? Number(
-                        container.dataset.limit
-                    )
-                    : null;
-
-
-            let articles =
-                [...raksti];
-
-
-            if (
-                category !== "all"
-            ) {
-
-                articles =
-                    articles.filter(
-                        function (article) {
-
-                            return (
-                                article.category ===
-                                category
-                            );
-
-                        }
-                    );
-
-            }
-
-
-            articles.sort(
-                sortNewestFirst
-            );
-
-
-            if (
-                limit !== null &&
-                !Number.isNaN(limit)
-            ) {
-
-                articles =
-                    articles.slice(
-                        0,
-                        limit
-                    );
-
-            }
-
-
-            return articles;
-        }
-
-
-        function renderContainer(
-            container
-        ) {
-
-            container.innerHTML = "";
-
-
-            const articles =
-                getVisibleArticles(
-                    container
-                );
-
-
-            articles.forEach(
-                function (raksts) {
-
-                    const language =
-                        getAvailableLanguage(
-                            raksts
-                        );
-
-
-                    if (!language) {
-                        return;
-                    }
-
-
-                    const content =
-                        raksts[language];
-
-
-                    const card =
-                        document.createElement(
-                            "article"
-                        );
-
-
-                    card.className =
-                        "raksts-card";
-
-
-                    card.setAttribute(
-                        "tabindex",
-                        "0"
-                    );
-
-
-                    card.setAttribute(
-                        "role",
-                        "button"
-                    );
-
-
-                    card.innerHTML = `
-
-                        <img
-                            class="raksts-card-image"
-                            src="${raksts.image}"
-                            alt="${escapeHTML(
-                                content.title
-                            )}"
-                            loading="lazy"
-                        >
-
-                        <div
-                            class="raksts-card-content"
-                        >
-
-                            <div
-                                class="raksts-card-category"
-                            >
-                                ${escapeHTML(
-                                    getCategoryName(
-                                        raksts.category
-                                    )
-                                )}
-                            </div>
-
-                            <h2
-                                class="raksts-card-title"
-                            >
-                                ${escapeHTML(
-                                    content.title
-                                )}
-                            </h2>
-
-                            <p
-                                class="raksts-card-excerpt"
-                            >
-                                ${escapeHTML(
-                                    content.excerpt
-                                )}
-                            </p>
-
-                        </div>
-
-                    `;
-
-
-                    card.addEventListener(
-                        "click",
-                        function () {
-
-                            openArticle(
-                                raksts
-                            );
-
-                        }
-                    );
-
-
-                    card.addEventListener(
-                        "keydown",
-                        function (event) {
-
-                            if (
-                                event.key ===
-                                "Enter" ||
-                                event.key ===
-                                " "
-                            ) {
-
-                                event.preventDefault();
-
-                                openArticle(
-                                    raksts
-                                );
-
-                            }
-
-                        }
-                    );
-
-
-                    container.appendChild(
-                        card
-                    );
-
-                }
-            );
-        }
-
-
-        function renderAll() {
-
-            containers.forEach(
-                function (container) {
-
-                    renderContainer(
-                        container
-                    );
-
-                }
-            );
-
-        }
-
-
-        function escapeHTML(
-            value
-        ) {
-
-            if (
-                value === null ||
-                value === undefined
-            ) {
-
-                return "";
-            }
-
-
-            return String(value)
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
-        }
-
-
-        function createModal() {
-
-            let modal =
-                document.querySelector(
-                    ".raksts-modal"
-                );
-
-
-            if (modal) {
-                return modal;
-            }
-
-
-            modal =
-                document.createElement(
-                    "div"
-                );
-
-
-            modal.className =
-                "raksts-modal";
-
-
-            modal.innerHTML = `
-
-                <div
-                    class="raksts-modal-content"
-                >
-
-                    <button
-                        class="raksts-modal-close"
-                        type="button"
-                        aria-label="AizvÄ“rt"
-                    >
-                        Ã—
-                    </button>
-
-                    <div
-                        class="raksts-modal-body"
-                    ></div>
-
-                </div>
-
-            `;
-
-
-            document.body.appendChild(
-                modal
-            );
-
-
-            modal
-                .querySelector(
-                    ".raksts-modal-close"
-                )
-                .addEventListener(
-                    "click",
-                    closeArticle
-                );
-
-
-            modal.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        event.target ===
-                        modal
-                    ) {
-
-                        closeArticle();
-                    }
-
-                }
-            );
-
-
-            return modal;
-        }
-
-
-        function openArticle(
-            raksts
-        ) {
-
-            const modal =
-                createModal();
-
-
-            const language =
-                getAvailableLanguage(
-                    raksts
-                );
-
-
-            if (!language) {
-                return;
-            }
-
-
-            const content =
-                raksts[language];
-
-
-            const missingTranslation =
-                language !==
-                currentLanguage;
-
-
-            const body =
-                modal.querySelector(
-                    ".raksts-modal-body"
-                );
-
-
-            body.innerHTML = `
-
-                <img
-                    class="raksts-modal-image"
-                    src="${raksts.image}"
-                    alt="${escapeHTML(
-                        content.title
-                    )}"
-                >
-
-                <div
-                    class="raksts-modal-category"
-                >
-                    ${escapeHTML(
-                        getCategoryName(
-                            raksts.category
-                        )
-                    )}
-                </div>
-
-                ${
-                    missingTranslation
-                        ? `
-                            <div
-                                class="raksts-translation-notice"
-                            >
-                                Å is raksts paÅ¡laik nav
-                                pieejams
-                                ${getLanguageName(
-                                    currentLanguage
-                                )}
-                                valodÄ.
-                                Tiek rÄdÄ«ta
-                                ${getLanguageName(
-                                    language
-                                )}
-                                versija.
-                            </div>
-                        `
-                        : ""
-                }
-
-                <h1
-                    class="raksts-modal-title"
-                >
-                    ${escapeHTML(
-                        content.title
-                    )}
-                </h1>
-
-                <div
-                    class="raksts-modal-text"
-                >
-                    ${content.content}
-                </div>
-
-            `;
-
-
-            modal.classList.add(
-                "active"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-        }
-
-
-        function closeArticle() {
-
-            const modal =
-                document.querySelector(
-                    ".raksts-modal"
-                );
-
-
-            if (!modal) {
-                return;
-            }
-
-
-            modal.classList.remove(
-                "active"
-            );
-
-
-            document.body.style.overflow =
-                "";
-        }
-
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
-
-                    closeArticle();
-
-                }
-
-            }
-        );
-
-
-        document.addEventListener(
-            "zeltainsLanguageChanged",
-            function (event) {
-
-                if (
-                    event.detail &&
-                    event.detail.language
-                ) {
-
-                    currentLanguage =
-                        event.detail.language;
-
-                    renderAll();
-
-                }
-
-            }
-        );
-
-
-        renderAll();
-
-    }
-);

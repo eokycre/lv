@@ -7,8 +7,13 @@ document.addEventListener(
                 ".raksti-container"
             );
 
+        const articlePage =
+            document.querySelector(
+                ".raksts-page"
+            );
 
-        if (!containers.length) {
+
+        if (!containers.length && !articlePage) {
             return;
         }
 
@@ -479,10 +484,8 @@ document.addEventListener(
 
                             function activate() {
 
-                                openArticle(
-                                    article,
-                                    true
-                                );
+                                window.location.href =
+                                    `raksts.html?raksts=${article.id}`;
 
                             }
 
@@ -829,6 +832,92 @@ document.addEventListener(
 
 
         /* =====================================================
+           RAKSTA LAPA
+           ===================================================== */
+
+        function renderArticlePage(
+            article
+        ) {
+
+            if (!articlePage) {
+                return;
+            }
+
+
+            const language =
+                getAvailableLanguage(
+                    article
+                );
+
+
+            if (!language) {
+                return;
+            }
+
+
+            const content =
+                article[language];
+
+
+            const translationMissing =
+                language !==
+                currentLanguage;
+
+
+            articlePage.innerHTML = `
+
+                <img
+                    class="raksts-page-image"
+                    src="${safeImage(article.image)}"
+                    alt="${safeText(content.title)}"
+                >
+
+                <div class="raksts-page-body">
+
+                    <div class="raksts-page-category">
+                        ${safeText(
+                            getCategoryName(
+                                article.category
+                            )
+                        )}
+                    </div>
+
+                    ${
+                        translationMissing
+                            ? `
+                                <div
+                                    class="raksts-translation-notice"
+                                >
+                                    Šis raksts pašlaik nav pieejams
+                                    ${safeText(
+                                        getLanguageName(
+                                            currentLanguage
+                                        )
+                                    )} valodā.
+                                </div>
+                            `
+                            : ""
+                    }
+
+                    <h1 class="raksts-page-title">
+                        ${safeText(content.title)}
+                    </h1>
+
+                    <div class="raksts-page-text">
+                        ${content.content || ""}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            document.title =
+                `${content.title} — ZELTAINS`;
+        }
+
+
+        /* =====================================================
            URL → RAKSTS
            ===================================================== */
 
@@ -865,6 +954,15 @@ document.addEventListener(
 
 
             if (!article) {
+                return;
+            }
+
+
+            if (articlePage) {
+                renderArticlePage(
+                    article
+                );
+
                 return;
             }
 
@@ -1027,10 +1125,17 @@ document.addEventListener(
 
                     if (article) {
 
-                        openArticle(
-                            article,
-                            false
-                        );
+                        if (articlePage) {
+                            renderArticlePage(
+                                article
+                            );
+
+                        } else {
+                            openArticle(
+                                article,
+                                false
+                            );
+                        }
 
                     }
 

@@ -193,6 +193,115 @@
 
 
 /* =========================================================
+   RAKSTA LAPA
+   ========================================================= */
+
+.raksts-page {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding:
+        36px 28px 70px;
+
+    background: white;
+
+    color: #222;
+}
+
+
+.raksts-page-image {
+    display: block;
+
+    width: 100%;
+
+    max-height: 520px;
+
+    object-fit: cover;
+}
+
+
+.raksts-page-body {
+    padding:
+        28px 8px 0;
+}
+
+
+.raksts-page-category {
+    margin-bottom: 10px;
+
+    color: #a98200;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.08em;
+
+    line-height: 1.2;
+
+    text-transform: uppercase;
+}
+
+
+.raksts-page-title {
+    margin:
+        0 0 25px;
+
+    color: #111;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size: 46px;
+
+    font-weight: normal;
+
+    line-height: 1.05;
+}
+
+
+.raksts-page-text {
+    color: #222;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.raksts-page-text p {
+    margin:
+        0 0 18px;
+}
+
+
+.raksts-page-status {
+    margin: 0;
+
+    color: #222;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
    MODAL
    ========================================================= */
 
@@ -598,6 +707,31 @@
    ========================================================= */
 
 @media (max-width: 600px) {
+
+    .raksts-page {
+        padding:
+            20px 12px 45px;
+    }
+
+
+    .raksts-page-body {
+        padding:
+            22px 3px 0;
+    }
+
+
+    .raksts-page-title {
+        font-size: 32px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .raksts-page-text {
+        font-size: 15px;
+
+        line-height: 1.6;
+    }
 
     .raksts-modal {
         padding: 10px;
