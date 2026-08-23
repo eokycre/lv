@@ -74,8 +74,13 @@
             },
             "it": {
                 "title": "Šķervelis",
-                "excerpt": "Questo articolo sarà aggiornato con notizie provenienti da Šķervelis.",
-                "content": "Escursione in 3 tappe."
+                "excerpt": "Questo articolo verrà aggiornato con notizie provenienti da Šķervelis.",
+                "content": "Escursione in 3 parti."
+            },
+            "en": {
+                "title": "Šķervelis.",
+                "excerpt": "This report will be updated with news from Šķervelis.",
+                "content": "A hike in three parts."
             }
         }
     ]
