@@ -23,6 +23,11 @@
     ></script>
 
     <script
+        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        defer
+    ></script>
+
+    <script
         src="js/cards.js"
         defer
     ></script>
@@ -54,6 +59,35 @@
         ></section>
 
     </main>
+
+<script>
+    window.addEventListener(
+        "load",
+        function () {
+
+            if (!window.netlifyIdentity) {
+                return;
+            }
+
+
+            window.netlifyIdentity.on(
+                "init",
+                function () {
+
+                    if (
+                        /#(?:invite|recovery)_token=/.test(
+                            window.location.hash
+                        )
+                    ) {
+                        window.netlifyIdentity.open();
+                    }
+
+                }
+            );
+
+        }
+    );
+</script>
 
 </body>
 
