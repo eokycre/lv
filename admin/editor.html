@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="lv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rakstu redaktors - ZELTAINS</title>
+    <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+    <main>
+        <header class="editor-header">
+            <div>
+                <p class="eyebrow">ZELTAINS ADMIN</p>
+                <h1>Rakstu redaktors</h1>
+            </div>
+            <button id="logout" type="button" class="text-button">Iziet</button>
+        </header>
+
+        <p id="status" class="status" role="status"></p>
+
+        <section class="toolbar" aria-label="Raksta izvēle">
+            <label for="article-select">Rediģēt rakstu</label>
+            <select id="article-select">
+                <option value="new">+ Jauns raksts</option>
+            </select>
+        </section>
+
+        <form id="article-form">
+            <div class="form-grid">
+                <label>
+                    ID
+                    <input id="id" name="id" type="number" min="1" required>
+                </label>
+                <label>
+                    Kategorija
+                    <select id="category" name="category" required>
+                        <option value="piedzivojumi">Piedzīvojumi</option>
+                        <option value="dzivesstils">Dzīvesstils</option>
+                    </select>
+                </label>
+                <label>
+                    Datums
+                    <input id="date" name="date" type="date" required>
+                </label>
+                <label>
+                    Attēla ceļš
+                    <input id="image" name="image" type="text" placeholder="images/raksts.jpg" required>
+                </label>
+            </div>
+
+            <fieldset>
+                <legend>Latviešu pamata teksts</legend>
+                <label>
+                    Virsraksts
+                    <input id="lv-title" type="text" maxlength="1000" required>
+                </label>
+                <label>
+                    Īsais apraksts
+                    <textarea id="lv-excerpt" maxlength="5000" required></textarea>
+                </label>
+                <label>
+                    Pilnais saturs
+                    <textarea id="lv-content" maxlength="20000" required></textarea>
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Automātiskā tulkošana</legend>
+                <div id="language-list" class="language-list">
+                    <p>Notiek valodu ielāde...</p>
+                </div>
+                <button id="translate" type="button" class="action-button">Ģenerēt tulkojumus ↵</button>
+            </fieldset>
+
+            <section id="translations" class="translations"></section>
+
+            <div class="actions">
+                <button id="save" type="submit" class="action-button">Saglabāt un publicēt</button>
+                <button id="delete" type="button" class="text-button danger">Dzēst rakstu</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>
