@@ -131,21 +131,30 @@ function renderLanguageOptions() {
                     languages.prepend(label);
                 }
 
-                renderTranslations();
+                renderTranslations(activeArticle);
             });
             label.append(input, document.createTextNode(`${item.name} (${item.language})`));
             languages.appendChild(label);
         });
+
+    renderTranslations(activeArticle);
 }
 
 function renderTranslations(article = null) {
     translations.innerHTML = "";
 
+    const sourceArticle =
+        article ||
+        activeArticle;
+
     const selected = [...languages.querySelectorAll("input:checked")]
         .map((input) => input.value);
 
     selected.forEach((language) => {
-        const value = articleContent(language, article);
+        const value = articleContent(
+            language,
+            sourceArticle
+        );
         const section = document.createElement("fieldset");
         section.className = "translation";
         section.dataset.language = language;
@@ -175,9 +184,13 @@ async function loadArticles() {
     articles = Array.isArray(data) ? data : data.articles;
     updateSelector();
     fillForm(null);
+    renderLanguageOptions();
 }
 
 async function loadExistingImages() {
+    existingImage.innerHTML =
+        "<option value=\"\">Izvēlies attēlu</option>";
+
     const response = await fetch("/.netlify/functions/upload-image", {
         headers: { Authorization: `Bearer ${await token()}` }
     });
@@ -215,6 +228,7 @@ async function loadDeepLLanguages() {
 selector.addEventListener("change", () => {
     if (selector.value === "new") {
         fillForm(null);
+        renderLanguageOptions();
         return;
     }
 
@@ -404,17 +418,23 @@ identity.on("logout", () => {
     window.location.href = "/admin/";
 });
 
-identity.on("init", async () => {
+async function initializeEditor() {
     if (!identity.currentUser()) {
         identity.open("login");
         return;
     }
 
     try {
+        setStatus("Ielādē redaktoru...");
         await loadArticles();
         await loadExistingImages();
         await loadDeepLLanguages();
+        setStatus("");
     } catch (error) {
         setStatus(error.message, true);
     }
-});
+}
+
+identity.on("init", initializeEditor);
+
+identity.on("login", initializeEditor);
