@@ -6,19 +6,44 @@ const languages = document.querySelector("#language-list");
 const translations = document.querySelector("#translations");
 const saveButton = document.querySelector("#save");
 const deleteButton = document.querySelector("#delete");
+const imageFile = document.querySelector("#image-file");
+const existingImage = document.querySelector("#existing-image");
 
 let articles = [];
 let deeplLanguages = [];
 let activeArticle = null;
 let deletedArticleId = null;
 
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            const value = String(reader.result || "");
+            resolve(value.split(",")[1] || "");
+        });
+
+        reader.addEventListener("error", reject);
+        reader.readAsDataURL(file);
+    });
+}
+
 function setStatus(message, error = false) {
     status.textContent = message;
     status.classList.toggle("error", error);
 }
 
-function token() {
+async function token() {
     const user = identity.currentUser();
+
+    if (!user) {
+        return null;
+    }
+
+    if (typeof user.jwt === "function") {
+        return user.jwt();
+    }
+
     return user && user.token && user.token.access_token;
 }
 
@@ -131,9 +156,29 @@ async function loadArticles() {
     fillForm(null);
 }
 
+async function loadExistingImages() {
+    const response = await fetch("/.netlify/functions/upload-image", {
+        headers: { Authorization: `Bearer ${await token()}` }
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || "Attēlus neizdevās ielādēt.");
+    }
+
+    data.files.forEach((file) => {
+        const option = document.createElement("option");
+        option.value = file.path;
+        option.textContent = file.name;
+        existingImage.appendChild(option);
+    });
+}
+
 async function loadDeepLLanguages() {
+    const accessToken = await token();
+
     const response = await fetch("/.netlify/functions/deepl", {
-        headers: { Authorization: `Bearer ${token()}` }
+        headers: { Authorization: `Bearer ${accessToken}` }
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "DeepL valodas nav pieejamas.");
@@ -152,7 +197,59 @@ selector.addEventListener("change", () => {
     renderLanguageOptions();
 });
 
+imageFile.addEventListener("change", async () => {
+    const file = imageFile.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        setStatus("Attēls ir pārāk liels. Maksimums ir 5 MB.", true);
+        imageFile.value = "";
+        return;
+    }
+
+    try {
+        setStatus("Augšupielādē attēlu...");
+
+        const response = await fetch("/.netlify/functions/upload-image", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${await token()}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: file.name,
+                type: file.type,
+                content: await fileToBase64(file)
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Attēla augšupielāde neizdevās.");
+        }
+
+        field("image").value = data.path;
+        setStatus("Attēls augšupielādēts.");
+    } catch (error) {
+        setStatus(error.message, true);
+    } finally {
+        imageFile.value = "";
+    }
+});
+
+existingImage.addEventListener("change", () => {
+    if (existingImage.value) {
+        field("image").value = existingImage.value;
+        setStatus("Esošais attēls izvēlēts.");
+    }
+});
+
 document.querySelector("#translate").addEventListener("click", async () => {
+    const accessToken = await token();
     const selected = [...languages.querySelectorAll("input:checked")];
     if (!selected.length) {
         setStatus("Izvēlies vismaz vienu tulkošanas valodu.", true);
@@ -173,7 +270,7 @@ document.querySelector("#translate").addEventListener("click", async () => {
             const response = await fetch("/.netlify/functions/deepl", {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token()}`,
+                    Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ source_lang: "LV", target_lang: input.value, ...source })
@@ -198,6 +295,7 @@ document.querySelector("#translate").addEventListener("click", async () => {
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const accessToken = await token();
     const id = Number(field("id").value);
     const existing = articles.find((article) => article.id === id);
     const article = existing || { id };
@@ -232,7 +330,7 @@ form.addEventListener("submit", async (event) => {
         const response = await fetch("/.netlify/functions/save-articles", {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${token()}`,
+                Authorization: `Bearer ${accessToken}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ articles: next })
@@ -275,6 +373,7 @@ identity.on("init", async () => {
 
     try {
         await loadArticles();
+        await loadExistingImages();
         await loadDeepLLanguages();
     } catch (error) {
         setStatus(error.message, true);

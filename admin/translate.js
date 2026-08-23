@@ -35,23 +35,29 @@ function setStatus(
 }
 
 
-function getToken() {
+async function getToken() {
 
     const user =
         identity &&
         identity.currentUser();
 
 
-    return user &&
-        user.token &&
-        user.token.access_token;
+    if (!user) {
+        return null;
+    }
+
+    if (typeof user.jwt === "function") {
+        return user.jwt();
+    }
+
+    return user.token && user.token.access_token;
 }
 
 
 async function loadLanguages() {
 
     const token =
-        getToken();
+        await getToken();
 
 
     if (!token) {
@@ -204,7 +210,7 @@ form.addEventListener(
 
 
         const token =
-            getToken();
+            await getToken();
 
 
         const selected =
