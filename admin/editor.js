@@ -106,6 +106,17 @@ function renderLanguageOptions() {
 
     deeplLanguages
         .filter((item) => item.language !== "LV")
+        .sort((first, second) => {
+            const firstHasContent =
+                activeArticle &&
+                activeArticle[first.language.toLowerCase()];
+            const secondHasContent =
+                activeArticle &&
+                activeArticle[second.language.toLowerCase()];
+
+            return Number(Boolean(secondHasContent)) -
+                Number(Boolean(firstHasContent));
+        })
         .forEach((item) => {
             const label = document.createElement("label");
             const input = document.createElement("input");
@@ -115,7 +126,13 @@ function renderLanguageOptions() {
                 activeArticle &&
                 activeArticle[input.value]
             );
-            input.addEventListener("change", () => renderTranslations());
+            input.addEventListener("change", () => {
+                if (input.checked) {
+                    languages.prepend(label);
+                }
+
+                renderTranslations();
+            });
             label.append(input, document.createTextNode(`${item.name} (${item.language})`));
             languages.appendChild(label);
         });
@@ -382,6 +399,10 @@ deleteButton.addEventListener("click", async () => {
 });
 
 document.querySelector("#logout").addEventListener("click", () => identity.logout());
+
+identity.on("logout", () => {
+    window.location.href = "/admin/";
+});
 
 identity.on("init", async () => {
     if (!identity.currentUser()) {

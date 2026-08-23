@@ -95,6 +95,94 @@ async function getDeepLLanguages() {
 }
 
 
+function canonicalLanguage(
+    language
+) {
+
+    const code =
+        String(language || "")
+            .toUpperCase();
+
+
+    if (
+        code === "EN-GB" ||
+        code === "EN-US" ||
+        code === "EN"
+    ) {
+        return "EN";
+    }
+
+
+    return code;
+}
+
+
+function publicLanguages(
+    languages
+) {
+
+    const unique = new Map();
+
+
+    languages.forEach(
+        function (language) {
+
+            const code =
+                canonicalLanguage(
+                    language.language
+                );
+
+
+            if (!unique.has(code)) {
+                unique.set(
+                    code,
+                    {
+                        ...language,
+                        language: code,
+                        name:
+                            code === "EN"
+                                ? "English"
+                                : language.name
+                    }
+                );
+            }
+        }
+    );
+
+
+    return [...unique.values()];
+}
+
+
+function deepLTargetLanguage(
+    language,
+    languages
+) {
+
+    const requested =
+        String(language || "")
+            .toUpperCase();
+
+
+    if (requested === "EN") {
+        const english =
+            languages.find(
+                function (item) {
+                    return item.language === "EN-GB";
+                }
+            );
+
+
+        return english
+            ? english.language
+            : "EN-US";
+    }
+
+
+    return requested;
+}
+
+
 function validateText(
     value,
     name
@@ -159,7 +247,10 @@ exports.handler = async function (
                 await getDeepLLanguages();
 
 
-            return response(200, languages);
+            return response(
+                200,
+                publicLanguages(languages)
+            );
         }
 
 
@@ -179,7 +270,7 @@ exports.handler = async function (
                 .toUpperCase();
 
 
-        const targetLang =
+        const requestedTargetLang =
             String(input.target_lang || "")
                 .toUpperCase();
 
@@ -195,6 +286,13 @@ exports.handler = async function (
             await getDeepLLanguages();
 
 
+        const targetLang =
+            deepLTargetLanguage(
+                requestedTargetLang,
+                languages
+            );
+
+
         const supported =
             languages.some(
                 function (language) {
@@ -203,7 +301,11 @@ exports.handler = async function (
             );
 
 
-        if (!supported || targetLang === sourceLang) {
+        if (
+            !supported ||
+            canonicalLanguage(targetLang) ===
+                canonicalLanguage(sourceLang)
+        ) {
             return response(400, {
                 error: "DeepL neatbalsta norādīto mērķa valodu."
             });
