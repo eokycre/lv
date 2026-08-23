@@ -193,6 +193,117 @@
 
 
 /* =========================================================
+   RAKSTU LAPOŠANA
+   ========================================================= */
+
+.raksti-pagination {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    width: 100%;
+
+    max-width: 1760px;
+
+    margin: 0 auto;
+
+    padding:
+        0 28px 50px;
+}
+
+
+.raksti-pagination button {
+    min-width: 32px;
+    height: 32px;
+
+    border: 1px solid #d8c26a;
+
+    border-radius: 3px;
+
+    background: white;
+
+    color: #111;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.raksti-pagination button:hover,
+.raksti-pagination button:focus-visible {
+    background: gold;
+}
+
+
+.raksti-pagination button:disabled {
+    background: gold;
+
+    color: #111;
+
+    cursor: default;
+}
+
+
+.raksti-page-form {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-left: 8px;
+
+    color: #111;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+}
+
+
+.raksti-page-form input {
+    width: 48px;
+    height: 32px;
+
+    padding: 0 5px;
+
+    border: 1px solid #d8c26a;
+
+    border-radius: 3px;
+
+    background: white;
+
+    color: #111;
+
+    font: inherit;
+
+    text-align: center;
+}
+
+
+.raksti-page-form input:focus-visible,
+.raksti-page-form button:focus-visible {
+    outline: 2px solid #a98200;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
    RAKSTA LAPA
    ========================================================= */
 

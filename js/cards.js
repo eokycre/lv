@@ -359,6 +359,304 @@ document.addEventListener(
            KARTĪŠU IZVEIDE
            ===================================================== */
 
+        function renderPagination(
+            container,
+            totalPages,
+            currentPage,
+            enabled
+        ) {
+
+            const oldPagination =
+                container.nextElementSibling;
+
+
+            if (
+                oldPagination &&
+                oldPagination.classList.contains(
+                    "raksti-pagination"
+                )
+            ) {
+                oldPagination.remove();
+            }
+
+
+            if (!enabled) {
+                return;
+            }
+
+
+            const pagination =
+                document.createElement(
+                    "nav"
+                );
+
+
+            pagination.className =
+                "raksti-pagination";
+
+
+            pagination.setAttribute(
+                "aria-label",
+                "Rakstu lapas"
+            );
+
+
+            function addButton(
+                label,
+                page,
+                ariaLabel
+            ) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type = "button";
+                button.textContent = label;
+                button.title = ariaLabel;
+                button.setAttribute(
+                    "aria-label",
+                    ariaLabel
+                );
+                button.disabled =
+                    page === currentPage;
+
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const url =
+                            new URL(
+                                window.location.href
+                            );
+
+
+                        if (page === 1) {
+                            url.searchParams.delete(
+                                "lapa"
+                            );
+
+                        } else {
+                            url.searchParams.set(
+                                "lapa",
+                                String(page)
+                            );
+                        }
+
+
+                        window.location.href =
+                            url.toString();
+                    }
+                );
+
+
+                pagination.appendChild(
+                    button
+                );
+            }
+
+
+            addButton(
+                "«",
+                1,
+                "Pirmā lapa"
+            );
+
+
+            addButton(
+                "‹",
+                Math.max(
+                    1,
+                    currentPage - 1
+                ),
+                "Iepriekšējā lapa"
+            );
+
+
+            for (
+                let page = 1;
+                page <= totalPages;
+                page += 1
+            ) {
+                addButton(
+                    String(page),
+                    page,
+                    `Lapa ${page}`
+                );
+            }
+
+
+            addButton(
+                "›",
+                Math.min(
+                    totalPages,
+                    currentPage + 1
+                ),
+                "Nākamā lapa"
+            );
+
+
+            addButton(
+                "»",
+                totalPages,
+                "Pēdējā lapa"
+            );
+
+
+            const pageForm =
+                document.createElement(
+                    "form"
+                );
+
+
+            pageForm.className =
+                "raksti-page-form";
+
+
+            const pageLabel =
+                document.createElement(
+                    "label"
+                );
+
+
+            pageLabel.textContent =
+                "Lapa";
+
+
+            const pageInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            pageInput.type = "number";
+            pageInput.min = "1";
+            pageInput.max =
+                String(totalPages);
+            pageInput.value =
+                String(currentPage);
+            pageInput.required = true;
+            pageInput.setAttribute(
+                "aria-label",
+                `Lapas numurs no 1 līdz ${totalPages}`
+            );
+
+
+            const pageCount =
+                document.createElement(
+                    "span"
+                );
+
+
+            pageCount.textContent =
+                ` / ${totalPages}`;
+
+
+            const pageSubmit =
+                document.createElement(
+                    "button"
+                );
+
+
+            pageSubmit.type = "submit";
+            pageSubmit.textContent = "Atvērt";
+
+
+            pageInput.addEventListener(
+                "input",
+                function () {
+
+                    const value =
+                        Number.parseInt(
+                            pageInput.value,
+                            10
+                        );
+
+
+                    if (value > totalPages) {
+                        pageInput.value =
+                            String(totalPages);
+                    }
+
+
+                    if (value < 1) {
+                        pageInput.value = "1";
+                    }
+                }
+            );
+
+
+            pageForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const value =
+                        Number.parseInt(
+                            pageInput.value,
+                            10
+                        );
+
+
+                    const page =
+                        Number.isFinite(value)
+                            ? Math.min(
+                                Math.max(value, 1),
+                                totalPages
+                            )
+                            : currentPage;
+
+
+                    const url =
+                        new URL(
+                            window.location.href
+                        );
+
+
+                    if (page === 1) {
+                        url.searchParams.delete(
+                            "lapa"
+                        );
+
+                    } else {
+                        url.searchParams.set(
+                            "lapa",
+                            String(page)
+                        );
+                    }
+
+
+                    window.location.href =
+                        url.toString();
+                }
+            );
+
+
+            pageForm.append(
+                pageLabel,
+                pageInput,
+                pageCount,
+                pageSubmit
+            );
+
+
+            pagination.appendChild(
+                pageForm
+            );
+
+
+            container.insertAdjacentElement(
+                "afterend",
+                pagination
+            );
+        }
+
+
         function renderCards() {
 
             containers.forEach(
@@ -408,6 +706,63 @@ document.addEventListener(
                     visible.sort(
                         sortNewestFirst
                     );
+
+
+                    let currentPage = 1;
+                    let totalPages = 1;
+
+
+                    if (
+                        limit !== null &&
+                        Number.isFinite(limit) &&
+                        limit > 0
+                    ) {
+
+                        totalPages =
+                            Math.max(
+                                1,
+                                Math.ceil(
+                                    visible.length /
+                                    limit
+                                )
+                            );
+
+
+                        const requestedPage =
+                            Number.parseInt(
+                                new URLSearchParams(
+                                    window.location.search
+                                ).get("lapa"),
+                                10
+                            );
+
+
+                        if (
+                            Number.isFinite(
+                                requestedPage
+                            ) &&
+                            requestedPage > 0
+                        ) {
+                            currentPage =
+                                Math.min(
+                                    requestedPage,
+                                    totalPages
+                                );
+                        }
+
+
+                        const start =
+                            (currentPage - 1) *
+                            limit;
+
+
+                        visible =
+                            visible.slice(
+                                start,
+                                start + limit
+                            );
+
+                    }
 
 
                     if (
@@ -557,6 +912,16 @@ document.addEventListener(
                             );
 
                         }
+                    );
+
+
+                    renderPagination(
+                        container,
+                        totalPages,
+                        currentPage,
+                        limit !== null &&
+                        Number.isFinite(limit) &&
+                        limit > 0
                     );
 
                 }
