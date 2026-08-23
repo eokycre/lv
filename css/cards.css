@@ -204,7 +204,7 @@
 
     flex-wrap: wrap;
 
-    gap: 7px;
+    gap: 18px;
 
     width: 100%;
 
@@ -217,40 +217,40 @@
 }
 
 
-.raksti-pagination button {
-    min-width: 32px;
-    height: 32px;
-
-    border: 1px solid #d8c26a;
-
-    border-radius: 3px;
-
-    background: white;
-
-    color: #111;
+.raksti-pagination a {
+    color: #a98200;
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size: 13px;
+    font-size: 16px;
 
     line-height: 1;
 
-    cursor: pointer;
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
 }
 
 
-.raksti-pagination button:hover,
-.raksti-pagination button:focus-visible {
-    background: gold;
+.raksti-pagination a:hover,
+.raksti-pagination a:focus-visible {
+    color: gold;
 }
 
 
-.raksti-pagination button:disabled {
-    background: gold;
+.raksti-pagination a.active {
+    color: gold;
 
-    color: #111;
+    font-weight: bold;
+}
+
+
+.raksti-pagination a.disabled {
+    opacity: 0.35;
 
     cursor: default;
 }
@@ -261,45 +261,83 @@
 
     align-items: center;
 
-    gap: 5px;
+    gap: 8px;
 
-    margin-left: 8px;
+    margin-left: 4px;
+}
 
-    color: #111;
+
+.raksti-page-form input {
+    width: 42px;
+    height: 28px;
+
+    padding: 0 4px;
+
+    border: 1px solid #a98200;
+
+    border-radius: 3px;
+
+    background: midnightblue;
+
+    color: gold;
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size: 13px;
-}
+    font-size: 14px;
 
-
-.raksti-page-form input {
-    width: 48px;
-    height: 32px;
-
-    padding: 0 5px;
-
-    border: 1px solid #d8c26a;
-
-    border-radius: 3px;
-
-    background: white;
-
-    color: #111;
-
-    font: inherit;
+    line-height: 1;
 
     text-align: center;
 }
 
 
-.raksti-page-form input:focus-visible,
-.raksti-page-form button:focus-visible {
-    outline: 2px solid #a98200;
+.raksti-page-form input:focus-visible {
+    outline: 1px solid gold;
 
-    outline-offset: 2px;
+    outline-offset: 3px;
+}
+
+
+.raksti-page-form button {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: gold;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.raksti-page-form button:hover,
+.raksti-page-form button:focus-visible {
+    color: white;
+}
+
+
+.raksti-page-form button:focus-visible {
+    outline: 1px solid gold;
+
+    outline-offset: 5px;
+}
+
+
+.raksti-pagination a:focus-visible {
+    outline: 1px solid #a98200;
+
+    outline-offset: 5px;
 }
 
 

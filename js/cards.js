@@ -61,6 +61,15 @@ document.addEventListener(
                 error
             );
 
+
+            if (articlePage) {
+                articlePage.innerHTML = `
+                    <p class="raksts-page-status">
+                        Rakstu neizdevās ielādēt.
+                    </p>
+                `;
+            }
+
             return;
         }
 
@@ -386,14 +395,11 @@ document.addEventListener(
 
 
             const pagination =
-                document.createElement(
-                    "nav"
-                );
+                document.createElement("nav");
 
 
             pagination.className =
                 "raksti-pagination";
-
 
             pagination.setAttribute(
                 "aria-label",
@@ -401,78 +407,69 @@ document.addEventListener(
             );
 
 
-            function addButton(
+            function addLink(
                 label,
                 page,
-                ariaLabel
+                ariaLabel,
+                disabled
             ) {
 
-                const button =
-                    document.createElement(
-                        "button"
-                    );
+                const link =
+                    document.createElement("a");
 
 
-                button.type = "button";
-                button.textContent = label;
-                button.title = ariaLabel;
-                button.setAttribute(
+                link.href =
+                    page === 1
+                        ? window.location.pathname
+                        : `${window.location.pathname}?lapa=${page}`;
+
+                link.textContent = label;
+                link.title = ariaLabel;
+                link.setAttribute(
                     "aria-label",
                     ariaLabel
                 );
-                button.disabled =
-                    page === currentPage;
 
 
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const url =
-                            new URL(
-                                window.location.href
-                            );
-
-
-                        if (page === 1) {
-                            url.searchParams.delete(
-                                "lapa"
-                            );
-
-                        } else {
-                            url.searchParams.set(
-                                "lapa",
-                                String(page)
-                            );
-                        }
+                if (disabled) {
+                    link.classList.add("disabled");
+                    link.setAttribute(
+                        "aria-disabled",
+                        "true"
+                    );
+                    link.removeAttribute("href");
+                }
 
 
-                        window.location.href =
-                            url.toString();
-                    }
-                );
+                if (page === currentPage) {
+                    link.classList.add("active");
+                    link.setAttribute(
+                        "aria-current",
+                        "page"
+                    );
+                }
 
 
-                pagination.appendChild(
-                    button
-                );
+                pagination.appendChild(link);
             }
 
 
-            addButton(
+            addLink(
                 "«",
                 1,
-                "Pirmā lapa"
+                "Pirmā lapa",
+                currentPage === 1
             );
 
 
-            addButton(
+            addLink(
                 "‹",
                 Math.max(
                     1,
                     currentPage - 1
                 ),
-                "Iepriekšējā lapa"
+                "Iepriekšējā lapa",
+                currentPage === 1
             );
 
 
@@ -481,56 +478,48 @@ document.addEventListener(
                 page <= totalPages;
                 page += 1
             ) {
-                addButton(
+                addLink(
                     String(page),
                     page,
-                    `Lapa ${page}`
+                    `Lapa ${page}`,
+                    false
                 );
             }
 
 
-            addButton(
+            addLink(
                 "›",
                 Math.min(
                     totalPages,
                     currentPage + 1
                 ),
-                "Nākamā lapa"
+                "Nākamā lapa",
+                currentPage === totalPages
             );
 
 
-            addButton(
+            addLink(
                 "»",
                 totalPages,
-                "Pēdējā lapa"
+                "Pēdējā lapa",
+                currentPage === totalPages
             );
 
 
             const pageForm =
-                document.createElement(
-                    "form"
-                );
-
+                document.createElement("form");
 
             pageForm.className =
                 "raksti-page-form";
 
-
-            const pageLabel =
-                document.createElement(
-                    "label"
-                );
-
-
-            pageLabel.textContent =
-                "Lapa";
+            pageForm.setAttribute(
+                "aria-label",
+                "Atvērt konkrētu rakstu lapu"
+            );
 
 
             const pageInput =
-                document.createElement(
-                    "input"
-                );
-
+                document.createElement("input");
 
             pageInput.type = "number";
             pageInput.min = "1";
@@ -545,24 +534,16 @@ document.addEventListener(
             );
 
 
-            const pageCount =
-                document.createElement(
-                    "span"
-                );
-
-
-            pageCount.textContent =
-                ` / ${totalPages}`;
-
-
             const pageSubmit =
-                document.createElement(
-                    "button"
-                );
-
+                document.createElement("button");
 
             pageSubmit.type = "submit";
-            pageSubmit.textContent = "Atvērt";
+            pageSubmit.textContent = "↵";
+            pageSubmit.title = "Atvērt lapu";
+            pageSubmit.setAttribute(
+                "aria-label",
+                "Atvērt lapu"
+            );
 
 
             pageInput.addEventListener(
@@ -638,12 +619,9 @@ document.addEventListener(
 
 
             pageForm.append(
-                pageLabel,
                 pageInput,
-                pageCount,
                 pageSubmit
             );
-
 
             pagination.appendChild(
                 pageForm
@@ -1369,6 +1347,15 @@ document.addEventListener(
 
 
             if (!articleId) {
+
+                if (articlePage) {
+                    articlePage.innerHTML = `
+                        <p class="raksts-page-status">
+                            Izvēlies rakstu.
+                        </p>
+                    `;
+                }
+
                 return;
             }
 
@@ -1387,6 +1374,15 @@ document.addEventListener(
 
 
             if (!article) {
+
+                if (articlePage) {
+                    articlePage.innerHTML = `
+                        <p class="raksts-page-status">
+                            Raksts nav atrasts.
+                        </p>
+                    `;
+                }
+
                 return;
             }
 
