@@ -23,8 +23,17 @@ function response(
 
 
 async function getIdentityUser(
-    event
+    event,
+    context
 ) {
+
+    if (
+        context &&
+        context.clientContext &&
+        context.clientContext.user
+    ) {
+        return context.clientContext.user;
+    }
 
     const authorization =
         event.headers.authorization ||
@@ -110,7 +119,8 @@ function validateText(
 
 
 exports.handler = async function (
-    event
+    event,
+    context
 ) {
 
     if (event.httpMethod === "OPTIONS") {
@@ -130,7 +140,10 @@ exports.handler = async function (
 
     try {
         const user =
-            await getIdentityUser(event);
+            await getIdentityUser(
+                event,
+                context
+            );
 
 
         if (!user || !user.email) {

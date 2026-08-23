@@ -41,10 +41,14 @@ async function token() {
     }
 
     if (typeof user.jwt === "function") {
-        return user.jwt();
+        const accessToken = await user.jwt();
+
+        if (accessToken) {
+            return accessToken;
+        }
     }
 
-    return user && user.token && user.token.access_token;
+    return user.token && user.token.access_token || null;
 }
 
 function field(id) {
@@ -177,6 +181,10 @@ async function loadExistingImages() {
 async function loadDeepLLanguages() {
     const accessToken = await token();
 
+    if (!accessToken) {
+        throw new Error("Admin sesija nav derīga. Izlogojies un pieslēdzies vēlreiz.");
+    }
+
     const response = await fetch("/.netlify/functions/deepl", {
         headers: { Authorization: `Bearer ${accessToken}` }
     });
@@ -262,6 +270,11 @@ document.querySelector("#translate").addEventListener("click", async () => {
         content: field("lv-content").value
     };
 
+    if (!accessToken) {
+        setStatus("Admin sesija nav derīga. Izlogojies un pieslēdzies vēlreiz.", true);
+        return;
+    }
+
     setStatus("Tulko...");
     document.querySelector("#translate").disabled = true;
 
@@ -296,6 +309,11 @@ document.querySelector("#translate").addEventListener("click", async () => {
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const accessToken = await token();
+
+    if (!accessToken) {
+        setStatus("Admin sesija nav derīga. Izlogojies un pieslēdzies vēlreiz.", true);
+        return;
+    }
     const id = Number(field("id").value);
     const existing = articles.find((article) => article.id === id);
     const article = existing || { id };

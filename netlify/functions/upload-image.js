@@ -1,4 +1,8 @@
-async function getUser(event) {
+async function getUser(event, context) {
+    if (context && context.clientContext && context.clientContext.user) {
+        return context.clientContext.user;
+    }
+
     const authorization =
         event.headers.authorization ||
         event.headers.Authorization;
@@ -36,7 +40,7 @@ function safeFileName(name) {
         .toLowerCase();
 }
 
-exports.handler = async function (event) {
+exports.handler = async function (event, context) {
     if (event.httpMethod === "OPTIONS") {
         return reply(204, {});
     }
@@ -45,7 +49,7 @@ exports.handler = async function (event) {
         return reply(405, { error: "Metode nav atbalstīta." });
     }
 
-    const user = await getUser(event);
+    const user = await getUser(event, context);
     if (!user || !user.email) {
         return reply(401, { error: "Nepieciešama admin autorizācija." });
     }
