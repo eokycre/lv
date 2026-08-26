@@ -61,7 +61,7 @@
                 "excerpt": "Šī ziņa tiks papildināta ar ziņām no Šķerveļa.",
                 "content": "Pārgājiens 3 daļās."
             },
-            "image": "images/Šķervelis 3.jpg",
+            "image": "images/ekra-nuzn-e-mums-2025-12-28-224925.png",
             "en-gb": {
                 "title": "Šķervelis",
                 "excerpt": "This report will be updated with news from Šķervelis.",
@@ -81,6 +81,32 @@
                 "title": "Šķervelis.",
                 "excerpt": "This report will be updated with news from Šķervelis.",
                 "content": "A hike in three parts."
+            }
+        },
+        {
+            "id": 4,
+            "category": "dzivesstils",
+            "date": "2026-08-26",
+            "image": "images/zeltains_lv_embossed_gold_tag.png",
+            "lv": {
+                "title": "Atstarojošs Zeltains tags ar logo",
+                "excerpt": "Burti ir izvirzīti, tags ir izturīgs un ar karabīni",
+                "content": "Nēsā kā dizaina aksesuāru un esi pamanāms!"
+            },
+            "fr": {
+                "title": "Étiquette réfléchissante dorée avec logo",
+                "excerpt": "Les lettres sont en relief, l'étiquette est résistante et munie d'un mousqueton",
+                "content": "Portez-le comme un accessoire de mode et faites sensation!"
+            },
+            "it": {
+                "title": "Etichetta riflettente dorata con logo",
+                "excerpt": "Le lettere sono in rilievo, il ciondolo è resistente e dotato di moschettone",
+                "content": "Indossalo come accessorio di design e fatti notare!"
+            },
+            "en": {
+                "title": "Reflective gold tag with logo",
+                "excerpt": "The letters are raised, the tag is sturdy and fitted with a carabiner",
+                "content": "Wear it as a fashion accessory and stand out from the crowd!"
             }
         }
     ]
