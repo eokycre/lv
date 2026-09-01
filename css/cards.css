@@ -3,6 +3,8 @@
    ========================================================= */
 
 .raksti-container {
+    --raksti-columns: 7;
+
     width: 100%;
 
     max-width: 1760px;
@@ -10,19 +12,126 @@
     margin: 0 auto;
 
     padding:
-        32px 28px 50px;
+        6px 22px 48px;
 
     display: grid;
 
     grid-template-columns:
         repeat(
-            auto-fit,
-            minmax(210px, 1fr)
+            var(--raksti-columns),
+            minmax(0, 1fr)
         );
 
-    gap: 22px;
+    gap: 16px;
 
     align-items: start;
+}
+
+
+.raksti-container[data-view="1"] {
+    --raksti-columns: 1;
+}
+
+
+.raksti-container[data-view="2"] {
+    --raksti-columns: 2;
+}
+
+
+.raksti-container[data-view="4"] {
+    --raksti-columns: 4;
+}
+
+
+.raksti-container[data-view="7"] {
+    --raksti-columns: 7;
+}
+
+
+.raksti-view-switcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    max-width: 1760px;
+    margin: 0 auto 4px;
+    padding:
+        0 28px;
+}
+
+
+.raksti-view-button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: gold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 0.72;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.raksti-view-button:hover,
+.raksti-view-button:focus-visible,
+.raksti-view-button.active,
+.raksti-view-button[aria-pressed="true"] {
+    opacity: 1;
+    color: gold;
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+}
+
+
+.raksti-view-preview {
+    display: grid;
+    grid-template-columns:
+        repeat(var(--preview-columns, 2), minmax(0, 1fr));
+    gap: 1px;
+    width: 28px;
+    height: 17px;
+    align-items: end;
+}
+
+
+.raksti-view-preview-horizontal {
+    display: flex;
+    width: 28px;
+    height: 17px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.raksti-view-tile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.75;
+}
+
+
+.raksti-view-tile-horizontal {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.9;
+}
+
+
+.raksti-view-button.active .raksti-view-tile,
+.raksti-view-button[aria-pressed="true"] .raksti-view-tile {
+    opacity: 1;
 }
 
 
@@ -38,14 +147,16 @@
 
     background: white;
 
-    border-radius: 3px;
+    border: none;
+
+    border-radius: 10px;
 
     overflow: hidden;
 
     cursor: pointer;
 
     box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.22);
+        0 6px 18px rgba(0, 0, 0, 0.10);
 
     transition:
         transform 0.25s ease,
@@ -53,11 +164,18 @@
 }
 
 
+.raksts-card-horizontal {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    min-height: 138px;
+}
+
+
 .raksts-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.30);
+        0 12px 22px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -71,8 +189,17 @@
     aspect-ratio: 4 / 3;
 
     object-fit: cover;
+    object-position: center 35%;
 
     margin: 0;
+    display: block;
+}
+
+
+.raksts-card-horizontal .raksts-card-image {
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 180px;
 }
 
 
@@ -82,11 +209,20 @@
 
 .raksts-card-content {
     padding:
-        15px 16px 18px;
+        12px 15px 16px;
 
     background: white;
 
     text-align: left;
+}
+
+
+.raksts-card-horizontal .raksts-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:
+        16px 18px 16px 16px;
 }
 
 
@@ -97,17 +233,18 @@
 .raksts-card-category {
     margin-bottom: 7px;
 
-    color: #a98200;
+    color: #d4af37;
 
     font-family:
+        "Segoe UI",
         Arial,
         sans-serif;
 
     font-size: 10px;
 
-    font-weight: bold;
+    font-weight: 700;
 
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
 
     line-height: 1.2;
 
@@ -121,20 +258,24 @@
 
 .raksts-card-title {
     margin:
-        0 0 9px;
+        0 0 8px;
 
     color: #111;
 
     font-family:
-        "Times New Roman",
-        Times,
-        serif;
+        "Segoe UI",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-    font-size: 22px;
+    font-size:
+        clamp(17px, 1.4vw, 20px);
 
-    font-weight: normal;
+    font-weight: 600;
 
-    line-height: 1.08;
+    line-height: 1.18;
+
+    letter-spacing: -0.02em;
 }
 
 
@@ -145,13 +286,14 @@
 .raksts-card-excerpt {
     margin: 0;
 
-    color: #333;
+    color: #4a4a4a;
 
     font-family:
+        "Segoe UI",
         Arial,
         sans-serif;
 
-    font-size: 13px;
+    font-size: 12px;
 
     line-height: 1.45;
 
@@ -168,11 +310,11 @@
 
     position: absolute;
 
-    left: 0;
-    right: 0;
+    left: 12px;
+    right: 12px;
     bottom: 0;
 
-    height: 3px;
+    height: 2px;
 
     background: gold;
 
@@ -717,9 +859,6 @@
 @media (min-width: 1500px) {
 
     .raksti-container {
-        grid-template-columns:
-            repeat(7, minmax(0, 1fr));
-
         max-width: 1760px;
 
         gap: 20px;
@@ -734,9 +873,6 @@
 @media (min-width: 1101px) and (max-width: 1499px) {
 
     .raksti-container {
-        grid-template-columns:
-            repeat(5, minmax(0, 1fr));
-
         max-width: 1400px;
 
         gap: 20px;
@@ -751,9 +887,6 @@
 @media (min-width: 701px) and (max-width: 1100px) {
 
     .raksti-container {
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr));
-
         padding:
             28px 20px 40px;
 
@@ -779,13 +912,24 @@
 @media (min-width: 421px) and (max-width: 700px) {
 
     .raksti-container {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        --raksti-columns: 2;
 
         padding:
             20px 13px 35px;
 
         gap: 13px;
+    }
+
+
+    .raksti-container[data-view="4"] {
+        --raksti-columns: 4;
+    }
+
+
+    .raksti-view-switcher {
+        padding:
+            0 13px;
+        margin-bottom: 4px;
     }
 
 
@@ -820,12 +964,24 @@
 @media (max-width: 420px) {
 
     .raksti-container {
-        grid-template-columns: 1fr;
+        --raksti-columns: 1;
 
         padding:
             18px 12px 30px;
 
         gap: 18px;
+    }
+
+
+    .raksti-container[data-view="2"] {
+        --raksti-columns: 2;
+    }
+
+
+    .raksti-view-switcher {
+        padding:
+            0 12px;
+        margin-bottom: 4px;
     }
 
 

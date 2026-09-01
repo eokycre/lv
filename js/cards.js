@@ -341,10 +341,16 @@ document.addEventListener(
                     Number.isFinite(limit)
                 ) {
 
+                    const effectiveLimit =
+                        limit === 24 &&
+                        container.dataset.view === "5"
+                            ? 25
+                            : limit;
+
                     visible =
                         visible.slice(
                             0,
-                            limit
+                            effectiveLimit
                         );
                 }
 
@@ -362,6 +368,261 @@ document.addEventListener(
 
             }
         );
+
+
+        /* =====================================================
+           SKATA PĀRSLĒGŠANA
+           ===================================================== */
+
+        function isHorizontalView(value) {
+            return value === "horizontal" ||
+                String(value).startsWith("horizontal-");
+        }
+
+
+        function getHorizontalColumns(value) {
+            if (value === "horizontal") {
+                return 1;
+            }
+
+            const match = String(value).match(/horizontal-(\d+)/);
+            return match ? Number(match[1]) : 1;
+        }
+
+
+        function getAvailableViews() {
+
+            const viewportWidth =
+                window.innerWidth;
+
+            let views = [];
+
+            if (viewportWidth <= 420) {
+                views = ["1", "2", "horizontal"];
+            } else if (viewportWidth <= 700) {
+                views = fillViewRange(2, 4);
+                views.push("horizontal-1", "horizontal-2");
+            } else if (viewportWidth <= 1100) {
+                views = fillViewRange(2, 6);
+                views.push("horizontal-1", "horizontal-2", "horizontal-3");
+            } else {
+                views = fillViewRange(3, 6);
+                views.push("horizontal-1", "horizontal-2", "horizontal-3", "horizontal-4");
+            }
+
+            return views;
+        }
+
+
+        function fillViewRange(minView, maxView) {
+            const views = [];
+
+            for (
+                let view = minView;
+                view <= maxView;
+                view += 1
+            ) {
+                views.push(String(view));
+            }
+
+            return views;
+        }
+
+
+        function getSelectedView(container) {
+
+            const allowedViews =
+                getAvailableViews();
+
+            const storageKey =
+                `zeltainsCardView:${window.location.pathname}`;
+
+            const storedValue =
+                localStorage.getItem(storageKey);
+
+            const currentValue =
+                String(container.dataset.view || "");
+
+            let selectedView =
+                currentValue;
+
+            const isAllowedView =
+                allowedViews.includes(selectedView) ||
+                (selectedView === "horizontal" && allowedViews.some(isHorizontalView));
+
+            if (
+                !isAllowedView
+            ) {
+                if (
+                    storedValue &&
+                    (allowedViews.includes(storedValue) ||
+                        (storedValue === "horizontal" && allowedViews.some(isHorizontalView)))
+                ) {
+                    selectedView = storedValue;
+                } else {
+                    const fallbackValue =
+                        allowedViews.find(
+                            function (value) {
+                                return !isHorizontalView(value);
+                            }
+                        ) || allowedViews[allowedViews.length - 1];
+
+                    selectedView = String(fallbackValue);
+                }
+            }
+
+            container.dataset.view =
+                String(selectedView);
+
+            localStorage.setItem(
+                storageKey,
+                String(selectedView)
+            );
+
+            return selectedView;
+        }
+
+
+        function renderViewSelector(container) {
+
+            const parent =
+                container.parentElement;
+
+            if (!parent) {
+                return;
+            }
+
+            const existingSelector =
+                parent.querySelector(
+                    ".raksti-view-switcher"
+                );
+
+            if (existingSelector) {
+                existingSelector.remove();
+            }
+
+            const allowedViews =
+                getAvailableViews();
+
+            const selectedView =
+                getSelectedView(container);
+
+            const selector =
+                document.createElement("div");
+
+            selector.className =
+                "raksti-view-switcher";
+
+            selector.setAttribute(
+                "aria-label",
+                "Rakstu skata izvēle"
+            );
+
+            allowedViews.forEach(
+                function (viewOption) {
+
+                    const button =
+                        document.createElement("button");
+
+                    const isHorizontal =
+                        isHorizontalView(viewOption);
+                    const viewCount =
+                        isHorizontal
+                            ? getHorizontalColumns(viewOption)
+                            : Number(viewOption);
+
+                    button.type = "button";
+                    button.className =
+                        "raksti-view-button";
+                    button.dataset.view =
+                        String(viewOption);
+
+                    const preview =
+                        document.createElement("span");
+
+                    preview.className =
+                        "raksti-view-preview";
+                    preview.style.setProperty(
+                        "--preview-columns",
+                        String(viewCount)
+                    );
+
+                    const tileCount =
+                        isHorizontal
+                            ? Math.min(viewCount, viewCount)
+                            : Math.min(viewCount, viewCount);
+
+                    for (
+                        let index = 0;
+                        index < tileCount;
+                        index += 1
+                    ) {
+                        const tile =
+                            document.createElement("span");
+                        tile.className =
+                            "raksti-view-tile";
+                        preview.appendChild(tile);
+                    }
+
+                    if (isHorizontal) {
+                        button.title = `Horizontāls skats ${viewCount}`;
+                        button.setAttribute(
+                            "aria-label",
+                            `Horizontāls skats ${viewCount}`
+                        );
+                    } else {
+                        button.title =
+                            `${viewCount} kartītes rindā`;
+
+                        button.setAttribute(
+                            "aria-label",
+                            `${viewCount} kartītes rindā`
+                        );
+                    }
+
+                    button.appendChild(
+                        preview
+                    );
+
+                    if (String(viewOption) === String(selectedView)) {
+                        button.classList.add("active");
+                        button.setAttribute(
+                            "aria-pressed",
+                            "true"
+                        );
+                    }
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const storageKey =
+                                `zeltainsCardView:${window.location.pathname}`;
+
+                            container.dataset.view =
+                                String(viewOption);
+
+                            localStorage.setItem(
+                                storageKey,
+                                String(viewOption)
+                            );
+
+                            renderViewSelector(container);
+                            renderCards();
+                        }
+                    );
+
+                    selector.appendChild(
+                        button
+                    );
+                }
+            );
+
+            parent.insertBefore(
+                selector,
+                container
+            );
+        }
 
 
         /* =====================================================
@@ -640,6 +901,23 @@ document.addEventListener(
             containers.forEach(
                 function (container) {
 
+                    const selectedView =
+                        getSelectedView(container);
+
+                    if (isHorizontalView(selectedView)) {
+                        container.style.setProperty(
+                            "--raksti-columns",
+                            String(getHorizontalColumns(selectedView))
+                        );
+                    } else {
+                        container.style.setProperty(
+                            "--raksti-columns",
+                            String(selectedView)
+                        );
+                    }
+
+                    renderViewSelector(container);
+
                     container.innerHTML = "";
 
 
@@ -783,6 +1061,12 @@ document.addEventListener(
 
                             card.className =
                                 "raksts-card";
+
+                            if (isHorizontalView(selectedView)) {
+                                card.classList.add(
+                                    "raksts-card-horizontal"
+                                );
+                            }
 
 
                             card.dataset.articleId =
@@ -1579,6 +1863,28 @@ document.addEventListener(
         /* =====================================================
            SĀKUMS
            ===================================================== */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                containers.forEach(
+                    function (container) {
+                        const selectedView =
+                            getSelectedView(container);
+
+                        container.style.setProperty(
+                            "--raksti-columns",
+                            String(selectedView)
+                        );
+
+                        renderViewSelector(container);
+                    }
+                );
+
+                renderCards();
+            }
+        );
 
         renderCards();
 

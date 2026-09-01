@@ -6,7 +6,7 @@
     width: 100%;
 
     padding:
-        26px 15px 18px;
+        26px 15px 8px;
 
     text-align: center;
 }
@@ -74,7 +74,7 @@
 
     .hero-text {
         padding:
-            18px 12px 12px;
+            18px 12px 6px;
     }
 
 
