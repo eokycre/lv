@@ -380,6 +380,133 @@ document.addEventListener(
         }
 
 
+        function isEditorial24View(value) {
+            return String(value) === "editorial-24";
+        }
+
+
+        function isEditorial24AltView(value) {
+            return String(value) === "editorial-24-alt";
+        }
+
+
+        function getEditorialMaxColumnsForViewport() {
+            const viewportWidth =
+                window.innerWidth;
+
+            if (viewportWidth <= 420) {
+                return {
+                    vertical: 2,
+                    horizontal: 1
+                };
+            }
+
+            if (viewportWidth <= 700) {
+                return {
+                    vertical: 4,
+                    horizontal: 2
+                };
+            }
+
+            return {
+                vertical: 6,
+                horizontal: 3
+            };
+        }
+
+
+        function splitPatternStep(step, maxVertical, maxHorizontal) {
+            const maxCount =
+                step.type === "vertical"
+                    ? maxVertical
+                    : maxHorizontal;
+
+            const segments = [];
+            let remaining = step.count;
+
+            while (remaining > 0) {
+                const nextCount =
+                    Math.min(maxCount, remaining);
+
+                segments.push({
+                    ...step,
+                    count: nextCount
+                });
+
+                remaining -= nextCount;
+            }
+
+            return segments;
+        }
+
+
+        function getEditorial24Pattern() {
+            const { vertical, horizontal } =
+                getEditorialMaxColumnsForViewport();
+            const basePattern = [
+                { type: "vertical", count: 3 },
+                { type: "vertical", count: 4 },
+                { type: "vertical", count: 4 },
+                { type: "horizontal", count: 2 },
+                { type: "horizontal", count: 2 },
+                { type: "vertical", count: 5 },
+                { type: "horizontal", count: 1 },
+                { type: "horizontal", count: 3 }
+            ];
+
+            const segments = [];
+
+            basePattern.forEach(
+                function (step) {
+                    splitPatternStep(step, vertical, horizontal).forEach(
+                        function (segment) {
+                            segments.push(segment);
+                        }
+                    );
+                }
+            );
+
+            return segments;
+        }
+
+
+        function getEditorial24AltPattern() {
+            const { vertical, horizontal } =
+                getEditorialMaxColumnsForViewport();
+            const basePattern = [
+                { type: "horizontal", count: 1, featured: true },
+                { type: "vertical", count: 4 },
+                { type: "horizontal", count: 2 },
+                { type: "vertical", count: 5 },
+                { type: "horizontal", count: 2 },
+                { type: "vertical", count: 4 },
+                { type: "horizontal", count: 3 },
+                { type: "vertical", count: 3 }
+            ];
+
+            const segments = [];
+
+            basePattern.forEach(
+                function (step) {
+                    splitPatternStep(step, vertical, horizontal).forEach(
+                        function (segment) {
+                            segments.push(segment);
+                        }
+                    );
+                }
+            );
+
+            return segments;
+        }
+
+
+        function getEditorialPatternForView(value) {
+            return isEditorial24AltView(value)
+                ? getEditorial24AltPattern()
+                : getEditorial24Pattern();
+        }
+
+
         function getHorizontalColumns(value) {
             if (value === "horizontal") {
                 return 1;
@@ -390,27 +517,171 @@ document.addEventListener(
         }
 
 
-        function getAvailableViews() {
+        function getPreviousMaxStandardView() {
+            const storageKey =
+                `zeltainsCardViewVertical:${window.location.pathname}`;
 
+            const storedValue =
+                localStorage.getItem(storageKey);
+
+            if (storedValue) {
+                const numericValue =
+                    Number.parseInt(storedValue, 10);
+
+                if (
+                    Number.isFinite(numericValue) &&
+                    numericValue >= 1 &&
+                    numericValue <= 6
+                ) {
+                    return numericValue;
+                }
+            }
+
+            const legacyValue =
+                Number.parseInt(
+                    localStorage.getItem(
+                        `zeltainsCardView:${window.location.pathname}`
+                    ),
+                    10
+                );
+
+            if (
+                Number.isFinite(legacyValue) &&
+                legacyValue >= 1 &&
+                legacyValue <= 6
+            ) {
+                return legacyValue;
+            }
+
+            return null;
+        }
+
+
+        function getPreviousMaxHorizontalView() {
+            const storageKey =
+                `zeltainsCardViewHorizontal:${window.location.pathname}`;
+
+            const storedValue =
+                localStorage.getItem(storageKey);
+
+            if (storedValue) {
+                if (storedValue === "horizontal") {
+                    return 1;
+                }
+
+                const match = String(storedValue).match(/horizontal-(\d+)/);
+                if (match) {
+                    return Math.max(1, Math.min(3, Number(match[1])));
+                }
+
+                const numericValue =
+                    Number.parseInt(storedValue, 10);
+
+                if (
+                    Number.isFinite(numericValue) &&
+                    numericValue >= 1 &&
+                    numericValue <= 3
+                ) {
+                    return numericValue;
+                }
+            }
+
+            const legacyValue =
+                localStorage.getItem(
+                    `zeltainsCardView:${window.location.pathname}`
+                );
+
+            if (legacyValue === "horizontal") {
+                return 1;
+            }
+
+            const match = String(legacyValue || "").match(/horizontal-(\d+)/);
+            if (match) {
+                return Math.max(1, Math.min(3, Number(match[1])));
+            }
+
+            return null;
+        }
+
+
+        function getViewportRules() {
             const viewportWidth =
                 window.innerWidth;
 
-            let views = [];
-
             if (viewportWidth <= 420) {
-                views = ["1", "2", "horizontal"];
-            } else if (viewportWidth <= 700) {
-                views = fillViewRange(2, 4);
-                views.push("horizontal-1", "horizontal-2");
-            } else if (viewportWidth <= 1100) {
-                views = fillViewRange(2, 6);
-                views.push("horizontal-1", "horizontal-2", "horizontal-3");
-            } else {
-                views = fillViewRange(3, 6);
-                views.push("horizontal-1", "horizontal-2", "horizontal-3", "horizontal-4");
+                return {
+                    verticalRange: [1, 2],
+                    horizontalRange: [1, 1]
+                };
             }
 
-            return views;
+            if (viewportWidth < 700) {
+                return {
+                    verticalRange: [2, 3],
+                    horizontalRange: [1, 2]
+                };
+            }
+
+            if (viewportWidth < 900) {
+                return {
+                    verticalRange: [2, 4],
+                    horizontalRange: [1, 2]
+                };
+            }
+
+            if (viewportWidth < 1100) {
+                return {
+                    verticalRange: [2, 5],
+                    horizontalRange: [1, 3]
+                };
+            }
+
+            return {
+                verticalRange: [3, 6],
+                horizontalRange: [1, 3]
+            };
+        }
+
+        function getViewOptionsWithSpecialCase() {
+            const viewportRules =
+                getViewportRules();
+            const [verticalStart, verticalEnd] =
+                viewportRules.verticalRange;
+
+            const views = [];
+
+            for (
+                let view = verticalStart;
+                view <= verticalEnd;
+                view += 1
+            ) {
+                views.push(String(view));
+            }
+
+            if (verticalEnd >= 5) {
+                views.push("5");
+            }
+
+            views.push("editorial-24");
+            views.push("editorial-24-alt");
+
+            const [, horizontalEnd] =
+                viewportRules.horizontalRange;
+
+            for (
+                let index = 1;
+                index <= horizontalEnd;
+                index += 1
+            ) {
+                views.push(`horizontal-${index}`);
+            }
+
+            return Array.from(new Set(views));
+        }
+
+
+        function getAvailableViews() {
+            return getViewOptionsWithSpecialCase();
         }
 
 
@@ -461,11 +732,13 @@ document.addEventListener(
                     selectedView = storedValue;
                 } else {
                     const fallbackValue =
-                        allowedViews.find(
-                            function (value) {
-                                return !isHorizontalView(value);
-                            }
-                        ) || allowedViews[allowedViews.length - 1];
+                        allowedViews.includes("editorial-24")
+                            ? "editorial-24"
+                            : allowedViews.find(
+                                function (value) {
+                                    return !isHorizontalView(value);
+                                }
+                            ) || allowedViews[allowedViews.length - 1];
 
                     selectedView = String(fallbackValue);
                 }
@@ -512,6 +785,11 @@ document.addEventListener(
 
             selector.className =
                 "raksti-view-switcher";
+            selector.style.border = "none";
+            selector.style.background = "transparent";
+            selector.style.boxShadow = "none";
+            selector.style.padding = "0";
+            selector.style.borderRadius = "0";
 
             selector.setAttribute(
                 "aria-label",
@@ -526,45 +804,76 @@ document.addEventListener(
 
                     const isHorizontal =
                         isHorizontalView(viewOption);
+                    const isEditorialAlt =
+                        isEditorial24AltView(viewOption);
+                    const isEditorial =
+                        isEditorial24View(viewOption) || isEditorialAlt;
                     const viewCount =
                         isHorizontal
                             ? getHorizontalColumns(viewOption)
-                            : Number(viewOption);
+                            : isEditorial
+                                ? 24
+                                : Number(viewOption);
 
                     button.type = "button";
                     button.className =
                         "raksti-view-button";
+                    button.style.border = "none";
+                    button.style.background = "transparent";
+                    button.style.borderRadius = "0";
                     button.dataset.view =
                         String(viewOption);
 
                     const preview =
                         document.createElement("span");
 
-                    preview.className =
-                        "raksti-view-preview";
-                    preview.style.setProperty(
-                        "--preview-columns",
-                        String(viewCount)
-                    );
+                    if (isEditorial) {
+                        preview.className =
+                            isEditorialAlt
+                                ? "raksti-view-preview raksti-view-preview-editorial-alt"
+                                : "raksti-view-preview raksti-view-preview-editorial";
+                        preview.innerHTML = `
+                            <span class="raksti-view-circle-symbol ${isEditorialAlt ? "raksti-view-circle-symbol-alt" : ""}"></span>
+                        `;
+                    } else {
+                        preview.className =
+                            "raksti-view-preview";
+                        preview.style.setProperty(
+                            "--preview-columns",
+                            String(viewCount)
+                        );
 
-                    const tileCount =
-                        isHorizontal
-                            ? Math.min(viewCount, viewCount)
-                            : Math.min(viewCount, viewCount);
+                        const tileCount =
+                            isHorizontal
+                                ? viewCount
+                                : viewCount;
 
-                    for (
-                        let index = 0;
-                        index < tileCount;
-                        index += 1
-                    ) {
-                        const tile =
-                            document.createElement("span");
-                        tile.className =
-                            "raksti-view-tile";
-                        preview.appendChild(tile);
+                        for (
+                            let index = 0;
+                            index < tileCount;
+                            index += 1
+                        ) {
+                            const tile =
+                                document.createElement("span");
+                            tile.className =
+                                "raksti-view-tile";
+                            preview.appendChild(tile);
+                        }
                     }
 
-                    if (isHorizontal) {
+                    if (isEditorialAlt) {
+                        button.title = "Editorial 24 II";
+                        button.setAttribute(
+                            "aria-label",
+                            "Editorial 24 II"
+                        );
+                    } else if (isEditorial) {
+                        button.title = "Editorial 24";
+                        button.setAttribute(
+                            "aria-label",
+                            "Editorial 24"
+                        );
+                    } else if (isHorizontal) {
                         button.title = `Horizontāls skats ${viewCount}`;
                         button.setAttribute(
                             "aria-label",
@@ -598,6 +907,10 @@ document.addEventListener(
 
                             const storageKey =
                                 `zeltainsCardView:${window.location.pathname}`;
+                            const verticalStorageKey =
+                                `zeltainsCardViewVertical:${window.location.pathname}`;
+                            const horizontalStorageKey =
+                                `zeltainsCardViewHorizontal:${window.location.pathname}`;
 
                             container.dataset.view =
                                 String(viewOption);
@@ -606,6 +919,23 @@ document.addEventListener(
                                 storageKey,
                                 String(viewOption)
                             );
+
+                            if (isHorizontalView(viewOption)) {
+                                const horizontalValue =
+                                    viewOption === "horizontal"
+                                        ? "horizontal"
+                                        : String(viewOption);
+
+                                localStorage.setItem(
+                                    horizontalStorageKey,
+                                    horizontalValue
+                                );
+                            } else if (!isEditorial24View(viewOption) && !isEditorial24AltView(viewOption)) {
+                                localStorage.setItem(
+                                    verticalStorageKey,
+                                    String(viewOption)
+                                );
+                            }
 
                             renderViewSelector(container);
                             renderCards();
@@ -896,6 +1226,34 @@ document.addEventListener(
         }
 
 
+        let resizeFrame = null;
+
+
+        function refreshLayoutAfterResize() {
+            if (resizeFrame !== null) {
+                cancelAnimationFrame(resizeFrame);
+            }
+
+            resizeFrame = requestAnimationFrame(
+                function () {
+                    containers.forEach(
+                        function (container) {
+                            renderViewSelector(container);
+                        }
+                    );
+
+                    renderCards();
+                }
+            );
+        }
+
+
+        window.addEventListener(
+            "resize",
+            refreshLayoutAfterResize
+        );
+
+
         function renderCards() {
 
             containers.forEach(
@@ -904,7 +1262,12 @@ document.addEventListener(
                     const selectedView =
                         getSelectedView(container);
 
-                    if (isHorizontalView(selectedView)) {
+                    if (isEditorial24View(selectedView) || isEditorial24AltView(selectedView)) {
+                        container.style.setProperty(
+                            "--raksti-columns",
+                            "1"
+                        );
+                    } else if (isHorizontalView(selectedView)) {
                         container.style.setProperty(
                             "--raksti-columns",
                             String(getHorizontalColumns(selectedView))
@@ -1035,148 +1398,312 @@ document.addEventListener(
                     }
 
 
-                    visible.forEach(
-                        function (article) {
+                    if (isEditorial24View(selectedView) || isEditorial24AltView(selectedView)) {
+                        const editorialPattern =
+                            getEditorialPatternForView(selectedView);
 
-                            const language =
-                                getAvailableLanguage(
-                                    article
+                        const layoutRoot =
+                            document.createElement("div");
+
+                        layoutRoot.className =
+                            "raksti-editorial-layout";
+
+                        let visibleIndex = 0;
+                        const layoutArticles =
+                            visible.slice(0, editorialPattern.reduce(function (sum, step) {
+                                return sum + step.count;
+                            }, 0));
+
+                        editorialPattern.forEach(
+                            function (rowSpec) {
+                                const row =
+                                    document.createElement("div");
+
+                                row.className =
+                                    `raksti-editorial-row raksti-editorial-row--${rowSpec.type}`;
+                                row.style.setProperty(
+                                    "--row-count",
+                                    String(rowSpec.count)
                                 );
 
+                                const rowItems =
+                                    layoutArticles.slice(
+                                        visibleIndex,
+                                        visibleIndex + rowSpec.count
+                                    );
 
-                            if (!language) {
-                                return;
+                                visibleIndex += rowSpec.count;
+
+                                rowItems.forEach(
+                                    function (article, itemIndex) {
+                                        const language =
+                                            getAvailableLanguage(
+                                                article
+                                            );
+
+                                        if (!language) {
+                                            return;
+                                        }
+
+                                        const content =
+                                            article[language];
+
+                                        const card =
+                                            document.createElement(
+                                                "article"
+                                            );
+
+                                        card.className =
+                                            "raksts-card";
+
+                                        if (rowSpec.type === "horizontal") {
+                                            card.classList.add(
+                                                "raksts-card-horizontal"
+                                            );
+                                        }
+
+                                        if (
+                                            rowSpec.featured &&
+                                            itemIndex === 0
+                                        ) {
+                                            card.classList.add(
+                                                "raksts-card-featured"
+                                            );
+                                        }
+
+                                        card.dataset.articleId =
+                                            article.id;
+                                        card.setAttribute(
+                                            "role",
+                                            "button"
+                                        );
+                                        card.setAttribute(
+                                            "tabindex",
+                                            "0"
+                                        );
+                                        card.setAttribute(
+                                            "aria-label",
+                                            content.title
+                                        );
+
+                                        card.innerHTML = `
+                                            <img
+                                                class="raksts-card-image"
+                                                src="${safeImage(article.image)}"
+                                                alt="${safeText(content.title)}"
+                                                loading="lazy"
+                                                decoding="async"
+                                            >
+
+                                            <div
+                                                class="raksts-card-content"
+                                            >
+                                                <div
+                                                    class="raksts-card-category"
+                                                >
+                                                    ${safeText(
+                                                        getCategoryName(
+                                                            article.category
+                                                        )
+                                                    )}
+                                                </div>
+
+                                                <h2
+                                                    class="raksts-card-title"
+                                                >
+                                                    ${safeText(
+                                                        content.title
+                                                    )}
+                                                </h2>
+
+                                                <p
+                                                    class="raksts-card-excerpt"
+                                                >
+                                                    ${safeText(
+                                                        content.excerpt
+                                                    )}
+                                                </p>
+                                            </div>
+                                        `;
+
+                                        function activate() {
+                                            window.location.href =
+                                                `raksts.html?raksts=${article.id}`;
+                                        }
+
+                                        card.addEventListener(
+                                            "click",
+                                            activate
+                                        );
+
+                                        card.addEventListener(
+                                            "keydown",
+                                            function (event) {
+                                                if (
+                                                    event.key === "Enter" ||
+                                                    event.key === " "
+                                                ) {
+                                                    event.preventDefault();
+                                                    activate();
+                                                }
+                                            }
+                                        );
+
+                                        row.appendChild(card);
+                                    }
+                                );
+
+                                if (row.childElementCount > 0) {
+                                    layoutRoot.appendChild(row);
+                                }
                             }
+                        );
+
+                        container.appendChild(layoutRoot);
+                    } else {
+                        visible.forEach(
+                            function (article) {
+
+                                const language =
+                                    getAvailableLanguage(
+                                        article
+                                    );
 
 
-                            const content =
-                                article[language];
+                                if (!language) {
+                                    return;
+                                }
 
 
-                            const card =
-                                document.createElement(
-                                    "article"
+                                const content =
+                                    article[language];
+
+
+                                const card =
+                                    document.createElement(
+                                        "article"
+                                    );
+
+
+                                card.className =
+                                    "raksts-card";
+
+                                if (isHorizontalView(selectedView)) {
+                                    card.classList.add(
+                                        "raksts-card-horizontal"
+                                    );
+                                }
+
+
+                                card.dataset.articleId =
+                                    article.id;
+
+
+                                card.setAttribute(
+                                    "role",
+                                    "button"
                                 );
 
 
-                            card.className =
-                                "raksts-card";
-
-                            if (isHorizontalView(selectedView)) {
-                                card.classList.add(
-                                    "raksts-card-horizontal"
+                                card.setAttribute(
+                                    "tabindex",
+                                    "0"
                                 );
-                            }
 
 
-                            card.dataset.articleId =
-                                article.id;
+                                card.setAttribute(
+                                    "aria-label",
+                                    content.title
+                                );
 
 
-                            card.setAttribute(
-                                "role",
-                                "button"
-                            );
+                                card.innerHTML = `
 
-
-                            card.setAttribute(
-                                "tabindex",
-                                "0"
-                            );
-
-
-                            card.setAttribute(
-                                "aria-label",
-                                content.title
-                            );
-
-
-                            card.innerHTML = `
-
-                                <img
-                                    class="raksts-card-image"
-                                    src="${safeImage(article.image)}"
-                                    alt="${safeText(content.title)}"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-
-                                <div
-                                    class="raksts-card-content"
-                                >
+                                    <img
+                                        class="raksts-card-image"
+                                        src="${safeImage(article.image)}"
+                                        alt="${safeText(content.title)}"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
 
                                     <div
-                                        class="raksts-card-category"
+                                        class="raksts-card-content"
                                     >
-                                        ${safeText(
-                                            getCategoryName(
-                                                article.category
-                                            )
-                                        )}
+
+                                        <div
+                                            class="raksts-card-category"
+                                        >
+                                            ${safeText(
+                                                getCategoryName(
+                                                    article.category
+                                                )
+                                            )}
+                                        </div>
+
+                                        <h2
+                                            class="raksts-card-title"
+                                        >
+                                            ${safeText(
+                                                content.title
+                                            )}
+                                        </h2>
+
+                                        <p
+                                            class="raksts-card-excerpt"
+                                        >
+                                            ${safeText(
+                                                content.excerpt
+                                            )}
+                                        </p>
+
                                     </div>
 
-                                    <h2
-                                        class="raksts-card-title"
-                                    >
-                                        ${safeText(
-                                            content.title
-                                        )}
-                                    </h2>
-
-                                    <p
-                                        class="raksts-card-excerpt"
-                                    >
-                                        ${safeText(
-                                            content.excerpt
-                                        )}
-                                    </p>
-
-                                </div>
-
-                            `;
+                                `;
 
 
-                            function activate() {
+                                function activate() {
 
-                                window.location.href =
-                                    `raksts.html?raksts=${article.id}`;
-
-                            }
-
-
-                            card.addEventListener(
-                                "click",
-                                activate
-                            );
-
-
-                            card.addEventListener(
-                                "keydown",
-                                function (event) {
-
-                                    if (
-                                        event.key ===
-                                        "Enter" ||
-                                        event.key ===
-                                        " "
-                                    ) {
-
-                                        event.preventDefault();
-
-                                        activate();
-
-                                    }
+                                    window.location.href =
+                                        `raksts.html?raksts=${article.id}`;
 
                                 }
-                            );
 
 
-                            container.appendChild(
-                                card
-                            );
+                                card.addEventListener(
+                                    "click",
+                                    activate
+                                );
 
-                        }
-                    );
+
+                                card.addEventListener(
+                                    "keydown",
+                                    function (event) {
+
+                                        if (
+                                            event.key ===
+                                            "Enter" ||
+                                            event.key ===
+                                            " "
+                                        ) {
+
+                                            event.preventDefault();
+
+                                            activate();
+
+                                        }
+
+                                    }
+                                );
+
+
+                                container.appendChild(
+                                    card
+                                );
+
+                            }
+                        );
+                    }
 
 
                     renderPagination(

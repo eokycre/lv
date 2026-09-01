@@ -292,8 +292,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 "click",
                 function () {
 
-                    currentLanguage =
+                    const nextLanguage =
                         button.dataset.language;
+
+                    document.documentElement.classList.remove("lang-ready");
+
+                    currentLanguage =
+                        nextLanguage;
 
 
                     localStorage.setItem(
@@ -306,6 +311,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     updateNavigationText();
 
+                    window.setTimeout(function () {
+                        document.documentElement.classList.add("lang-ready");
+                    }, 120);
 
                     document.dispatchEvent(
                         new CustomEvent(
@@ -329,6 +337,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updateLanguageButtons();
 
     updateNavigationText();
+
+    requestAnimationFrame(function () {
+        document.documentElement.classList.add("lang-ready");
+    });
 
 
     /* =========================================================
