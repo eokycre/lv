@@ -24,7 +24,7 @@
 
     gap: 16px;
 
-    align-items: start;
+    align-items: stretch;
 }
 
 
@@ -236,6 +236,9 @@
     width: 100%;
     min-width: 0;
 
+    display: flex;
+    flex-direction: column;
+
     background: white;
 
     border: 1px solid rgba(17, 17, 17, 0.03);
@@ -365,6 +368,8 @@
    ========================================================= */
 
 .raksts-card-content {
+    flex: 1;
+
     padding:
         12px 15px 16px;
 

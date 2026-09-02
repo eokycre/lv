@@ -1491,7 +1491,8 @@ document.addEventListener(
                                                 class="raksts-card-image"
                                                 src="${safeImage(article.image)}"
                                                 alt="${safeText(content.title)}"
-                                                loading="lazy"
+                                                loading="${(visibleIndex - rowItems.length + itemIndex) < 3 ? "eager" : "lazy"}"
+                                                fetchpriority="${(visibleIndex - rowItems.length + itemIndex) < 3 ? "high" : "low"}"
                                                 decoding="async"
                                             >
 
@@ -1562,7 +1563,7 @@ document.addEventListener(
                         container.appendChild(layoutRoot);
                     } else {
                         visible.forEach(
-                            function (article) {
+                            function (article, articleIndex) {
 
                                 const language =
                                     getAvailableLanguage(
@@ -1623,7 +1624,8 @@ document.addEventListener(
                                         class="raksts-card-image"
                                         src="${safeImage(article.image)}"
                                         alt="${safeText(content.title)}"
-                                        loading="lazy"
+                                                loading="${articleIndex < 3 ? "eager" : "lazy"}"
+                                                fetchpriority="${articleIndex < 3 ? "high" : "low"}"
                                         decoding="async"
                                     >
 

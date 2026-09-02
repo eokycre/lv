@@ -33,11 +33,6 @@
     ></script>
 
     <script
-        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-        defer
-    ></script>
-
-    <script
         src="js/cards.js"
         defer
     ></script>
@@ -71,32 +66,17 @@
     </main>
 
 <script>
-    window.addEventListener(
-        "load",
-        function () {
-
-            if (!window.netlifyIdentity) {
-                return;
-            }
-
-
-            window.netlifyIdentity.on(
-                "init",
-                function () {
-
-                    if (
-                        /#(?:invite|recovery)_token=/.test(
-                            window.location.hash
-                        )
-                    ) {
-                        window.netlifyIdentity.open();
-                    }
-
-                }
-            );
-
-        }
-    );
+    if (/#(?:invite|recovery)_token=/.test(window.location.hash)) {
+        const identityScript = document.createElement("script");
+        identityScript.src =
+            "https://identity.netlify.com/v1/netlify-identity-widget.js";
+        identityScript.onload = function () {
+            window.netlifyIdentity.on("init", function () {
+                window.netlifyIdentity.open();
+            });
+        };
+        document.head.appendChild(identityScript);
+    }
 </script>
 
 </body>
